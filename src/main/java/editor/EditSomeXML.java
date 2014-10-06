@@ -14,10 +14,15 @@ public class EditSomeXML extends JFrame {
     private Element root;
 
     public EditSomeXML() {
+        root = null;
+
+        // Set up the main window
         setSize(800,600);
         setTitle("EditSomeXML");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
 
+        // Set up the menu bar
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem newItem = new JMenuItem("New...");
