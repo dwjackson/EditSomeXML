@@ -1,5 +1,7 @@
 package editor;
 
+import xml.Element;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +11,8 @@ import java.awt.event.ActionListener;
  * The EditSomeXML class is the main editor class of EditSomeXML.
  */
 public class EditSomeXML extends JFrame {
+    private Element root;
+
     public EditSomeXML() {
         setSize(800,600);
         setTitle("EditSomeXML");
@@ -20,14 +24,23 @@ public class EditSomeXML extends JFrame {
         newItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JFrame newRootFrame = new JFrame();
+                final JFrame newRootFrame = new JFrame();
                 newRootFrame.setSize(400,60);
                 newRootFrame.setTitle("New Root Element");
                 newRootFrame.setLayout(new FlowLayout());
                 newRootFrame.add(new JLabel("Root Tag"));
-                JTextField rootTagField = new JTextField("", 20);
+                final JTextField rootTagField = new JTextField("", 20);
                 newRootFrame.add(rootTagField);
                 JButton okButton = new JButton("OK");
+                okButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        root = new Element(rootTagField.getText());
+                        System.out.printf("[DEBUG] root.name = \"%s\"\n", root.getTag());
+                        newRootFrame.setVisible(false);
+                        newRootFrame.dispose();
+                    }
+                });
                 newRootFrame.add(okButton);
                 newRootFrame.setVisible(true);
             }

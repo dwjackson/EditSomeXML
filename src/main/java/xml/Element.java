@@ -24,4 +24,12 @@ public class Element {
         attributes = new HashMap<String, String>();
         children = new ArrayList<Element>();
     }
+
+    /**
+     * Get the element's tag
+     * @return The element's tag
+     */
+    public String getTag() {
+        return tag;
+    }
 }
