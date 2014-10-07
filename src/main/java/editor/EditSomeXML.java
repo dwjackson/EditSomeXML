@@ -14,7 +14,7 @@ public class EditSomeXML extends JFrame {
     private Element root;
 
     public EditSomeXML() {
-        root = null;
+        root = new Element();
 
         // Set up the main window
         setSize(800,600);
@@ -29,25 +29,9 @@ public class EditSomeXML extends JFrame {
         newItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                final JFrame newRootFrame = new JFrame();
-                newRootFrame.setSize(400,60);
-                newRootFrame.setTitle("New Root Element");
-                newRootFrame.setLayout(new FlowLayout());
-                newRootFrame.add(new JLabel("Root Tag"));
-                final JTextField rootTagField = new JTextField("", 20);
-                newRootFrame.add(rootTagField);
-                JButton okButton = new JButton("OK");
-                okButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        root = new Element(rootTagField.getText());
-                        System.out.printf("[DEBUG] root.name = \"%s\"\n", root.getTag());
-                        newRootFrame.setVisible(false);
-                        newRootFrame.dispose();
-                    }
-                });
-                newRootFrame.add(okButton);
-                newRootFrame.setVisible(true);
+                NewRootController controller = new NewRootController(root);
+                NewRootView view = new NewRootView(controller);
+                controller.setView(view);
             }
         });
         fileMenu.add(newItem);

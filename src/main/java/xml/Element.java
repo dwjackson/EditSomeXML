@@ -15,6 +15,17 @@ public class Element {
     private ArrayList<Element> children;
 
     /**
+     * Initialize an Element with no data in it. This element is invalid until
+     * it has a tag.
+     */
+    public Element() {
+        tag = null;
+        text = null;
+        attributes = new HashMap<String, String>();
+        children = new ArrayList<Element>();
+    }
+
+    /**
      * Create a new element, initialize it with a tag
      * @param tagName The name of the tag to give to this element
      */
@@ -31,5 +42,14 @@ public class Element {
      */
     public String getTag() {
         return tag;
+    }
+
+    /**
+     * Set this element's tag, which serves as an identifier for this type of
+     * element.
+     * @param tag The tag to apply to this element
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
