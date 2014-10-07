@@ -8,7 +8,6 @@ import java.awt.*;
  * XML element.
  */
 public class NewRootView extends JFrame {
-    private NewRootController controller;
     private JTextField rootTagField;
 
     /**
@@ -17,8 +16,6 @@ public class NewRootView extends JFrame {
      *                          view. This controller will update the model.
      */
     public NewRootView(NewRootController newRootController) {
-        controller = newRootController;
-
         setSize(400, 60);
         setTitle("New Root Element");
         setLayout(new FlowLayout());
@@ -27,7 +24,7 @@ public class NewRootView extends JFrame {
         rootTagField = new JTextField("", 20);
         add(rootTagField);
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(controller);
+        okButton.addActionListener(newRootController);
         add(okButton);
 
         setVisible(true);
