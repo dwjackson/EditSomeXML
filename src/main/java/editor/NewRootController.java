@@ -24,7 +24,7 @@ public class NewRootController implements ActionListener {
     }
 
     /**
-     * Associcate a view with this controller. The view is used to get input
+     * Associate a view with this controller. The view is used to get input
      * from the user.
      * @param view The view with which to associate this controller
      */
