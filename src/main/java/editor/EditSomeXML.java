@@ -47,6 +47,10 @@ public class EditSomeXML extends JFrame {
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
 
+        // Set up the tree view
+        add(new ElementTreeView(root));
+
+        // Make the main frame visible
         setVisible(true);
     }
 

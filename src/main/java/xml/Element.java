@@ -1,5 +1,8 @@
 package xml;
 
+import utility.Observable;
+import utility.Observer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,12 +10,16 @@ import java.util.HashMap;
  * The Element class is used to represent a node in an XML tree. It must have
  * a tag (name) which identifies it. It may optionally have textual content,
  * attributes (key/value pairs) and children (other elements).
+ *
+ * @see Observable
+ * @see Observer
  */
-public class Element {
+public class Element implements Observable {
     private String tag;
     private String text;
     private HashMap<String, String> attributes;
     private ArrayList<Element> children;
+    private ArrayList<Observer> observers;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
@@ -23,6 +30,7 @@ public class Element {
         text = null;
         attributes = new HashMap<String, String>();
         children = new ArrayList<Element>();
+        observers = new ArrayList<Observer>();
     }
 
     /**
@@ -34,6 +42,7 @@ public class Element {
         text = null;
         attributes = new HashMap<String, String>();
         children = new ArrayList<Element>();
+        observers = new ArrayList<Observer>();
     }
 
     /**
@@ -51,5 +60,28 @@ public class Element {
      */
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    /**
+     * @see Observable
+     */
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    /**
+     * @see Observable
+     */
+    public void unregisterObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    /**
+     * @see Observable
+     */
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.notifyObserver();
+        }
     }
 }
