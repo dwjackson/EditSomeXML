@@ -4,6 +4,8 @@ import utility.Observer;
 import xml.Element;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  * The ElementTreeView controls the section of the GUI that displays the tree
@@ -12,6 +14,8 @@ import javax.swing.*;
 public class ElementTreeView extends JPanel implements Observer {
     private JTree tree;
     private Element root;
+    private DefaultMutableTreeNode treeNode;
+    private DefaultTreeModel model;
 
     /**
      * Create the tree view and associate it with a particular model (root of
@@ -22,7 +26,9 @@ public class ElementTreeView extends JPanel implements Observer {
         root.registerObserver(this);
         this.root = root;
 
-        tree = new JTree();
+        treeNode = new DefaultMutableTreeNode();
+        tree = new JTree(treeNode);
+        model = (DefaultTreeModel) tree.getModel();
         add(tree);
 
         setVisible(false);
@@ -34,6 +40,8 @@ public class ElementTreeView extends JPanel implements Observer {
     public void notifyObserver() {
         if (root != null) {
             // TODO: Change the tree
+            treeNode.setUserObject("DEBUG_ROOT");
+            model.nodeChanged(treeNode);
             System.out.println("[DEBUG] root has changed");
             setVisible(true);
         }
