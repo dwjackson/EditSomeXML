@@ -1,5 +1,6 @@
 package xml;
 
+import utility.GenericObservable;
 import utility.Observable;
 import utility.Observer;
 
@@ -12,14 +13,14 @@ import java.util.HashMap;
  * attributes (key/value pairs) and children (other elements).
  *
  * @see Observable
- * @see Observer
+ * @see GenericObservable
  */
 public class Element implements Observable {
     private String tag;
     private String text;
     private HashMap<String, String> attributes;
     private ArrayList<Element> children;
-    private ArrayList<Observer> observers;
+    private GenericObservable observable;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
@@ -30,7 +31,7 @@ public class Element implements Observable {
         text = null;
         attributes = new HashMap<String, String>();
         children = new ArrayList<Element>();
-        observers = new ArrayList<Observer>();
+        observable = new GenericObservable();
     }
 
     /**
@@ -42,7 +43,7 @@ public class Element implements Observable {
         text = null;
         attributes = new HashMap<String, String>();
         children = new ArrayList<Element>();
-        observers = new ArrayList<Observer>();
+        observable = new GenericObservable();
     }
 
     /**
@@ -66,22 +67,20 @@ public class Element implements Observable {
      * @see Observable
      */
     public void registerObserver(Observer observer) {
-        observers.add(observer);
+        observable.registerObserver(observer);
     }
 
     /**
      * @see Observable
      */
     public void unregisterObserver(Observer observer) {
-        observers.remove(observer);
+        observable.unregisterObserver(observer);
     }
 
     /**
      * @see Observable
      */
     public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.notifyObserver();
-        }
+        observable.notifyObservers();
     }
 }
