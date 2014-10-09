@@ -7,6 +7,7 @@ import utility.Observer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * The Element class is used to represent a node in an XML tree. It must have
@@ -149,5 +150,31 @@ public class Element implements Observable {
      */
     public Element getParent() {
         return parent;
+    }
+
+    /**
+     * Get a Set of the attribute names
+     * @see java.util.Set
+     * @return a Set of the attribute names
+     */
+    public Set<String> attributeNames() {
+        return attributes.keySet();
+    }
+
+    /**
+     * Get the value of a particular attribute
+     * @param key The attribute's name
+     * @return The value of the attribute
+     */
+    public String getAttribute(String key) {
+        return attributes.get(key);
+    }
+
+    /**
+     * Get the total number of attributes that the Element has
+     * @return the number of attributes that the Element has
+     */
+    public int getNumberOfAttributes() {
+        return attributes.size();
     }
 }
