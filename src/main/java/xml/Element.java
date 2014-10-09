@@ -99,6 +99,15 @@ public class Element implements Observable {
     }
 
     /**
+     * Get this Elements' children as an Iterable
+     * @see java.lang.Iterable
+     * @return this Element's children as an Iterable
+     */
+    public Iterable<Element> children() {
+        return children;
+    }
+
+    /**
      * Determine if this element has children
      * @return true if this element has childre, false if it doesn't
      */
@@ -176,5 +185,21 @@ public class Element implements Observable {
      */
     public int getNumberOfAttributes() {
         return attributes.size();
+    }
+
+    /**
+     * Determine if this element has textual content
+     * @return true if this element has assigned text, false if not
+     */
+    public boolean hasText() {
+        return !(text == null);
+    }
+
+    /**
+     * Get this Element's textual content
+     * @return This element's text
+     */
+    public String getText() {
+        return text;
     }
 }
