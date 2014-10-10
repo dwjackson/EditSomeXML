@@ -202,4 +202,12 @@ public class Element implements Observable {
     public String getText() {
         return text;
     }
+
+    /**
+     * Add a child to this Element
+     * @param child The child to add to this Element
+     */
+    public void addChild(Element child) {
+        children.add(child);
+    }
 }
