@@ -210,4 +210,30 @@ public class Element implements Observable {
     public void addChild(Element child) {
         children.add(child);
     }
+
+    /**
+     * Determine the index of a child element
+     * @param child The child Element whose index to search for
+     * @return The index of the child if found, -1 in case of any error
+     */
+    public int getIndexOfChild(Element child) {
+        int idx = -1;
+        if (child != null) {
+            for (int i = 0; i < children.size(); i++) {
+                if (child.equals(children.get(i))) {
+                    idx = i;
+                }
+            }
+        }
+        return idx;
+    }
+
+    /**
+     * When converting an Element to a String, use the tag
+     * @return the element's tag
+     */
+    @Override
+    public String toString() {
+        return tag;
+    }
 }
