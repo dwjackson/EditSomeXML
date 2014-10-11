@@ -36,7 +36,6 @@ public class ElementTreeView extends JPanel implements Observer {
     public void notifyObserver() {
         if (root != null) {
             model.elementChanged(root);
-            System.out.println("[DEBUG] root has changed");
             setVisible(true);
         }
     }

@@ -39,7 +39,6 @@ public class NewRootController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         root.setTag(view.getRootTag());
-        System.out.printf("[DEBUG] root.tag = \"%s\"\n", root.getTag());
         view.teardown();
         root.notifyObservers();
     }

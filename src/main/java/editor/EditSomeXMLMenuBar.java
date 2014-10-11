@@ -1,6 +1,7 @@
 package editor;
 
 import xml.Element;
+import xml.ElementXMLSerializer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,12 +26,36 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         }
     }
 
+    private class ExportActionListener implements ActionListener {
+        private Element root;
+
+        public ExportActionListener(Element root) {
+            this.root = root;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            ElementXMLSerializer exs = new ElementXMLSerializer();
+            String fileName = "tree.xml";
+            System.out.printf("[DEBUG] writing file: %s\n", fileName);
+            exs.serializeToFile(root, fileName);
+        }
+    }
+
     public EditSomeXMLMenuBar(Element root) {
         JMenu fileMenu = new JMenu("File");
         JMenuItem newItem = new JMenuItem("New...");
         newItem.addActionListener(new NewRootActionListener(root));
         fileMenu.add(newItem);
+
         fileMenu.addSeparator();
+
+        JMenuItem exportItem = new JMenuItem("Export...");
+        exportItem.addActionListener(new ExportActionListener(root));
+        fileMenu.add(exportItem);
+
+        fileMenu.addSeparator();
+
         JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(new ActionListener() {
             @Override
