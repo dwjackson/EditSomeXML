@@ -29,6 +29,9 @@ public class EditSomeXML extends JFrame {
         // Set up the tree view
         add(new ElementTreeView(root));
 
+        // Set up the element editor view
+        add(new ElementEditorView());
+
         // Make the main frame visible
         setVisible(true);
     }
