@@ -236,4 +236,15 @@ public class Element implements Observable {
     public String toString() {
         return tag;
     }
+
+    /**
+     * Add a sub-element (child) to this element and return the new Element
+     * @param tag The child's tag
+     * @return the new child element
+     */
+    public Element newSubElement(String tag) {
+        Element child = new Element(tag);
+        addChild(child);
+        return child;
+    }
 }
