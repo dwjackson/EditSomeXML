@@ -40,7 +40,7 @@ public class ElementXMLSerializer implements ElementSerializer {
             }
             sb.append(String.format("</%s>", root.getTag()));
         } else {
-            sb.append("/>");
+            sb.append(" />");
         }
 
         return sb.toString();
