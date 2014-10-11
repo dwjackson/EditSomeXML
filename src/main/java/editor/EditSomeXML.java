@@ -23,28 +23,7 @@ public class EditSomeXML extends JFrame {
         setLayout(new FlowLayout());
 
         // Set up the menu bar
-        JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem newItem = new JMenuItem("New...");
-        newItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                NewRootController controller = new NewRootController(root);
-                NewRootView view = new NewRootView(controller);
-                controller.setView(view);
-            }
-        });
-        fileMenu.add(newItem);
-        fileMenu.addSeparator();
-        JMenuItem exitItem = new JMenuItem("Exit");
-        exitItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
-            }
-        });
-        fileMenu.add(exitItem);
-        menuBar.add(fileMenu);
+        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(root);
         setJMenuBar(menuBar);
 
         // Set up the tree view
