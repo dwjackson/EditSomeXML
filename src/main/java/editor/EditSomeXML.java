@@ -1,11 +1,11 @@
 package editor;
 
+import editor.views.ElementEditorView;
+import editor.views.ElementTreeView;
 import xml.Element;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The EditSomeXML class is the main editor class of EditSomeXML.

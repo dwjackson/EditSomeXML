@@ -1,4 +1,6 @@
-package editor;
+package editor.views;
+
+import editor.controllers.NewRootController;
 
 import javax.swing.*;
 import java.awt.*;

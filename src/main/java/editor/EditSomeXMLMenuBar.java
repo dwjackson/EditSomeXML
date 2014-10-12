@@ -1,5 +1,8 @@
 package editor;
 
+import editor.controllers.NewRootController;
+import editor.views.NewElementView;
+import editor.views.NewRootView;
 import xml.Element;
 import xml.ElementXMLSerializer;
 

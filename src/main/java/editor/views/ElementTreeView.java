@@ -1,5 +1,6 @@
-package editor;
+package editor.views;
 
+import editor.ElementTreeModel;
 import utility.Observer;
 import xml.Element;
 

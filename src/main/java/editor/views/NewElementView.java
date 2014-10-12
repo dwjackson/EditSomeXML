@@ -1,4 +1,4 @@
-package editor;
+package editor.views;
 
 import javax.swing.*;
 import java.awt.*;

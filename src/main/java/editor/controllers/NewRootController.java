@@ -1,5 +1,6 @@
-package editor;
+package editor.controllers;
 
+import editor.views.NewRootView;
 import xml.Element;
 
 import java.awt.event.ActionEvent;
