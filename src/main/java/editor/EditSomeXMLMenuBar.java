@@ -43,6 +43,7 @@ public class EditSomeXMLMenuBar extends JMenuBar {
     }
 
     public EditSomeXMLMenuBar(Element root) {
+        // File Menu
         JMenu fileMenu = new JMenu("File");
         JMenuItem newItem = new JMenuItem("New...");
         newItem.addActionListener(new NewRootActionListener(root));
@@ -65,5 +66,17 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         });
         fileMenu.add(exitItem);
         add(fileMenu);
+
+        // Edit Menu
+        JMenu editMenu = new JMenu("Edit");
+        JMenuItem newElementItem = new JMenuItem("New Element...");
+        newElementItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new NewElementView();
+            }
+        });
+        editMenu.add(newElementItem);
+        add(editMenu);
     }
 }
