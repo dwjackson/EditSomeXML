@@ -1,5 +1,7 @@
 package editor.views;
 
+import xml.Element;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,9 +10,12 @@ import java.awt.*;
  */
 public class ElementEditorView extends JPanel {
     private JTextField tagField;
-    private JPanel attributesPanel;
+    private AttributesPanelView attributesPanel;
     private JTextArea elementTextArea;
 
+    /**
+     * Create the ElementEditorView and leave all of its fields blank
+     */
     public ElementEditorView() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -18,11 +23,7 @@ public class ElementEditorView extends JPanel {
         tagField = new JTextField("", 20);
         add(tagField);
 
-        add(new JLabel("Attributes"));
-        attributesPanel = new JPanel();
-        attributesPanel.setLayout(new GridLayout());
-        attributesPanel.add(new JTextField("", 10));
-        attributesPanel.add(new JTextField("", 10));
+        attributesPanel = new AttributesPanelView();
         add(attributesPanel);
 
         add(new JLabel("Text"));
@@ -30,5 +31,15 @@ public class ElementEditorView extends JPanel {
         add(elementTextArea);
 
         setVisible(true);
+    }
+
+    /**
+     * Populate this view with the data of a particular element
+     * @param elem The element with whose data to populate this view
+     */
+    public void populateWithElementData(Element elem) {
+        tagField.setText(elem.getTag());
+        // TODO: Set the attributes
+        elementTextArea.setText(elem.getText());
     }
 }
