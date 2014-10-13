@@ -1,5 +1,6 @@
 package editor;
 
+import editor.controllers.ElementTreeController;
 import editor.views.ElementEditorView;
 import editor.views.ElementTreeView;
 import xml.Element;
@@ -27,10 +28,16 @@ public class EditSomeXML extends JFrame {
         setJMenuBar(menuBar);
 
         // Set up the tree view
-        add(new ElementTreeView(root));
+        ElementTreeController elementTreeController;
+        elementTreeController = new ElementTreeController();
+        ElementTreeView elementTreeView;
+        elementTreeView = new ElementTreeView(root, elementTreeController);
+        add(elementTreeView);
 
         // Set up the element editor view
-        add(new ElementEditorView());
+        ElementEditorView elementEditorView = new ElementEditorView();
+        elementTreeController.setElementEditorView(elementEditorView);
+        add(elementEditorView);
 
         // Make the main frame visible
         setVisible(true);
