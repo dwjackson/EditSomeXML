@@ -5,6 +5,10 @@ import utility.Observer;
 import xml.Element;
 
 import javax.swing.*;
+import javax.swing.tree.TreePath;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * The ElementTreeView controls the section of the GUI that displays the tree
@@ -27,6 +31,22 @@ public class ElementTreeView extends JPanel implements Observer {
         model = new ElementTreeModel(root);
         tree = new JTree(model);
         add(tree);
+
+        MouseListener ml = new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                int selRow = tree.getRowForLocation(e.getX(), e.getY());
+                TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
+                Element elem = (Element) selPath.getLastPathComponent();
+                if (selRow != -1) {
+                    if (e.getClickCount() == 1) {
+                        System.out.println("[DEBUG] Single-click, tag = " + elem.getTag());
+                    } else if (e.getClickCount() == 2) {
+                        System.out.println("[DEBUG] Double-click, tag = " + elem.getTag());
+                    }
+                }
+            }
+        };
+        tree.addMouseListener(ml);
 
         setVisible(false);
     }
