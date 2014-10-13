@@ -20,7 +20,7 @@ public class ElementTreeModel implements TreeModel {
 
     /**
      * Initialize the ElementTreeModel by supplying it with a root Element
-     * @param root
+     * @param root The root of the XML tree
      */
     public ElementTreeModel(Element root) {
         this.root = root;
@@ -103,7 +103,7 @@ public class ElementTreeModel implements TreeModel {
     }
 
     public void elementChanged(Element elem) {
-        fireTreeStructureChanged(root);
+        fireTreeStructureChanged(elem);
     }
 
     public void fireTreeStructureChanged(Element oldRoot) {
