@@ -12,11 +12,14 @@ public class ElementEditorView extends JPanel {
     private JTextField tagField;
     private AttributesPanelView attributesPanel;
     private JTextArea elementTextArea;
+    private Element elem;
 
     /**
      * Create the ElementEditorView and leave all of its fields blank
      */
     public ElementEditorView() {
+        elem = null;
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         add(new JLabel("Tag"));
@@ -35,11 +38,22 @@ public class ElementEditorView extends JPanel {
 
     /**
      * Populate this view with the data of a particular element
-     * @param elem The element with whose data to populate this view
+     * @param element The element with whose data to populate this view
      */
-    public void populateWithElementData(Element elem) {
+    public void populateWithElementData(Element element) {
+        elem = element;
         tagField.setText(elem.getTag());
         // TODO: Set the attributes
         elementTextArea.setText(elem.getText());
+    }
+
+    /**
+     * Remove all data from this view
+     */
+    public void depopulateAllData() {
+        tagField.setText("");
+        attributesPanel = new AttributesPanelView();
+        elementTextArea.setText("");
+        elem = null;
     }
 }
