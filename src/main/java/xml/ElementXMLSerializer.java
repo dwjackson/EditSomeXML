@@ -53,8 +53,10 @@ public class ElementXMLSerializer implements ElementSerializer {
      */
     public void serializeToFile(Element root, String fileName) {
         String xmlStr = serializeToString(root);
+        String xmlHeader = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            writer.write(xmlHeader);
             writer.write(xmlStr);
             writer.close();
         } catch (IOException e) {
