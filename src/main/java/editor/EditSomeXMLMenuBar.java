@@ -1,6 +1,7 @@
 package editor;
 
 import editor.controllers.NewRootController;
+import editor.views.ElementTreeView;
 import editor.views.NewElementView;
 import editor.views.NewRootView;
 import xml.Element;
@@ -45,7 +46,20 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         }
     }
 
-    public EditSomeXMLMenuBar(Element root) {
+    private class NewElementActionListener implements ActionListener {
+        private ElementTreeView view;
+
+        private NewElementActionListener(ElementTreeView view) {
+            this.view = view;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            new NewElementView(view);
+        }
+    }
+
+    public EditSomeXMLMenuBar(Element root, ElementTreeView elementTreeView) {
         // File Menu
         JMenu fileMenu = new JMenu("File");
         JMenuItem newItem = new JMenuItem("New...");
@@ -73,12 +87,9 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         // Edit Menu
         JMenu editMenu = new JMenu("Edit");
         JMenuItem newElementItem = new JMenuItem("New Element...");
-        newElementItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new NewElementView();
-            }
-        });
+        NewElementActionListener listener;
+        listener = new NewElementActionListener(elementTreeView);
+        newElementItem.addActionListener(listener);
         editMenu.add(newElementItem);
         add(editMenu);
     }

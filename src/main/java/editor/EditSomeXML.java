@@ -23,10 +23,6 @@ public class EditSomeXML extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        // Set up the menu bar
-        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(root);
-        setJMenuBar(menuBar);
-
         // Set up the tree view
         ElementTreeController elementTreeController;
         elementTreeController = new ElementTreeController();
@@ -38,6 +34,10 @@ public class EditSomeXML extends JFrame {
         ElementEditorView elementEditorView = new ElementEditorView();
         elementTreeController.setElementEditorView(elementEditorView);
         add(elementEditorView);
+
+        // Set up the menu bar
+        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(root, elementTreeView);
+        setJMenuBar(menuBar);
 
         // Make the main frame visible
         setVisible(true);
