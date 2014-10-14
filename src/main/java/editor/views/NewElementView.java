@@ -1,5 +1,6 @@
 package editor.views;
 
+import editor.controllers.NewElementController;
 import xml.Element;
 
 import javax.swing.*;
@@ -33,8 +34,13 @@ public class NewElementView extends JFrame {
         add(parentTagField);
 
         JButton okButton = new JButton("OK");
+        okButton.addActionListener(new NewElementController(this, parent));
         add(okButton);
 
         setVisible(true);
+    }
+
+    public String getTag() {
+        return tagField.getText();
     }
 }

@@ -1,6 +1,7 @@
 package editor.controllers;
 
 import editor.views.NewElementView;
+import xml.Element;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,12 +12,18 @@ import java.awt.event.ActionListener;
  */
 public class NewElementController implements ActionListener {
     private NewElementView view;
+    private Element parent;
 
-    public NewElementController(NewElementView view) {
+    public NewElementController(NewElementView view, Element parent) {
         this.view = view;
+        this.parent = parent;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        Element child = new Element(view.getTag());
+        parent.addChild(child);
+        view.dispose();
+        parent.notifyObservers();
     }
 }
