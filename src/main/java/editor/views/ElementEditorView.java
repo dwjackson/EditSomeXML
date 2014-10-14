@@ -4,6 +4,8 @@ import xml.Element;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The ElementEditorView is used to edit the currently-selected element.
@@ -28,6 +30,15 @@ public class ElementEditorView extends JPanel {
 
         attributesPanel = new AttributesPanelView();
         add(attributesPanel);
+
+        JButton newAttributeButton = new JButton("Add Attribute");
+        newAttributeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                attributesPanel.addAttribute();
+            }
+        });
+        add(newAttributeButton);
 
         add(new JLabel("Text"));
         elementTextArea = new JTextArea();

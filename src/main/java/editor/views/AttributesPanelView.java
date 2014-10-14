@@ -36,6 +36,7 @@ public class AttributesPanelView extends JPanel {
      * the attribute's name and another for its value.
      */
     public void addAttribute() {
+        System.out.println("[DEBUG] Adding attribute");
         JTextField nameField = new JTextField("", 10);
         attributesPanel.add(nameField);
         attributeNameFields.add(nameField);
@@ -43,5 +44,7 @@ public class AttributesPanelView extends JPanel {
         JTextField valueField = new JTextField("", 10);
         attributesPanel.add(valueField);
         attributeValueFields.add(valueField);
+
+        attributesPanel.updateUI();
     }
 }
