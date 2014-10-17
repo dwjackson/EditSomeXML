@@ -69,6 +69,38 @@ public class Element implements Observable {
     }
 
     /**
+     * Determine if this element is equivalent to another Element. This does
+     * not take the element's children into account, just the actual element
+     * itself.
+     * @param obj The object to which to compare
+     * @return true if the elements match, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() == getClass()) {
+            Element elem = (Element) obj;
+            if (elem.getTag() != tag) {
+                return false;
+            }
+            if (elem.getText() != text) {
+                return false;
+            }
+            if (elem.getParent() != parent) {
+                return false;
+            }
+            String attVal;
+            for (String attName : elem.attributeNames()) {
+                attVal = getAttribute(attName);
+                if (!elem.getAttribute(attName).equals(attVal)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Get the element's tag
      * @return The element's tag
      */
