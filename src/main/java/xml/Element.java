@@ -52,6 +52,23 @@ public class Element implements Observable {
     }
 
     /**
+     * Get an exact (deep) copy of this element, but without children
+     * @return a copy of this element
+     */
+    public Element cloneWithoutChildren() {
+        Element cloneElem = new Element();
+        cloneElem.setTag(tag);
+        cloneElem.setText(text);
+        String attVal;
+        for (String attName : attributeNames()) {
+            attVal = getAttribute(attName);
+            cloneElem.setAttribute(attName, attVal);
+        }
+        cloneElem.setParent(parent);
+        return cloneElem;
+    }
+
+    /**
      * Get the element's tag
      * @return The element's tag
      */
@@ -162,6 +179,14 @@ public class Element implements Observable {
     }
 
     /**
+     * Set this element's parent
+     * @param parent The new parent to give this element
+     */
+    public void setParent(Element parent) {
+        this.parent = parent;
+    }
+
+    /**
      * Get a Set of the attribute names
      * @see java.util.Set
      * @return a Set of the attribute names
@@ -177,6 +202,15 @@ public class Element implements Observable {
      */
     public String getAttribute(String key) {
         return attributes.get(key);
+    }
+
+    /**
+     * Set the value of an attribute
+     * @param key The attribute's name
+     * @param value The attribute's value/content
+     */
+    public void setAttribute(String key, String value) {
+        attributes.put(key, value);
     }
 
     /**
@@ -201,6 +235,14 @@ public class Element implements Observable {
      */
     public String getText() {
         return text;
+    }
+
+    /**
+     * Set this element's textual content
+     * @param text The text to assign to this element
+     */
+    public void setText(String text) {
+        this.text = text;
     }
 
     /**
