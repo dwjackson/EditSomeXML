@@ -29,4 +29,15 @@ public class ElementTest extends TestCase {
         assertTrue("Clone is not equal to original", snd.equals(fst));
         assertFalse("Clone is original", snd == fst);
     }
+
+    @Test
+    public void testAddChild() {
+        Element root = new Element("root");
+        Element child = new Element("child");
+
+        root.addChild(child);
+
+        Element parent = child.getParent();
+        assertTrue("Child's parent is not set", parent.equals(root));
+    }
 }

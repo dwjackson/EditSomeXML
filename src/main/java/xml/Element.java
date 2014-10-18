@@ -288,6 +288,7 @@ public class Element implements Observable {
      * @param child The child to add to this Element
      */
     public void addChild(Element child) {
+        child.setParent(this);
         children.add(child);
     }
 
