@@ -77,9 +77,13 @@ public class Element implements Observable {
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
         if (obj.getClass() == getClass()) {
             Element elem = (Element) obj;
-            if (!(elem.getTag().equals(tag))) {
+            if (elem.getTag() == null || !(elem.getTag().equals(tag))) {
                 System.out.println("[DEBUG] Element.equals() tags differ");
                 return false;
             }
