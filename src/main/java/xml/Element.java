@@ -79,11 +79,17 @@ public class Element implements Observable {
     public boolean equals(Object obj) {
         if (obj.getClass() == getClass()) {
             Element elem = (Element) obj;
-            if (elem.getTag() != tag) {
+            if (!(elem.getTag().equals(tag))) {
                 return false;
             }
-            if (elem.getText() != text) {
+            if (text == null && elem.getText() != null) {
                 return false;
+            } else if (text != null && elem.getText() == null) {
+                return false;
+            } else if (text != null && elem.getText() != null) {
+                if (!text.equals(elem.getText())) {
+                    return false;
+                }
             }
             if (elem.getParent() != parent) {
                 return false;
@@ -91,7 +97,7 @@ public class Element implements Observable {
             String attVal;
             for (String attName : elem.attributeNames()) {
                 attVal = getAttribute(attName);
-                if (!elem.getAttribute(attName).equals(attVal)) {
+                if (!(elem.getAttribute(attName).equals(attVal))) {
                     return false;
                 }
             }
