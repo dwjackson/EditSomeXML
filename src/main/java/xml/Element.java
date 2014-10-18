@@ -321,4 +321,16 @@ public class Element implements Observable {
         addChild(child);
         return child;
     }
+
+    /**
+     * Determine if this is the root element in a tree (i.e. it has no parent)
+     * @return true if this is the root element, false if it's not
+     */
+    public boolean isRoot() {
+        boolean rootStatus = false;
+        if (parent == null) {
+            rootStatus = true;
+        }
+        return rootStatus;
+    }
 }
