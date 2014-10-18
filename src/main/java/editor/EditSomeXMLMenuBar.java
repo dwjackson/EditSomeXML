@@ -6,6 +6,7 @@ import editor.views.ElementTreeView;
 import editor.views.NewElementView;
 import editor.views.NewRootView;
 import xml.Element;
+import xml.ElementXMLDeserializer;
 import xml.ElementXMLSerializer;
 
 import javax.swing.*;
@@ -60,6 +61,19 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         }
     }
 
+    private class ImportActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            JFrame f = new JFrame();
+            JFileChooser fc = new JFileChooser();
+            fc.showOpenDialog(f);
+            String fileName = fc.getSelectedFile().getAbsolutePath();
+            ElementXMLDeserializer deserializer = new ElementXMLDeserializer();
+            Element elem = deserializer.deserializeFromFile(fileName);
+            // TODO: Set the actual root element
+        }
+    }
+
     public EditSomeXMLMenuBar(Element root, final ElementTreeView elementTreeView) {
         // File Menu
         JMenu fileMenu = new JMenu("File");
@@ -72,6 +86,9 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         JMenuItem exportItem = new JMenuItem("Export...");
         exportItem.addActionListener(new ExportActionListener(root));
         fileMenu.add(exportItem);
+        JMenuItem importItem = new JMenuItem("Import...");
+        importItem.addActionListener(new ImportActionListener());
+        fileMenu.add(importItem);
 
         fileMenu.addSeparator();
 

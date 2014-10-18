@@ -64,4 +64,5 @@ public class ElementTreeView extends JPanel implements Observer {
     public Element getRoot() {
         return root;
     }
+
 }
