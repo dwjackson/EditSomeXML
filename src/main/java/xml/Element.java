@@ -80,20 +80,23 @@ public class Element implements Observable {
         if (obj.getClass() == getClass()) {
             Element elem = (Element) obj;
             if (!(elem.getTag().equals(tag))) {
+                System.out.println("[DEBUG] Element.equals() tags differ");
                 return false;
             }
+
             if (text == null && elem.getText() != null) {
+                System.out.println("[DEBUG] Element.equals() text differs");
                 return false;
             } else if (text != null && elem.getText() == null) {
+                System.out.println("[DEBUG] Element.equals() text differs");
                 return false;
             } else if (text != null && elem.getText() != null) {
                 if (!text.equals(elem.getText())) {
+                    System.out.println("[DEBUG] Element.equals() text differs");
                     return false;
                 }
             }
-            if (elem.getParent() != parent) {
-                return false;
-            }
+
             String attVal;
             for (String attName : elem.attributeNames()) {
                 attVal = getAttribute(attName);
@@ -101,6 +104,18 @@ public class Element implements Observable {
                     return false;
                 }
             }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Determine if this element has the same parent as another element
+     * @param elem The element to compare with
+     * @return true if they are siblings, false if not
+     */
+    public boolean isSibling(Element elem) {
+        if (parent == elem.getParent()) {
             return true;
         }
         return false;
@@ -339,5 +354,29 @@ public class Element implements Observable {
             rootStatus = true;
         }
         return rootStatus;
+    }
+
+    /**
+     * Compare an entire tree to see if they are equivalent
+     * @param elem The element in the other tree
+     * @return true if the trees match, false otherwise
+     */
+    public boolean equalTree(Element elem) {
+        if (!equals(elem)) {
+            System.out.println("[DEBUG] equalTree(): Elements differ");
+            System.out.println("[DEBUG] element 1: " + tag + ", Element 2: " + elem);
+            return false;
+        }
+
+        // Verify that all the children are equal and at the correct indices
+        Element child, compareChild;
+        for (int i = 0; i < getNumberOfChildren(); i++) {
+            child = getChildAt(i);
+            compareChild = elem.getChildAt(i);
+            if (!child.equalTree(compareChild)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

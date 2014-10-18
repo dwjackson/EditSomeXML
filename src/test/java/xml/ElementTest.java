@@ -40,4 +40,15 @@ public class ElementTest extends TestCase {
         Element parent = child.getParent();
         assertTrue("Child's parent is not set", parent.equals(root));
     }
+
+    @Test
+    public void testEqualTree() {
+        Element root1 = new Element("root");
+        Element root2 = new Element("root");
+
+        root1.newSubElement("test");
+        root2.newSubElement("test");
+
+        assertTrue("Trees not equal", root1.equalTree(root2));
+    }
 }
