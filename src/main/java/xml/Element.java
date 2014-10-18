@@ -120,10 +120,7 @@ public class Element implements Observable {
      * @return true if they are siblings, false if not
      */
     public boolean isSibling(Element elem) {
-        if (parent == elem.getParent()) {
-            return true;
-        }
-        return false;
+        return parent == elem.getParent();
     }
 
     /**
@@ -300,7 +297,7 @@ public class Element implements Observable {
      * @param text The text to assign to this element
      */
     public void setText(String text) {
-        if (text != null && text.length() > 0) {
+        if (text != null && text.trim().length() > 0) {
             this.text = text;
         }
     }
