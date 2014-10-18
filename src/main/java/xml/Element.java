@@ -86,13 +86,16 @@ public class Element implements Observable {
 
             if (text == null && elem.getText() != null) {
                 System.out.println("[DEBUG] Element.equals() text differs");
+                System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
                 return false;
             } else if (text != null && elem.getText() == null) {
                 System.out.println("[DEBUG] Element.equals() text differs");
+                System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
                 return false;
             } else if (text != null && elem.getText() != null) {
                 if (!text.equals(elem.getText())) {
                     System.out.println("[DEBUG] Element.equals() text differs");
+                    System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
                     return false;
                 }
             }
@@ -101,6 +104,8 @@ public class Element implements Observable {
             for (String attName : elem.attributeNames()) {
                 attVal = getAttribute(attName);
                 if (!(elem.getAttribute(attName).equals(attVal))) {
+                    System.out.println("[DEBUG] Element.equals() Attribute differs ");
+                    System.out.printf("[DEBUG] key = \"%s\", val = \"%s\"\n", attName, attVal);
                     return false;
                 }
             }
@@ -295,7 +300,9 @@ public class Element implements Observable {
      * @param text The text to assign to this element
      */
     public void setText(String text) {
-        this.text = text;
+        if (text != null && text.length() > 0) {
+            this.text = text;
+        }
     }
 
     /**
