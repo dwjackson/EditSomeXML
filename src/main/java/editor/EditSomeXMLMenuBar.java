@@ -1,6 +1,7 @@
 package editor;
 
 import editor.controllers.NewRootController;
+import editor.views.CloneElementView;
 import editor.views.ElementTreeView;
 import editor.views.NewElementView;
 import editor.views.NewRootView;
@@ -59,7 +60,7 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         }
     }
 
-    public EditSomeXMLMenuBar(Element root, ElementTreeView elementTreeView) {
+    public EditSomeXMLMenuBar(Element root, final ElementTreeView elementTreeView) {
         // File Menu
         JMenu fileMenu = new JMenu("File");
         JMenuItem newItem = new JMenuItem("New...");
@@ -91,6 +92,14 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         listener = new NewElementActionListener(elementTreeView);
         newElementItem.addActionListener(listener);
         editMenu.add(newElementItem);
+        JMenuItem cloneElementItem = new JMenuItem("Clone Element...");
+        cloneElementItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new CloneElementView(elementTreeView);
+            }
+        });
+        editMenu.add(cloneElementItem);
         add(editMenu);
     }
 }
