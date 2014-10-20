@@ -1,6 +1,7 @@
 package editor;
 
 import editor.controllers.ElementTreeController;
+import editor.menubar.EditSomeXMLMenuBar;
 import editor.views.ElementEditorView;
 import editor.views.ElementTreeView;
 import xml.Element;

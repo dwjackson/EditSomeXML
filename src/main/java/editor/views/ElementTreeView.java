@@ -27,7 +27,7 @@ public class ElementTreeView extends JPanel implements Observer {
         this.data = data;
         data.registerObserver(this);
 
-        model = new ElementTreeModel(data.getRoot());
+        model = new ElementTreeModel(data);
         tree = new JTree(model);
         add(tree);
 
@@ -42,10 +42,12 @@ public class ElementTreeView extends JPanel implements Observer {
      */
     public void notifyObserver() {
         if (data.getRoot() != null) {
-            model.elementChanged(data.getRoot());
+            model.elementChanged(data.getRoot()); // TODO: Fix this
             if (!isVisible()) {
                 setVisible(true);
             }
+        } else {
+            System.out.println("[ERROR] data.root is null!");
         }
     }
 

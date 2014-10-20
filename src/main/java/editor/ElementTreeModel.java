@@ -12,18 +12,19 @@ import java.util.ArrayList;
  * The ElementTreeModel is used to map the Element class onto a JTree
  * @see javax.swing.tree.TreeModel
  * @see xml.Element
+ * @see editor.ElementTreeData
  * @see javax.swing.JTree
  */
 public class ElementTreeModel implements TreeModel {
-    private Element root;
+    private ElementTreeData data;
     private ArrayList<TreeModelListener> listeners;
 
     /**
-     * Initialize the ElementTreeModel by supplying it with a root Element
-     * @param root The root of the XML tree
+     * Initialize the ElementTreeModel by supplying it with element tree data
+     * @param data The element tree data
      */
-    public ElementTreeModel(Element root) {
-        this.root = root;
+    public ElementTreeModel(ElementTreeData data) {
+        this.data = data;
         listeners = new ArrayList<TreeModelListener>();
     }
 
@@ -33,7 +34,7 @@ public class ElementTreeModel implements TreeModel {
      */
     @Override
     public Object getRoot() {
-        return root;
+        return data.getRoot();
     }
 
     /**
