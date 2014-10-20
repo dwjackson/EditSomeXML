@@ -74,17 +74,17 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         }
     }
 
-    public EditSomeXMLMenuBar(Element root, final ElementTreeView elementTreeView) {
+    public EditSomeXMLMenuBar(ElementTreeData data, final ElementTreeView elementTreeView) {
         // File Menu
         JMenu fileMenu = new JMenu("File");
         JMenuItem newItem = new JMenuItem("New...");
-        newItem.addActionListener(new NewRootActionListener(root));
+        newItem.addActionListener(new NewRootActionListener(data.getRoot()));
         fileMenu.add(newItem);
 
         fileMenu.addSeparator();
 
         JMenuItem exportItem = new JMenuItem("Export...");
-        exportItem.addActionListener(new ExportActionListener(root));
+        exportItem.addActionListener(new ExportActionListener(data.getRoot()));
         fileMenu.add(exportItem);
         JMenuItem importItem = new JMenuItem("Import...");
         importItem.addActionListener(new ImportActionListener());

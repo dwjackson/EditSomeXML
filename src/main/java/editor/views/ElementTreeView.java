@@ -1,5 +1,6 @@
 package editor.views;
 
+import editor.ElementTreeData;
 import editor.ElementTreeModel;
 import editor.controllers.ElementTreeController;
 import utility.Observer;
@@ -13,20 +14,20 @@ import javax.swing.*;
  */
 public class ElementTreeView extends JPanel implements Observer {
     private JTree tree;
-    private Element root;
+    private ElementTreeData data;
     private ElementTreeModel model;
 
     /**
      * Create the tree view and associate it with a particular model (root of
      * the XML element tree)
-     * @param root The root element of the XML element tree.
+     * @param data The element tree data
      * @param controller The controller for this tree view
      */
-    public ElementTreeView(Element root, ElementTreeController controller) {
-        root.registerObserver(this);
-        this.root = root;
+    public ElementTreeView(ElementTreeData data, ElementTreeController controller) {
+        this.data = data;
+        data.registerObserver(this);
 
-        model = new ElementTreeModel(root);
+        model = new ElementTreeModel(data.getRoot());
         tree = new JTree(model);
         add(tree);
 
@@ -40,8 +41,8 @@ public class ElementTreeView extends JPanel implements Observer {
      * When the associated element tree root has changed, change the view
      */
     public void notifyObserver() {
-        if (root != null) {
-            model.elementChanged(root);
+        if (data.getRoot() != null) {
+            model.elementChanged(data.getRoot());
             if (!isVisible()) {
                 setVisible(true);
             }
@@ -62,7 +63,7 @@ public class ElementTreeView extends JPanel implements Observer {
      * @return the root element of the tree
      */
     public Element getRoot() {
-        return root;
+        return data.getRoot();
     }
 
 }

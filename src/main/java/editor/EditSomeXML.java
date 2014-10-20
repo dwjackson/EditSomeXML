@@ -12,10 +12,10 @@ import java.awt.*;
  * The EditSomeXML class is the main editor class of EditSomeXML.
  */
 public class EditSomeXML extends JFrame {
-    private Element root;
+    private ElementTreeData data;
 
     public EditSomeXML() {
-        root = new Element();
+        data = new ElementTreeData(new Element());
 
         // Set up the main window
         setSize(800,600);
@@ -27,7 +27,7 @@ public class EditSomeXML extends JFrame {
         ElementTreeController elementTreeController;
         elementTreeController = new ElementTreeController();
         ElementTreeView elementTreeView;
-        elementTreeView = new ElementTreeView(root, elementTreeController);
+        elementTreeView = new ElementTreeView(data, elementTreeController);
         add(elementTreeView);
 
         // Set up the element editor view
@@ -36,7 +36,7 @@ public class EditSomeXML extends JFrame {
         add(elementEditorView);
 
         // Set up the menu bar
-        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(root, elementTreeView);
+        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(data, elementTreeView);
         setJMenuBar(menuBar);
 
         // Make the main frame visible
