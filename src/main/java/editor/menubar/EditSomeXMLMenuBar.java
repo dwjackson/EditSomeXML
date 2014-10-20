@@ -3,8 +3,6 @@ package editor.menubar;
 import editor.ElementTreeData;
 import editor.views.CloneElementView;
 import editor.views.ElementTreeView;
-import xml.Element;
-import xml.ElementXMLDeserializer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
