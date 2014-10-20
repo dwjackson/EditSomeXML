@@ -13,10 +13,8 @@ import java.awt.*;
  * The EditSomeXML class is the main editor class of EditSomeXML.
  */
 public class EditSomeXML extends JFrame {
-    private ElementTreeData data;
-
     public EditSomeXML() {
-        data = new ElementTreeData(new Element());
+        ElementTreeData data = new ElementTreeData(new Element());
 
         // Set up the main window
         setSize(800,600);
