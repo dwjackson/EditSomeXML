@@ -1,5 +1,6 @@
 package editor.views;
 
+import editor.TagDocumentListener;
 import xml.Element;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class ElementEditorView extends JPanel {
     private AttributesPanelView attributesPanel;
     private JTextArea elementTextArea;
     private Element elem;
+    private TagDocumentListener tagDocumentListener;
 
     /**
      * Create the ElementEditorView and leave all of its fields blank
@@ -26,6 +28,8 @@ public class ElementEditorView extends JPanel {
 
         add(new JLabel("Tag"));
         tagField = new JTextField("", 20);
+        tagDocumentListener = new TagDocumentListener(elem);
+        tagField.getDocument().addDocumentListener(tagDocumentListener);
         add(tagField);
 
         attributesPanel = new AttributesPanelView();
@@ -53,6 +57,7 @@ public class ElementEditorView extends JPanel {
      */
     public void populateWithElementData(Element element) {
         elem = element;
+        tagDocumentListener.setElement(elem);
         tagField.setText(elem.getTag());
         // TODO: Set the attributes
         elementTextArea.setText(elem.getText());

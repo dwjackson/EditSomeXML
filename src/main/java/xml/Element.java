@@ -142,6 +142,7 @@ public class Element implements Observable {
      */
     public void setTag(String tag) {
         this.tag = tag;
+        notifyObservers();
     }
 
     /**
