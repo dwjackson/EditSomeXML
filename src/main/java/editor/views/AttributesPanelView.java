@@ -2,6 +2,8 @@ package editor.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,6 +31,15 @@ public class AttributesPanelView extends JPanel {
         attributesPanel.setLayout(new GridLayout());
         addAttribute();
         add(attributesPanel);
+
+        JButton newAttributeButton = new JButton("Add Attribute");
+        newAttributeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addAttribute();
+            }
+        });
+        add(newAttributeButton);
     }
 
     /**

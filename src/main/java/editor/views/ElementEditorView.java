@@ -6,8 +6,6 @@ import xml.Element;
 
 import javax.swing.*;
 import javax.swing.text.Document;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The ElementEditorView is used to edit the currently-selected element.
@@ -28,30 +26,30 @@ public class ElementEditorView extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        add(new JLabel("Tag"));
+        // Tag
+        JPanel tagPanel = new JPanel();
+        tagPanel.add(new JLabel("Tag"));
         tagField = new JTextField("", 20);
         tagDocumentListener = new TagDocumentListener(elem);
         tagField.getDocument().addDocumentListener(tagDocumentListener);
-        add(tagField);
+        tagPanel.add(tagField);
+        add(tagPanel);
 
+        // Attributes
         attributesPanel = new AttributesPanelView();
         add(attributesPanel);
 
-        JButton newAttributeButton = new JButton("Add Attribute");
-        newAttributeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                attributesPanel.addAttribute();
-            }
-        });
-        add(newAttributeButton);
-
-        add(new JLabel("Text"));
+        // Text
+        JPanel textPanel = new JPanel();
+        textPanel.add(new JLabel("Text"));
         elementTextArea = new JTextArea();
-        add(elementTextArea);
+        elementTextArea.setRows(4);
+        elementTextArea.setColumns(40);
+        textPanel.add(elementTextArea);
         textDocumentListener = new TextDocumentListener(elem);
         Document doc = elementTextArea.getDocument();
         doc.addDocumentListener(textDocumentListener);
+        add(textPanel);
 
         setVisible(true);
     }
