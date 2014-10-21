@@ -1,9 +1,11 @@
 package editor.views;
 
 import editor.TagDocumentListener;
+import editor.TextDocumentListener;
 import xml.Element;
 
 import javax.swing.*;
+import javax.swing.text.Document;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +18,7 @@ public class ElementEditorView extends JPanel {
     private JTextArea elementTextArea;
     private Element elem;
     private TagDocumentListener tagDocumentListener;
+    private TextDocumentListener textDocumentListener;
 
     /**
      * Create the ElementEditorView and leave all of its fields blank
@@ -46,6 +49,9 @@ public class ElementEditorView extends JPanel {
         add(new JLabel("Text"));
         elementTextArea = new JTextArea();
         add(elementTextArea);
+        textDocumentListener = new TextDocumentListener(elem);
+        Document doc = elementTextArea.getDocument();
+        doc.addDocumentListener(textDocumentListener);
 
         setVisible(true);
     }
@@ -57,6 +63,7 @@ public class ElementEditorView extends JPanel {
     public void populateWithElementData(Element element) {
         elem = element;
         tagDocumentListener.setElement(elem);
+        textDocumentListener.setElement(elem);
         tagField.setText(elem.getTag());
         // TODO: Set the attributes
         elementTextArea.setText(elem.getText());
