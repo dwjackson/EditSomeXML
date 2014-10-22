@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * The AttributesPanelView is used to show all of the attributes of an XML
@@ -53,7 +52,7 @@ public class AttributesPanelView extends JPanel {
     public void addAttribute() {
         System.out.println("[DEBUG] Adding attribute");
 
-        if (getNumberOfAttributes() >  0) {
+        if (getNumberOfAttributeRows() >  0) {
             int numRows = layout.getRows();
             layout.setRows(numRows + 1);
         }
@@ -69,7 +68,11 @@ public class AttributesPanelView extends JPanel {
         attributesPanel.updateUI();
     }
 
-    public int getNumberOfAttributes() {
+    /**
+     * Get the number of attribute rows available
+     * @return the number of attribute rows available
+     */
+    public int getNumberOfAttributeRows() {
         return attributeNameFields.size();
     }
 }
