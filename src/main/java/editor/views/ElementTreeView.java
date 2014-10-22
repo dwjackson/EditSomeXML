@@ -56,8 +56,7 @@ public class ElementTreeView extends JPanel implements Observer {
      * @return the currently-selected element
      */
     public Element getSelectedElement() {
-        Element elem = (Element) tree.getLastSelectedPathComponent();
-        return elem;
+        return (Element) tree.getLastSelectedPathComponent();
     }
 
     /**
