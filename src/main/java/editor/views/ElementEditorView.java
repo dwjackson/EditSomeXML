@@ -79,9 +79,12 @@ public class ElementEditorView extends JPanel {
      * Remove all data from this view
      */
     public void depopulateAllData() {
+        elem = null;
+        for (ElementDocumentListener listener : documentListeners) {
+            listener.unsetElement();
+        }
         tagField.setText("");
         attributesPanel.resetAttributes();
         elementTextArea.setText("");
-        elem = null;
     }
 }

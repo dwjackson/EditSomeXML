@@ -32,4 +32,8 @@ public class ElementDocumentListener {
     public void setElement(Element element) {
         elem = element;
     }
+
+    public void unsetElement() {
+        elem = null;
+    }
 }
