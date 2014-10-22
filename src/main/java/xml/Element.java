@@ -96,7 +96,7 @@ public class Element implements Observable {
                 System.out.println("[DEBUG] Element.equals() text differs");
                 System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
                 return false;
-            } else if (text != null && elem.getText() != null) {
+            } else if (text != null) {
                 if (!text.equals(elem.getText())) {
                     System.out.println("[DEBUG] Element.equals() text differs");
                     System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
@@ -271,6 +271,14 @@ public class Element implements Observable {
      */
     public void setAttribute(String key, String value) {
         attributes.put(key, value);
+    }
+
+    /**
+     * Remove an attribute from this element
+     * @param key The attribute's key
+     */
+    public void removeAttribute(String key) {
+        attributes.remove(key);
     }
 
     /**
