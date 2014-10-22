@@ -16,6 +16,8 @@ public class AttributesPanelView extends JPanel {
     private JPanel attributesPanel;
     private ArrayList<JTextField> attributeNameFields;
     private ArrayList<JTextField> attributeValueFields;
+    private GridLayout layout;
+    private final int NUM_COLS = 2;
 
     /**
      * Initialize the AttributesPanelView with no data
@@ -28,7 +30,9 @@ public class AttributesPanelView extends JPanel {
         add(new JLabel("Attributes"));
 
         attributesPanel = new JPanel();
-        attributesPanel.setLayout(new GridLayout());
+        layout = new GridLayout();
+        layout.setColumns(NUM_COLS);
+        attributesPanel.setLayout(layout);
         addAttribute();
         add(attributesPanel);
 
@@ -48,6 +52,12 @@ public class AttributesPanelView extends JPanel {
      */
     public void addAttribute() {
         System.out.println("[DEBUG] Adding attribute");
+
+        if (getNumberOfAttributes() >  0) {
+            int numRows = layout.getRows();
+            layout.setRows(numRows + 1);
+        }
+
         JTextField nameField = new JTextField("", 10);
         attributesPanel.add(nameField);
         attributeNameFields.add(nameField);
@@ -57,5 +67,9 @@ public class AttributesPanelView extends JPanel {
         attributeValueFields.add(valueField);
 
         attributesPanel.updateUI();
+    }
+
+    public int getNumberOfAttributes() {
+        return attributeNameFields.size();
     }
 }
