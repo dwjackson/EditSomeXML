@@ -17,6 +17,7 @@ public class AttributesPanelView extends JPanel {
     private ArrayList<JTextField> attributeValueFields;
     private GridLayout layout;
     private final int NUM_COLS = 2;
+    private final int MIN_NUM_ROWS = 1;
 
     /**
      * Initialize the AttributesPanelView with no data
@@ -74,5 +75,19 @@ public class AttributesPanelView extends JPanel {
      */
     public int getNumberOfAttributeRows() {
         return attributeNameFields.size();
+    }
+
+    public void resetAttributes() {
+        for (JTextField field : attributeNameFields) {
+            attributesPanel.remove(field);
+        }
+        for (JTextField field : attributeValueFields) {
+            attributesPanel.remove(field);
+        }
+        attributeNameFields.clear();
+        attributeValueFields.clear();
+        layout.setColumns(NUM_COLS);
+        layout.setRows(MIN_NUM_ROWS);
+        addAttribute();
     }
 }

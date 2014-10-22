@@ -65,6 +65,7 @@ public class ElementEditorView extends JPanel {
      * @param element The element with whose data to populate this view
      */
     public void populateWithElementData(Element element) {
+        depopulateAllData();
         elem = element;
         for (ElementDocumentListener listener : documentListeners) {
             listener.setElement(elem);
@@ -79,7 +80,7 @@ public class ElementEditorView extends JPanel {
      */
     public void depopulateAllData() {
         tagField.setText("");
-        attributesPanel = new AttributesPanelView();
+        attributesPanel.resetAttributes();
         elementTextArea.setText("");
         elem = null;
     }
