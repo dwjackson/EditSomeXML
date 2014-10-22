@@ -30,12 +30,7 @@ public class Element implements Observable {
      * it has a tag.
      */
     public Element() {
-        tag = null;
-        text = null;
-        attributes = new HashMap<String, String>();
-        children = new ArrayList<Element>();
-        observable = new GenericObservable();
-        parent = null;
+        this(null);
     }
 
     /**
