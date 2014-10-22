@@ -3,6 +3,7 @@ package editor.menubar;
 import xml.Element;
 import xml.ElementXMLSerializer;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,8 +21,11 @@ public class ExportActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         ElementXMLSerializer exs = new ElementXMLSerializer();
-        String fileName = "tree.xml";
-        System.out.printf("[DEBUG] writing file: %s\n", fileName);
+        JFrame exportFileChooserFrame = new JFrame();
+        JFileChooser fc = new JFileChooser();
+        fc.showSaveDialog(exportFileChooserFrame);
+        String fileName = fc.getSelectedFile().getAbsolutePath();
+        System.out.printf("[DEBUG] writing file: \"%s\"\n", fileName);
         exs.serializeToFile(root, fileName);
     }
 }
