@@ -15,8 +15,10 @@ public class TextDocumentListener extends ElementDocumentListener implements Doc
     }
 
     private void updateElementText(DocumentEvent documentEvent) {
-        String text = getStringFromEvent(documentEvent);
-        elem.setText(text);
+        if (elem != null) {
+            String text = getStringFromEvent(documentEvent);
+            elem.setText(text);
+        }
     }
 
     @Override

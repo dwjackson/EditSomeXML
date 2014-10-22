@@ -14,8 +14,10 @@ public class TagDocumentListener extends ElementDocumentListener implements Docu
     }
 
     private void updateElementTag(DocumentEvent documentEvent) {
-        String str = getStringFromEvent(documentEvent);
-        elem.setTag(str);
+        if (elem != null) {
+            String str = getStringFromEvent(documentEvent);
+            elem.setTag(str);
+        }
     }
 
     @Override
