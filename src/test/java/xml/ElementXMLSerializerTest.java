@@ -23,10 +23,11 @@ public class ElementXMLSerializerTest {
     @Test
     public void testMultipleElementSerializeToString() {
         Element root = new Element("test");
-        root.newSubElement("first");
+        Element first = root.newSubElement("first");
+        first.setText("Testing");
         root.newSubElement("second");
         String result = exs.serializeToString(root);
-        String correctResult = "<test><first /><second /></test>";
+        String correctResult = "<test><first>Testing</first><second /></test>";
         assertEquals("Multiple element XML string incorrect", correctResult, result);
     }
 }

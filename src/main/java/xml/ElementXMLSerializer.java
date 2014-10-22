@@ -29,18 +29,22 @@ public class ElementXMLSerializer implements ElementSerializer {
             sb.append(String.format(ATTRIBUTE_FMT, attName, val));
         }
 
+        if (root.hasText() || root.hasChildren()) {
+            sb.append(">");
+        } else {
+            sb.append(" />");
+        }
+
         if (root.hasText()) {
             sb.append(root.getText());
         }
 
-        if (root.hasChildren()) {
-            sb.append(">");
-            for (Element child : root.children()) {
-                sb.append(serializeToString(child));
-            }
+        for (Element child : root.children()) {
+            sb.append(serializeToString(child));
+        }
+
+        if (root.hasText() || root.hasChildren()) {
             sb.append(String.format("</%s>", root.getTag()));
-        } else {
-            sb.append(" />");
         }
 
         return sb.toString();
