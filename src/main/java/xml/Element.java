@@ -4,10 +4,7 @@ import utility.GenericObservable;
 import utility.Observable;
 import utility.Observer;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The Element class is used to represent a node in an XML tree. It must have
@@ -30,7 +27,12 @@ public class Element implements Observable {
      * it has a tag.
      */
     public Element() {
-        this(null);
+        tag = null;
+        text = null;
+        attributes = new HashMap<String, String>();
+        children = new ArrayList<Element>();
+        observable = new GenericObservable();
+        parent = null;
     }
 
     /**
@@ -38,12 +40,8 @@ public class Element implements Observable {
      * @param tagName The name of the tag to give to this element
      */
     public Element(String tagName) {
+        this();
         setTag(tagName);
-        text = null;
-        attributes = new HashMap<String, String>();
-        children = new ArrayList<Element>();
-        observable = new GenericObservable();
-        parent = null;
     }
 
     /**
@@ -136,8 +134,10 @@ public class Element implements Observable {
      * @param tag The tag to apply to this element
      */
     public void setTag(String tag) {
-        this.tag = tag.replace(' ', '-');
-        notifyObservers();
+        if (tag != null) {
+            this.tag = tag.replace(' ', '-');
+            notifyObservers();
+        }
     }
 
     /**

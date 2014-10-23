@@ -5,6 +5,12 @@ import org.junit.Test;
 
 public class ElementTest extends TestCase {
     @Test
+    public void testCreate() {
+        Element elem = new Element("elem");
+        assertNotNull("Element is null", elem);
+    }
+
+    @Test
     public void testEquals() {
         Element elem1 = new Element("Test");
         elem1.setText("Testing");
