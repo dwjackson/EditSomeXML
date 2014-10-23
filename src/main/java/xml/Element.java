@@ -277,6 +277,17 @@ public class Element implements Observable {
     }
 
     /**
+     * Rename an existing attribute
+     * @param oldKey The current/old key for the attribute
+     * @param newKey The new key for the attribute
+     */
+    public void renameAttribute(String oldKey, String newKey) {
+        String value = getAttribute(oldKey);
+        removeAttribute(oldKey);
+        setAttribute(newKey, value);
+    }
+
+    /**
      * Get the total number of attributes that the Element has
      * @return the number of attributes that the Element has
      */
