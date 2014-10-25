@@ -67,4 +67,13 @@ public class ElementAttributes {
     public int size() {
         return attributeNames.size();
     }
+
+    public void rename(String oldKey, String newKey) {
+        int idx = attributeNames.indexOf(oldKey);
+        attributeNames.set(idx, newKey);
+
+        String val = attributes.get(oldKey);
+        attributes.put(newKey, val);
+        attributes.remove(oldKey);
+    }
 }

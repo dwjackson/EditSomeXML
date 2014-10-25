@@ -283,9 +283,7 @@ public class Element implements Observable {
      * @param newKey The new key for the attribute
      */
     public void renameAttribute(String oldKey, String newKey) {
-        String value = getAttribute(oldKey);
-        removeAttribute(oldKey);
-        setAttribute(newKey, value);
+        attributes.rename(oldKey, newKey);
     }
 
     /**
