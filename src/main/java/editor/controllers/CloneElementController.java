@@ -20,12 +20,14 @@ public class CloneElementController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Element origElem = view.getElement();
+        int numberOfClones = view.getNumberOfClones();
         if (origElem != null && !origElem.isRoot()) {
-            Element clonedElem = origElem.cloneWithoutChildren();
-            Element parent = origElem.getParent();
-            parent.addChild(clonedElem);
-            parent.notifyObservers();
-
+            for (int i = 0; i < numberOfClones; i++) {
+                Element clonedElem = origElem.cloneWithoutChildren();
+                Element parent = origElem.getParent();
+                parent.addChild(clonedElem);
+                parent.notifyObservers();
+            }
             view.dispose();
         }
     }

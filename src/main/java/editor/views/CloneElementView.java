@@ -5,13 +5,18 @@ import xml.Element;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.Format;
+import java.text.NumberFormat;
 
 /**
  * The CloneElementView is the window that pops up when the user wants to
  * clone (deep-copy) and element in the XML tree
  */
 public class CloneElementView extends JFrame {
+    private final int MAX_CLONES = 100;
+
     Element elem;
+    private JFormattedTextField numberOfClonesField;
 
     public CloneElementView(ElementTreeView elementTreeView) {
         elem = null;
@@ -24,6 +29,14 @@ public class CloneElementView extends JFrame {
         JTextField tagField = new JTextField("", 20);
         tagField.setEditable(false);
         add(tagField);
+
+        add(new JLabel("Number of clones:"));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumIntegerDigits(2);
+        numberOfClonesField = new JFormattedTextField(numberFormat);
+        numberOfClonesField.setColumns(2);
+        numberOfClonesField.setText("1");
+        add(numberOfClonesField);
 
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new CloneElementController(this));
@@ -42,5 +55,14 @@ public class CloneElementView extends JFrame {
 
     public Element getElement() {
         return elem;
+    }
+
+    public int getNumberOfClones() {
+        Long val = (Long) numberOfClonesField.getValue();
+        if (val == null || val < 0 || val > MAX_CLONES) {
+            return 1;
+        } else {
+            return val.intValue();
+        }
     }
 }
