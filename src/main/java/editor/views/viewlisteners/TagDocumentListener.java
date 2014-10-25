@@ -1,5 +1,6 @@
-package editor;
+package editor.views.viewlisteners;
 
+import editor.ElementDocumentListener;
 import xml.Element;
 
 import javax.swing.event.DocumentEvent;

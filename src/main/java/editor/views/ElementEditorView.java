@@ -1,8 +1,8 @@
 package editor.views;
 
 import editor.ElementDocumentListener;
-import editor.TagDocumentListener;
-import editor.TextDocumentListener;
+import editor.views.viewlisteners.TagDocumentListener;
+import editor.views.viewlisteners.TextDocumentListener;
 import xml.Element;
 
 import javax.swing.*;
