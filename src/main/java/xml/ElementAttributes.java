@@ -58,6 +58,8 @@ public class ElementAttributes {
      */
     public void remove(String key) {
         attributes.remove(key);
+        int idx = attributeNames.indexOf(key);
+        attributeNames.remove(idx);
     }
 
     /**
