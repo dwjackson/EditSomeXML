@@ -120,6 +120,6 @@ public class AttributesPanelView extends JPanel {
      */
     public void unsetElement() {
         elem = null;
-        // TODO
+        resetAttributes();
     }
 }
