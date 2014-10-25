@@ -55,6 +55,9 @@ public class EditSomeXMLMenuBar extends JMenuBar {
             }
         });
         editMenu.add(cloneElementItem);
+        JMenuItem deleteItem = new JMenuItem("Delete...");
+        // TODO
+        editMenu.add(deleteItem);
         add(editMenu);
     }
 }
