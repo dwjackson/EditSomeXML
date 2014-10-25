@@ -402,4 +402,14 @@ public class Element implements Observable {
         }
         return true;
     }
+
+    /**
+     * Delete a child from this element
+     * @param child The child to delete
+     */
+    public void deleteChild(Element child) {
+        if (children.contains(child)) {
+            children.remove(child);
+        }
+    }
 }

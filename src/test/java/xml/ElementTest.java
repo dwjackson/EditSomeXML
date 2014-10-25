@@ -57,4 +57,18 @@ public class ElementTest extends TestCase {
 
         assertTrue("Trees not equal", root1.equalTree(root2));
     }
+
+    @Test
+    public void testDeleteChild() {
+        Element root = new Element("root");
+        Element ch1 = root.newSubElement("child1");
+        Element ch2 = root.newSubElement("child2");
+        Element ch3 = root.newSubElement("child3");
+        root.deleteChild(ch2);
+
+        assertEquals("Number of children is wrong", root.getNumberOfChildren(), 2);
+        for (Element child : root.children()) {
+            assertTrue("Wrong child deleted", child.getTag() != "child2");
+        }
+    }
 }
