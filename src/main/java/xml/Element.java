@@ -295,6 +295,15 @@ public class Element implements Observable {
     }
 
     /**
+     * Rename an attribute based on its index
+     * @param index The attribute's index
+     * @param newKey The attribute's new name
+     */
+    public void renameAttribute(int index, String newKey) {
+        attributes.rename(index, newKey);
+    }
+
+    /**
      * Get the total number of attributes that the Element has
      * @return the number of attributes that the Element has
      */

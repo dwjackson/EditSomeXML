@@ -46,10 +46,10 @@ public class ElementAttributes {
      * @param value The attribute's value
      */
     public void set(String key, String value) {
-        attributes.put(key, value);
         if (!attributes.containsKey(key)) {
             attributeNames.add(key);
         }
+        attributes.put(key, value);
     }
 
     /**
@@ -80,6 +80,16 @@ public class ElementAttributes {
         String val = attributes.get(oldKey);
         attributes.put(newKey, val);
         attributes.remove(oldKey);
+    }
+
+    /**
+     * Rename an attribute based on its index
+     * @param index The attribute's index
+     * @param newKey The attribute's new name
+     */
+    public void rename(int index, String newKey) {
+        String oldKey = attributeNames.get(index);
+        rename(oldKey, newKey);
     }
 
     /**
