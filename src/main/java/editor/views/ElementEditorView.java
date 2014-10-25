@@ -72,7 +72,6 @@ public class ElementEditorView extends JPanel {
             listener.setElement(elem);
         }
         tagField.setText(elem.getTag());
-        // TODO: Set the attributes
         elementTextArea.setText(elem.getText());
     }
 

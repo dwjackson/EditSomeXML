@@ -60,8 +60,11 @@ public class AttributesPanelView extends JPanel {
     /**
      * Add more space for another attribute to be added. This adds a field for
      * the attribute's name and another for its value.
+     *
+     * @param name The attribute's name
+     * @param value The attribute's value
      */
-    public void addAttribute() {
+    public void addAttribute(String name, String value) {
         if (elem == null) {
             return; // Bail out if no element is set
         }
@@ -73,17 +76,13 @@ public class AttributesPanelView extends JPanel {
             layout.setRows(numRows + 1);
         }
 
-        String attName;
-        attName = DEFAULT_ATTRIBUTE_BASE_NAME + Integer.toString(numRows);
-        JTextField nameField = new JTextField(attName, 10);
+        JTextField nameField = new JTextField(name, 10);
         attributesPanel.add(nameField);
         attributeNameFields.add(nameField);
 
-        JTextField valueField = new JTextField(DEFAULT_ATTRIBUTE_VALUE, 10);
+        JTextField valueField = new JTextField(value, 10);
         attributesPanel.add(valueField);
         attributeValueFields.add(valueField);
-
-        elem.setAttribute(attName, DEFAULT_ATTRIBUTE_VALUE);
 
         AttributeDocumentListener listener;
         listener = new AttributeDocumentListener(elem, numRows-1, nameField,
@@ -93,6 +92,16 @@ public class AttributesPanelView extends JPanel {
         listeners.add(listener);
 
         attributesPanel.updateUI();
+    }
+
+    /**
+     * Add a default attribute
+     */
+    public void addAttribute() {
+        int numRows = layout.getRows();
+        String attName;
+        attName = DEFAULT_ATTRIBUTE_BASE_NAME + Integer.toString(numRows);
+        addAttribute(attName, DEFAULT_ATTRIBUTE_VALUE);
     }
 
     /**
@@ -123,7 +132,13 @@ public class AttributesPanelView extends JPanel {
      */
     public void setElement(Element element) {
         elem = element;
-        // TODO
+        // TODO: Load the attributes
+        if (elem.getNumberOfAttributes() > 0) {
+            for (String attName : elem.attributeNames()) {
+                String attVal = elem.getAttribute(attName);
+                addAttribute(attName, attVal);
+            }
+        }
     }
 
     /**
