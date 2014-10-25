@@ -93,4 +93,15 @@ public class ElementTest extends TestCase {
 
         assertEquals("Wrong number of children", 0, root.getNumberOfChildren());
     }
+
+    @Test
+    public void testRemoveAttribute() {
+        Element elem = new Element("test");
+        elem.setAttribute("att", "test");
+        elem.setAttribute("attribute", "testing");
+        elem.removeAttribute("att");
+
+        assertEquals("Wrong number of attributes", 1, elem.getNumberOfAttributes());
+        assertNull("Deleted attribute still exists", elem.getAttribute("att"));
+    }
 }
