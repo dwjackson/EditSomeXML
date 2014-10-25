@@ -2,6 +2,7 @@ package editor.menubar;
 
 import editor.ElementTreeData;
 import editor.views.CloneElementView;
+import editor.views.DeleteElementView;
 import editor.views.ElementTreeView;
 
 import javax.swing.*;
@@ -56,7 +57,12 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         });
         editMenu.add(cloneElementItem);
         JMenuItem deleteItem = new JMenuItem("Delete...");
-        // TODO
+        deleteItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new DeleteElementView(elementTreeView);
+            }
+        });
         editMenu.add(deleteItem);
         add(editMenu);
     }
