@@ -17,7 +17,7 @@ import java.util.*;
 public class Element implements Observable {
     private String tag;
     private String text;
-    private HashMap<String, String> attributes;
+    private ElementAttributes attributes;
     private ArrayList<Element> children;
     private GenericObservable observable;
     private Element parent;
@@ -29,7 +29,7 @@ public class Element implements Observable {
     public Element() {
         tag = null;
         text = null;
-        attributes = new HashMap<String, String>();
+        attributes = new ElementAttributes();
         children = new ArrayList<Element>();
         observable = new GenericObservable();
         parent = null;
@@ -246,8 +246,8 @@ public class Element implements Observable {
      * @see java.util.Set
      * @return a Set of the attribute names
      */
-    public Set<String> attributeNames() {
-        return attributes.keySet();
+    public Iterable<String> attributeNames() {
+        return attributes.names();
     }
 
     /**
@@ -256,7 +256,7 @@ public class Element implements Observable {
      * @return The value of the attribute
      */
     public String getAttribute(String key) {
-        return attributes.get(key);
+        return attributes.getValue(key);
     }
 
     /**
@@ -265,7 +265,8 @@ public class Element implements Observable {
      * @param value The attribute's value/content
      */
     public void setAttribute(String key, String value) {
-        attributes.put(key, value);
+        attributes.set(key, value);
+        //attributes.put(key, value);
     }
 
     /**
