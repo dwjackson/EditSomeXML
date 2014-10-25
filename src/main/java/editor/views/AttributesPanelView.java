@@ -1,5 +1,6 @@
 package editor.views;
 
+import editor.views.viewlisteners.AttributeDocumentListener;
 import xml.Element;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class AttributesPanelView extends JPanel {
     private GridLayout layout;
     private final int NUM_COLS = 2;
     private final int MIN_NUM_ROWS = 1;
+    private ArrayList<AttributeDocumentListener> listeners;
 
     /**
      * Initialize the AttributesPanelView with no data
@@ -31,6 +33,7 @@ public class AttributesPanelView extends JPanel {
      */
     public AttributesPanelView(Element element) {
         elem = element;
+        listeners = new ArrayList<AttributeDocumentListener>();
 
         attributeNameFields = new ArrayList<JTextField>();
         attributeValueFields = new ArrayList<JTextField>();
@@ -82,6 +85,13 @@ public class AttributesPanelView extends JPanel {
 
         elem.setAttribute(attName, DEFAULT_ATTRIBUTE_VALUE);
 
+        AttributeDocumentListener listener;
+        listener = new AttributeDocumentListener(elem, numRows-1, nameField,
+                valueField);
+        nameField.getDocument().addDocumentListener(listener);
+        valueField.getDocument().addDocumentListener(listener);
+        listeners.add(listener);
+
         attributesPanel.updateUI();
     }
 
@@ -102,6 +112,7 @@ public class AttributesPanelView extends JPanel {
         }
         attributeNameFields.clear();
         attributeValueFields.clear();
+        listeners.clear();
         layout.setColumns(NUM_COLS);
         layout.setRows(MIN_NUM_ROWS);
     }

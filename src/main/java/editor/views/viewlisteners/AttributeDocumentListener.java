@@ -53,15 +53,18 @@ public class AttributeDocumentListener extends ElementDocumentListener
     @Override
     public void insertUpdate(DocumentEvent documentEvent) {
         updateAttribute(documentEvent);
+        System.out.printf("[DEBUG] elem.attribute = \"%s\"\n", elem.getAttribute(elem.getAttributeName(attributeIndex)));
     }
 
     @Override
     public void removeUpdate(DocumentEvent documentEvent) {
         updateAttribute(documentEvent);
+        System.out.printf("[DEBUG] elem.attribute = \"%s\"\n", elem.getAttribute(elem.getAttributeName(attributeIndex)));
     }
 
     @Override
     public void changedUpdate(DocumentEvent documentEvent) {
         updateAttribute(documentEvent);
+        System.out.printf("[DEBUG] elem.attribute = \"%s\"\n", elem.getAttribute(elem.getAttributeName(attributeIndex)));
     }
 }
