@@ -71,4 +71,16 @@ public class ElementTest extends TestCase {
             assertTrue("Wrong child deleted", child.getTag() != "child2");
         }
     }
+
+    @Test
+    public void testAttributeRename() {
+        Element elem = new Element("test");
+        elem.setAttribute("att", "testing");
+        assertEquals("Initial attribute not set", elem.getAttribute("att"), "testing");
+        elem.renameAttribute("att", "test");
+        assertNull("Old attribute still exists", elem.getAttribute("att"));
+        assertEquals("New attribute not set properly", elem.getAttribute("test"), "testing");
+        elem.renameAttribute(0, "testagain");
+        assertEquals("New attribute not set properly from index", elem.getAttribute("testagain"), "testing");
+    }
 }
