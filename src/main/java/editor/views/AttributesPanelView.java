@@ -1,6 +1,7 @@
 package editor.views;
 
 import editor.views.viewlisteners.AttributeDocumentListener;
+import editor.views.viewlisteners.DeleteAttributeListener;
 import xml.Element;
 
 import javax.swing.*;
@@ -22,8 +23,9 @@ public class AttributesPanelView extends JPanel {
     private JPanel attributesPanel;
     private ArrayList<JTextField> attributeNameFields;
     private ArrayList<JTextField> attributeValueFields;
+    private ArrayList<JButton> deleteButtons;
     private GridLayout layout;
-    private final int NUM_COLS = 2;
+    private final int NUM_COLS = 3;
     private final int MIN_NUM_ROWS = 1;
     private ArrayList<AttributeDocumentListener> listeners;
 
@@ -37,6 +39,7 @@ public class AttributesPanelView extends JPanel {
 
         attributeNameFields = new ArrayList<JTextField>();
         attributeValueFields = new ArrayList<JTextField>();
+        deleteButtons = new ArrayList<JButton>();
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(new JLabel("Attributes"));
@@ -91,6 +94,12 @@ public class AttributesPanelView extends JPanel {
         valueField.getDocument().addDocumentListener(listener);
         listeners.add(listener);
 
+        int attIndex = numRows - 1;
+        JButton deleteButton = new JButton("Delete Attribute");
+        deleteButton.addActionListener(new DeleteAttributeListener(attIndex, elem, this));
+        deleteButtons.add(deleteButton);
+        attributesPanel.add(deleteButton);
+
         attributesPanel.updateUI();
     }
 
@@ -119,11 +128,17 @@ public class AttributesPanelView extends JPanel {
         for (JTextField field : attributeValueFields) {
             attributesPanel.remove(field);
         }
+        for (JButton button : deleteButtons) {
+            attributesPanel.remove(button);
+        }
         attributeNameFields.clear();
         attributeValueFields.clear();
+        deleteButtons.clear();
         listeners.clear();
         layout.setColumns(NUM_COLS);
         layout.setRows(MIN_NUM_ROWS);
+
+        attributesPanel.updateUI();
     }
 
     /**
@@ -132,13 +147,7 @@ public class AttributesPanelView extends JPanel {
      */
     public void setElement(Element element) {
         elem = element;
-        // TODO: Load the attributes
-        if (elem.getNumberOfAttributes() > 0) {
-            for (String attName : elem.attributeNames()) {
-                String attVal = elem.getAttribute(attName);
-                addAttribute(attName, attVal);
-            }
-        }
+        populate();
     }
 
     /**
@@ -147,5 +156,17 @@ public class AttributesPanelView extends JPanel {
     public void unsetElement() {
         elem = null;
         resetAttributes();
+    }
+
+    /**
+     * Draw the attributes for the attached element
+     */
+    public void populate() {
+        if (elem.getNumberOfAttributes() > 0) {
+            for (String attName : elem.attributeNames()) {
+                String attVal = elem.getAttribute(attName);
+                addAttribute(attName, attVal);
+            }
+        }
     }
 }
