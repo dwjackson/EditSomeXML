@@ -428,4 +428,16 @@ public class Element implements Observable {
             children.remove(child);
         }
     }
+
+    /**
+     * Delete every subelement of this element (the entire subtree is removed)
+     */
+    public void deleteSubelements() {
+        if (getNumberOfChildren() > 0) {
+            for (Element child : children) {
+                child.deleteSubelements();
+                deleteChild(child);
+            }
+        }
+    }
 }
