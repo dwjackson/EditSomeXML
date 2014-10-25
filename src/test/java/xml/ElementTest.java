@@ -83,4 +83,14 @@ public class ElementTest extends TestCase {
         elem.renameAttribute(0, "testagain");
         assertEquals("New attribute not set properly from index", elem.getAttribute("testagain"), "testing");
     }
+
+    @Test
+    public void testDeleteSubelements() {
+        Element root = new Element("root");
+        Element child = root.newSubElement("child");
+        child.newSubElement("grandchild");
+        root.deleteSubelements();
+
+        assertEquals("Wrong number of children", 0, root.getNumberOfChildren());
+    }
 }

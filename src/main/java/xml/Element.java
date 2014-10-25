@@ -425,7 +425,9 @@ public class Element implements Observable {
      */
     public void deleteChild(Element child) {
         if (children.contains(child)) {
+            System.out.println("[DEBUG] Deleting " + child.getTag());
             children.remove(child);
+            System.out.println("[DEBUG] " + child.getTag() + " deleted");
         }
     }
 
@@ -434,9 +436,14 @@ public class Element implements Observable {
      */
     public void deleteSubelements() {
         if (getNumberOfChildren() > 0) {
-            for (Element child : children) {
+            System.out.println("[DEBUG] Deleting subelements of " + tag);
+            //for (Element child : children) {
+            for (int i = 0; i < children.size(); i++) {
+                Element child = children.get(i);
                 child.deleteSubelements();
+                System.out.println("[DEBUG] children of " + child.getTag() + " deleted");
                 deleteChild(child);
+                System.out.println("[DEBUG] continuing loop...");
             }
         }
     }
