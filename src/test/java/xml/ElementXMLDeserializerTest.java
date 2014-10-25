@@ -6,7 +6,7 @@ import org.junit.Test;
 public class ElementXMLDeserializerTest extends TestCase {
     @Test
     public void testDeserialize() {
-        String testFileName = "test.xml"; // TODO
+        String testFileName = "test.xml";
 
         Element correctRoot = new Element("root");
         Element child = correctRoot.newSubElement("child");

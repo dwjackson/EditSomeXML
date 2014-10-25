@@ -42,7 +42,7 @@ public class ElementTreeView extends JPanel implements Observer {
      */
     public void notifyObserver() {
         if (data.getRoot() != null) {
-            model.elementChanged(data.getRoot()); // TODO: Fix this
+            model.elementChanged(data.getRoot());
             if (!isVisible()) {
                 setVisible(true);
             }
