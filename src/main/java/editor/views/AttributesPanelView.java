@@ -1,5 +1,7 @@
 package editor.views;
 
+import xml.Element;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,10 @@ import java.util.ArrayList;
  * @see xml.Element
  */
 public class AttributesPanelView extends JPanel {
+    private final String DEFAULT_ATTRIBUTE_BASE_NAME = "attribute";
+    private final String DEFAULT_ATTRIBUTE_VALUE = "";
+
+    private Element elem;
     private JPanel attributesPanel;
     private ArrayList<JTextField> attributeNameFields;
     private ArrayList<JTextField> attributeValueFields;
@@ -21,8 +27,11 @@ public class AttributesPanelView extends JPanel {
 
     /**
      * Initialize the AttributesPanelView with no data
+     * @param element The element whose attributes this view represents
      */
-    public AttributesPanelView() {
+    public AttributesPanelView(Element element) {
+        elem = element;
+
         attributeNameFields = new ArrayList<JTextField>();
         attributeValueFields = new ArrayList<JTextField>();
 
@@ -33,7 +42,6 @@ public class AttributesPanelView extends JPanel {
         layout = new GridLayout();
         layout.setColumns(NUM_COLS);
         attributesPanel.setLayout(layout);
-        addAttribute();
         add(attributesPanel);
 
         JButton newAttributeButton = new JButton("Add Attribute");
@@ -51,20 +59,28 @@ public class AttributesPanelView extends JPanel {
      * the attribute's name and another for its value.
      */
     public void addAttribute() {
+        if (elem == null) {
+            return; // Bail out if no element is set
+        }
+
         System.out.println("[DEBUG] Adding attribute");
 
+        int numRows = layout.getRows();
         if (getNumberOfAttributeRows() >  0) {
-            int numRows = layout.getRows();
             layout.setRows(numRows + 1);
         }
 
-        JTextField nameField = new JTextField("", 10);
+        String attName;
+        attName = DEFAULT_ATTRIBUTE_BASE_NAME + Integer.toString(numRows);
+        JTextField nameField = new JTextField(attName, 10);
         attributesPanel.add(nameField);
         attributeNameFields.add(nameField);
 
-        JTextField valueField = new JTextField("", 10);
+        JTextField valueField = new JTextField(DEFAULT_ATTRIBUTE_VALUE, 10);
         attributesPanel.add(valueField);
         attributeValueFields.add(valueField);
+
+        elem.setAttribute(attName, DEFAULT_ATTRIBUTE_VALUE);
 
         attributesPanel.updateUI();
     }
@@ -88,6 +104,22 @@ public class AttributesPanelView extends JPanel {
         attributeValueFields.clear();
         layout.setColumns(NUM_COLS);
         layout.setRows(MIN_NUM_ROWS);
-        addAttribute();
+    }
+
+    /**
+     * Change the element this panel refers to
+     * @param element The new element whose attributes to represent
+     */
+    public void setElement(Element element) {
+        elem = element;
+        // TODO
+    }
+
+    /**
+     * Depopulate all data and remove association with an element
+     */
+    public void unsetElement() {
+        elem = null;
+        // TODO
     }
 }

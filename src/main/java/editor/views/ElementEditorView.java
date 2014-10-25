@@ -40,7 +40,7 @@ public class ElementEditorView extends JPanel {
         add(tagPanel);
 
         // Attributes
-        attributesPanel = new AttributesPanelView();
+        attributesPanel = new AttributesPanelView(elem);
         add(attributesPanel);
 
         // Text
@@ -67,6 +67,7 @@ public class ElementEditorView extends JPanel {
     public void populateWithElementData(Element element) {
         depopulateAllData();
         elem = element;
+        attributesPanel.setElement(elem);
         for (ElementDocumentListener listener : documentListeners) {
             listener.setElement(elem);
         }
@@ -80,6 +81,7 @@ public class ElementEditorView extends JPanel {
      */
     public void depopulateAllData() {
         elem = null;
+        attributesPanel.unsetElement();
         for (ElementDocumentListener listener : documentListeners) {
             listener.unsetElement();
         }
