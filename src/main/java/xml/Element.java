@@ -260,13 +260,21 @@ public class Element implements Observable {
     }
 
     /**
+     * Get an attribute's name from its index
+     * @param index The attribute's index
+     * @return the attribute's name
+     */
+    public String getAttributeName(int index) {
+        return attributes.getName(index);
+    }
+
+    /**
      * Set the value of an attribute
      * @param key The attribute's name
      * @param value The attribute's value/content
      */
     public void setAttribute(String key, String value) {
         attributes.set(key, value);
-        //attributes.put(key, value);
     }
 
     /**

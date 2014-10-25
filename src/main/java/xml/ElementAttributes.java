@@ -68,6 +68,11 @@ public class ElementAttributes {
         return attributeNames.size();
     }
 
+    /**
+     * Rename an existing attribute
+     * @param oldKey The attribute's old name
+     * @param newKey The attribute's new name
+     */
     public void rename(String oldKey, String newKey) {
         int idx = attributeNames.indexOf(oldKey);
         attributeNames.set(idx, newKey);
@@ -75,5 +80,14 @@ public class ElementAttributes {
         String val = attributes.get(oldKey);
         attributes.put(newKey, val);
         attributes.remove(oldKey);
+    }
+
+    /**
+     * Get an attribute's name from its index
+     * @param index The attribute's index
+     * @return the attribute's name
+     */
+    public String getName(int index) {
+        return attributeNames.get(index);
     }
 }
