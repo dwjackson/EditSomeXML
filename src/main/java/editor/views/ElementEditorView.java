@@ -1,6 +1,6 @@
 package editor.views;
 
-import editor.ElementDocumentListener;
+import editor.views.viewlisteners.ElementDocumentListener;
 import editor.views.viewlisteners.TagDocumentListener;
 import editor.views.viewlisteners.TextDocumentListener;
 import xml.Element;
