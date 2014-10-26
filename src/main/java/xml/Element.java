@@ -174,6 +174,9 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void notifyObservers() {
         observable.notifyObservers();
+        if (parent != null) {
+            parent.notifyObservers();
+        }
     }
 
     /**
