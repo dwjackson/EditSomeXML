@@ -23,3 +23,11 @@ run
 If you'd like to run the unit tests, run
 
     mvn test
+
+License
+-------
+
+Copyright 2014 David Jackson
+
+EditSomeXML is licensed under the GPLv3 or later. A copy of the GPLv3 is
+included in the "LICENSE" file.
