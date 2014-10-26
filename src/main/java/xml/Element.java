@@ -485,6 +485,60 @@ public class Element extends GenericObservable implements Observable, Observer {
     }
 
     /**
+     * When an element is mirroring another element, this method is called
+     * when the data of the mirrored element changes and requires that the
+     * mirroring element to change its own data.
+     */
+    protected void updateFromMirror() {
+        tag = mirroredElement.getTag();
+
+        int numOfAtts = getNumberOfAttributes();
+        int numMirroredAtts = mirroredElement.getNumberOfAttributes();
+        if (numOfAtts < numMirroredAtts) {
+            for (int i = 0; i < numOfAtts; i++) {
+                String attName = mirroredElement.getAttributeName(i);
+                String attVal = mirroredElement.getAttribute(attName);
+                setAttribute(i, attName, attVal);
+            }
+
+            for (int i = numOfAtts; i < numMirroredAtts; i++) {
+                String attName = mirroredElement.getAttributeName(i);
+                String attVal = mirroredElement.getAttribute(attName);
+                setAttribute(attName, attVal);
+            }
+        } else if (numOfAtts == numMirroredAtts) {
+            for (int i = numOfAtts; i < numMirroredAtts; i++) {
+                String attName = mirroredElement.getAttributeName(i);
+                String attVal = mirroredElement.getAttribute(attName);
+                setAttribute(attName, attVal);
+            }
+        } else {
+            for (int i = 0; i < numMirroredAtts; i++) {
+                String attName = mirroredElement.getAttributeName(i);
+                String attVal = mirroredElement.getAttribute(attName);
+                setAttribute(i, attName, attVal);
+            }
+            for (int i = numMirroredAtts; i < numOfAtts; i++) {
+                attributes.remove(i);
+            }
+        }
+
+        text = mirroredElement.getText();
+
+        int numOfChildren = getNumberOfChildren();
+        int numOfMirroredChildren = mirroredElement.getNumberOfChildren();
+        if (numOfChildren < numOfMirroredChildren) {
+            Element newestChild = mirroredElement.getYoungestChild();
+            Element child = new Element();
+            child.mirrorElement(newestChild);
+            addChild(child);
+        } else if (numOfChildren > numOfMirroredChildren) {
+            int childIndex = numOfChildren - 1;
+            children.remove(childIndex);
+        }
+    }
+
+    /**
      * Mirror another element. When the mirrored element changes, this element
      * will change so that it has the same content as the mirrored element.
      * @param element The element to mirror
@@ -498,63 +552,17 @@ public class Element extends GenericObservable implements Observable, Observer {
                 child.mirrorElement(mirroredChild);
                 addChild(child);
             }
+            updateFromMirror();
         }
     }
 
     /**
-     * When an element is mirroring another element, this method is called
-     * when the data of the mirrored element changes and requires that the
-     * mirroring element to change its own data.
+     * @see utility.Observer
      */
     @Override
     public void notifyObserver() {
         if (mirroredElement != null) {
-            tag = mirroredElement.getTag();
-
-            int numOfAtts = getNumberOfAttributes();
-            int numMirroredAtts = mirroredElement.getNumberOfAttributes();
-            if (numOfAtts < numMirroredAtts) {
-                for (int i = 0; i < numOfAtts; i++) {
-                    String attName = mirroredElement.getAttributeName(i);
-                    String attVal = mirroredElement.getAttribute(attName);
-                    setAttribute(i, attName, attVal);
-                }
-
-                for (int i = numOfAtts; i < numMirroredAtts; i++) {
-                    String attName = mirroredElement.getAttributeName(i);
-                    String attVal = mirroredElement.getAttribute(attName);
-                    setAttribute(attName, attVal);
-                }
-            } else if (numOfAtts == numMirroredAtts) {
-                for (int i = numOfAtts; i < numMirroredAtts; i++) {
-                    String attName = mirroredElement.getAttributeName(i);
-                    String attVal = mirroredElement.getAttribute(attName);
-                    setAttribute(attName, attVal);
-                }
-            } else {
-                for (int i = 0; i < numMirroredAtts; i++) {
-                    String attName = mirroredElement.getAttributeName(i);
-                    String attVal = mirroredElement.getAttribute(attName);
-                    setAttribute(i, attName, attVal);
-                }
-                for (int i = numMirroredAtts; i < numOfAtts; i++) {
-                    attributes.remove(i);
-                }
-            }
-
-            text = mirroredElement.getText();
-
-            int numOfChildren = getNumberOfChildren();
-            int numOfMirroredChildren = mirroredElement.getNumberOfChildren();
-            if (numOfChildren < numOfMirroredChildren) {
-                Element newestChild = mirroredElement.getYoungestChild();
-                Element child = new Element();
-                child.mirrorElement(newestChild);
-                addChild(child);
-            } else if (numOfChildren > numOfMirroredChildren) {
-                int childIndex = numOfChildren - 1;
-                children.remove(childIndex);
-            }
+            updateFromMirror();
         }
     }
 }
