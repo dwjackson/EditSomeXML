@@ -23,6 +23,7 @@ package editor.menubar;
 import editor.views.CloneElementView;
 import editor.views.DeleteElementView;
 import editor.views.ElementTreeView;
+import editor.views.MirrorElementView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,11 +35,13 @@ import java.awt.event.ActionListener;
 public class EditMenu extends JMenu {
     public EditMenu(final ElementTreeView elementTreeView) {
         setText("Edit");
-        JMenuItem newElementItem = new JMenuItem("New Element...");
+
+        JMenuItem newElementItem = new JMenuItem("New Child Element...");
         NewElementActionListener listener;
         listener = new NewElementActionListener(elementTreeView);
         newElementItem.addActionListener(listener);
         add(newElementItem);
+
         JMenuItem cloneElementItem = new JMenuItem("Clone Element...");
         cloneElementItem.addActionListener(new ActionListener() {
             @Override
@@ -47,7 +50,17 @@ public class EditMenu extends JMenu {
             }
         });
         add(cloneElementItem);
-        JMenuItem deleteItem = new JMenuItem("Delete...");
+
+        JMenuItem mirrorItem = new JMenuItem("Mirror Element...");
+        mirrorItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new MirrorElementView(elementTreeView);
+            }
+        });
+        add(mirrorItem);
+
+        JMenuItem deleteItem = new JMenuItem("Delete Element...");
         deleteItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
