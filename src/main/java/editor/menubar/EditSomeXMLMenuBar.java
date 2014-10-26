@@ -21,20 +21,16 @@
 package editor.menubar;
 
 import editor.ElementTreeData;
-import editor.views.CloneElementView;
-import editor.views.DeleteElementView;
 import editor.views.ElementTreeView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * This is the menu bar for EditSomeXML
  */
 public class EditSomeXMLMenuBar extends JMenuBar {
-    public EditSomeXMLMenuBar(ElementTreeData data, final ElementTreeView elementTreeView) {
-        add(new FileMenu(data));
+    public EditSomeXMLMenuBar(JFrame frame, ElementTreeData data, final ElementTreeView elementTreeView) {
+        add(new FileMenu(frame, data));
 
         add(new EditMenu(elementTreeView));
 

@@ -29,6 +29,8 @@ import xml.Element;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * The EditSomeXML class is the main editor class of EditSomeXML.
@@ -38,9 +40,24 @@ public class EditSomeXML extends JFrame {
         ElementTreeData data = new ElementTreeData(new Element());
 
         // Set up the main window
-        setSize(800,600);
+        setSize(800, 600);
         setTitle("EditSomeXML");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                System.out.println("[DEBUG] Closing main window");
+                Logger.getInstance().closeLog();
+                System.exit(0);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent windowEvent) {
+                Logger.getInstance().closeLog();
+                dispose();
+                System.exit(0);
+            }
+        });
         setLayout(new FlowLayout());
 
         // Set up the tree view
@@ -56,7 +73,7 @@ public class EditSomeXML extends JFrame {
         add(elementEditorView);
 
         // Set up the menu bar
-        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(data, elementTreeView);
+        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(this, data, elementTreeView);
         setJMenuBar(menuBar);
 
         // Make the main frame visible
@@ -65,6 +82,5 @@ public class EditSomeXML extends JFrame {
 
     public static void main(String[] args) {
         new EditSomeXML();
-        Logger.getInstance().closeLog();
     }
 }

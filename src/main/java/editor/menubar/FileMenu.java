@@ -30,7 +30,7 @@ import java.awt.event.ActionListener;
  * This is the "File" menu of the menu bar
  */
 public class FileMenu extends JMenu {
-    public FileMenu(ElementTreeData data) {
+    public FileMenu(final JFrame frame, ElementTreeData data) {
         setText("File");
         JMenuItem newItem = new JMenuItem("New...");
         newItem.addActionListener(new NewRootActionListener(data.getRoot()));
@@ -51,7 +51,7 @@ public class FileMenu extends JMenu {
         exitItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
+                frame.dispose();
             }
         });
         add(exitItem);

@@ -21,6 +21,7 @@
 package editor.menubar;
 
 import editor.ElementTreeData;
+import utility.Logger;
 import xml.Element;
 import xml.ElementXMLSerializer;
 
@@ -47,6 +48,7 @@ public class ExportActionListener implements ActionListener {
         JFileChooser fc = new JFileChooser();
         fc.showSaveDialog(exportFileChooserFrame);
         String fileName = fc.getSelectedFile().getAbsolutePath();
+        Logger.getInstance().write("Writing XML file: " + fileName);
         exs.serializeToFile(root, fileName);
     }
 }
