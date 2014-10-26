@@ -20,6 +20,7 @@
 
 package xml;
 
+import sun.net.www.content.text.Generic;
 import utility.GenericObservable;
 import utility.Observable;
 import utility.Observer;
@@ -34,25 +35,28 @@ import java.util.*;
  * @see Observable
  * @see GenericObservable
  */
-public class Element implements Observable {
+public class Element extends GenericObservable implements Observable, Observer {
     private String tag;
     private String text;
     private ElementAttributes attributes;
     private ArrayList<Element> children;
     private GenericObservable observable;
     private Element parent;
+    private Element mirroredElement;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
      * it has a tag.
      */
     public Element() {
+        super();
         tag = null;
         text = null;
         attributes = new ElementAttributes();
         children = new ArrayList<Element>();
         observable = new GenericObservable();
         parent = null;
+        mirroredElement = null;
     }
 
     /**
@@ -286,6 +290,18 @@ public class Element implements Observable {
      */
     public void setAttribute(String key, String value) {
         attributes.set(key, value);
+        notifyObservers();
+    }
+
+    /**
+     * Set an attribute's name and value, based on the index of that attribute
+     * @param index The attribute's index
+     * @param key The attribute's name
+     * @param value The attribute's value/content
+     */
+    public void setAttribute(int index, String key, String value) {
+        attributes.setAttribute(index, key, value);
+        notifyObservers();
     }
 
     /**
@@ -345,6 +361,7 @@ public class Element implements Observable {
     public void setText(String text) {
         if (text != null && text.trim().length() > 0) {
             this.text = text;
+            notifyObservers();
         }
     }
 
@@ -449,6 +466,64 @@ public class Element implements Observable {
                 child.deleteSubelements();
                 deleteChild(child);
             }
+        }
+    }
+
+    /**
+     * Mirror another element. When the mirrored element changes, this element
+     * will change so that it has the same content as the mirrored element.
+     * @param element The element to mirror
+     */
+    public void mirrorElement(Element element) {
+        if (mirroredElement == null) {
+            mirroredElement = element;
+            element.registerObserver(this);
+            // TODO: All the children should mirror as well
+        }
+    }
+
+    /**
+     * When an element is mirroring another element, this method is called
+     * when the data of the mirrored element changes and requires that the
+     * mirroring element to change its own data.
+     */
+    @Override
+    public void notifyObserver() {
+        if (mirroredElement != null) {
+            tag = mirroredElement.getTag();
+
+            int numOfAtts = getNumberOfAttributes();
+            int numMirroredAtts = mirroredElement.getNumberOfAttributes();
+            if (numOfAtts < numMirroredAtts) {
+                for (int i = 0; i < numOfAtts; i++) {
+                    String attName = mirroredElement.getAttributeName(i);
+                    String attVal = mirroredElement.getAttribute(attName);
+                    setAttribute(i, attName, attVal);
+                }
+
+                for (int i = numOfAtts; i < numMirroredAtts; i++) {
+                    String attName = mirroredElement.getAttributeName(i);
+                    String attVal = mirroredElement.getAttribute(attName);
+                    setAttribute(attName, attVal);
+                }
+            } else if (numOfAtts == numMirroredAtts) {
+                for (int i = numOfAtts; i < numMirroredAtts; i++) {
+                    String attName = mirroredElement.getAttributeName(i);
+                    String attVal = mirroredElement.getAttribute(attName);
+                    setAttribute(attName, attVal);
+                }
+            } else {
+                for (int i = 0; i < numMirroredAtts; i++) {
+                    String attName = mirroredElement.getAttributeName(i);
+                    String attVal = mirroredElement.getAttribute(attName);
+                    setAttribute(i, attName, attVal);
+                }
+                for (int i = numMirroredAtts; i < numOfAtts; i++) {
+                    attributes.remove(i);
+                }
+            }
+
+            text = mirroredElement.getText();
         }
     }
 }

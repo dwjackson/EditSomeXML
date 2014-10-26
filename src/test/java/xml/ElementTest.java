@@ -124,4 +124,19 @@ public class ElementTest extends TestCase {
         assertEquals("Wrong number of attributes", 1, elem.getNumberOfAttributes());
         assertNull("Deleted attribute still exists", elem.getAttribute("att"));
     }
+
+    @Test
+    public void testMirroring() {
+        Element orig = new Element("test");
+        Element mirroring = new Element();
+        mirroring.mirrorElement(orig);
+
+        orig.setTag("testing");
+        orig.setAttribute("att", "val");
+        orig.setText("Test.");
+
+        assertEquals("Mirror tag is wrong", orig.getTag(), mirroring.getTag());
+        assertEquals("Mirror attribute is wrong", orig.getAttribute("att"), mirroring.getAttribute("att"));
+        assertEquals("Mirror text is wrong", orig.getText(), mirroring.getText());
+    }
 }
