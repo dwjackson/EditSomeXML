@@ -97,22 +97,15 @@ public class Element implements Observable {
         if (obj.getClass() == getClass()) {
             Element elem = (Element) obj;
             if (elem.getTag() == null || !(elem.getTag().equals(tag))) {
-                System.out.println("[DEBUG] Element.equals() tags differ");
                 return false;
             }
 
             if (text == null && elem.getText() != null) {
-                System.out.println("[DEBUG] Element.equals() text differs");
-                System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
                 return false;
             } else if (text != null && elem.getText() == null) {
-                System.out.println("[DEBUG] Element.equals() text differs");
-                System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
                 return false;
             } else if (text != null) {
                 if (!text.equals(elem.getText())) {
-                    System.out.println("[DEBUG] Element.equals() text differs");
-                    System.out.printf("[DEBUG] text1 = \"%s\", text2 = \"%s\"\n", text, elem.getText());
                     return false;
                 }
             }
@@ -121,8 +114,6 @@ public class Element implements Observable {
             for (String attName : elem.attributeNames()) {
                 attVal = getAttribute(attName);
                 if (!(elem.getAttribute(attName).equals(attVal))) {
-                    System.out.println("[DEBUG] Element.equals() Attribute differs ");
-                    System.out.printf("[DEBUG] key = \"%s\", val = \"%s\"\n", attName, attVal);
                     return false;
                 }
             }
@@ -422,8 +413,6 @@ public class Element implements Observable {
      */
     public boolean equalTree(Element elem) {
         if (!equals(elem)) {
-            System.out.println("[DEBUG] equalTree(): Elements differ");
-            System.out.println("[DEBUG] element 1: " + tag + ", Element 2: " + elem);
             return false;
         }
 
@@ -445,9 +434,7 @@ public class Element implements Observable {
      */
     public void deleteChild(Element child) {
         if (children.contains(child)) {
-            System.out.println("[DEBUG] Deleting " + child.getTag());
             children.remove(child);
-            System.out.println("[DEBUG] " + child.getTag() + " deleted");
         }
     }
 
@@ -456,14 +443,11 @@ public class Element implements Observable {
      */
     public void deleteSubelements() {
         if (getNumberOfChildren() > 0) {
-            System.out.println("[DEBUG] Deleting subelements of " + tag);
             //for (Element child : children) {
             for (int i = 0; i < children.size(); i++) {
                 Element child = children.get(i);
                 child.deleteSubelements();
-                System.out.println("[DEBUG] children of " + child.getTag() + " deleted");
                 deleteChild(child);
-                System.out.println("[DEBUG] continuing loop...");
             }
         }
     }

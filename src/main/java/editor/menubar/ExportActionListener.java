@@ -42,14 +42,11 @@ public class ExportActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Element root = data.getRoot();
-        System.out.println("[DEBUG] Writing Element tree");
-        System.out.println("[DEBUG] root.tag = " + root.getTag());
         ElementXMLSerializer exs = new ElementXMLSerializer();
         JFrame exportFileChooserFrame = new JFrame();
         JFileChooser fc = new JFileChooser();
         fc.showSaveDialog(exportFileChooserFrame);
         String fileName = fc.getSelectedFile().getAbsolutePath();
-        System.out.printf("[DEBUG] writing file: \"%s\"\n", fileName);
         exs.serializeToFile(root, fileName);
     }
 }

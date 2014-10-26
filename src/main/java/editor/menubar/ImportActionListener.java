@@ -47,7 +47,6 @@ public class ImportActionListener implements ActionListener {
         String fileName = fc.getSelectedFile().getAbsolutePath();
         ElementXMLDeserializer deserializer = new ElementXMLDeserializer();
         Element elem = deserializer.deserializeFromFile(fileName);
-        System.out.println("[DEBUG] imported root.tag = " + elem);
         data.setRoot(elem);
         data.notifyObservers();
     }

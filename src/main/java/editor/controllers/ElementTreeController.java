@@ -55,10 +55,7 @@ public class ElementTreeController extends MouseAdapter {
         TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
         Element elem = (Element) selPath.getLastPathComponent();
         if (selRow != -1) {
-            if (e.getClickCount() == 1) {
-                System.out.println("[DEBUG] Single-click, tag = " + elem.getTag());
-            } else if (e.getClickCount() == 2) {
-                System.out.println("[DEBUG] Double-click, tag = " + elem.getTag());
+            if (e.getClickCount() == 2) {
                 elementEditorView.populateWithElementData(elem);
             }
         }

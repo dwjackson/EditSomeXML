@@ -96,8 +96,6 @@ public class AttributesPanelView extends JPanel {
             return; // Bail out if no element is set
         }
 
-        System.out.println("[DEBUG] Adding attribute");
-
         // Notify controller to add attribute to element model
         controller.attachAttributeToElement(name, value);
 
@@ -115,7 +113,6 @@ public class AttributesPanelView extends JPanel {
         attributeValueFields.add(valueField);
 
         int attIndex = layout.getRows() - 1;
-        System.out.println("[DEBUG] attIndex = " + attIndex);
 
         AttributeDocumentListener listener;
         listener = new AttributeDocumentListener(elem, attIndex, nameField,

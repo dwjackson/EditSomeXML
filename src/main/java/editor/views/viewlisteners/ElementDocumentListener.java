@@ -42,7 +42,6 @@ public class ElementDocumentListener {
         String txt = null;
         try {
             txt = doc.getText(0, doc.getLength());
-            System.out.println("[DEBUG] txt = " + txt);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
