@@ -24,6 +24,7 @@ import editor.controllers.ElementTreeController;
 import editor.menubar.EditSomeXMLMenuBar;
 import editor.views.ElementEditorView;
 import editor.views.ElementTreeView;
+import utility.Logger;
 import xml.Element;
 
 import javax.swing.*;
@@ -64,5 +65,6 @@ public class EditSomeXML extends JFrame {
 
     public static void main(String[] args) {
         new EditSomeXML();
+        Logger.getInstance().closeLog();
     }
 }
