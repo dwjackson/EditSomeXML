@@ -20,6 +20,7 @@
 
 package editor.menubar;
 
+import editor.ElementTreeData;
 import xml.Element;
 import xml.ElementXMLSerializer;
 
@@ -32,14 +33,17 @@ import java.awt.event.ActionListener;
  * an element tree to XML
  */
 public class ExportActionListener implements ActionListener {
-    private Element root;
+    private ElementTreeData data;
 
-    public ExportActionListener(Element root) {
-        this.root = root;
+    public ExportActionListener(ElementTreeData data) {
+        this.data = data;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        Element root = data.getRoot();
+        System.out.println("[DEBUG] Writing Element tree");
+        System.out.println("[DEBUG] root.tag = " + root.getTag());
         ElementXMLSerializer exs = new ElementXMLSerializer();
         JFrame exportFileChooserFrame = new JFrame();
         JFileChooser fc = new JFileChooser();

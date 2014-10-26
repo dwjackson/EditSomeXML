@@ -43,7 +43,7 @@ public class EditSomeXMLMenuBar extends JMenuBar {
         fileMenu.addSeparator();
 
         JMenuItem exportItem = new JMenuItem("Export...");
-        exportItem.addActionListener(new ExportActionListener(data.getRoot()));
+        exportItem.addActionListener(new ExportActionListener(data));
         fileMenu.add(exportItem);
         JMenuItem importItem = new JMenuItem("Import...");
         importItem.addActionListener(new ImportActionListener(data));
