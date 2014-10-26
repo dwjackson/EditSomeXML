@@ -1,0 +1,11 @@
+# Change Log
+All notable chanegs to EditSomeXML will be documented in this file.
+
+## 0.1 - 2014-10-25
+### Added
+- Initial release
+
+## 0.1.1 - 2014-10-26
+### Added
+- Elements can "mirror" other elements
+- Fixed a bug where element tags didn't update in real time
