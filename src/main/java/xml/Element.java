@@ -195,6 +195,19 @@ public class Element extends GenericObservable implements Observable, Observer {
     }
 
     /**
+     * Get this element's youngest (most-recently-added) child
+     * @return the youngest child or null if none
+     */
+    public Element getYoungestChild() {
+        Element child = null;
+        int idx = children.size() - 1;
+        if (idx >= 0) {
+            child = children.get(idx);
+        }
+        return child;
+    }
+
+    /**
      * Determine if this element has children
      * @return true if this element has childre, false if it doesn't
      */
@@ -372,6 +385,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void addChild(Element child) {
         child.setParent(this);
         children.add(child);
+        notifyObservers();
     }
 
     /**
@@ -408,6 +422,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public Element newSubElement(String tag) {
         Element child = new Element(tag);
         addChild(child);
+        notifyObservers();
         return child;
     }
 
@@ -452,6 +467,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void deleteChild(Element child) {
         if (children.contains(child)) {
             children.remove(child);
+            notifyObservers();
         }
     }
 
@@ -460,7 +476,6 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void deleteSubelements() {
         if (getNumberOfChildren() > 0) {
-            //for (Element child : children) {
             for (int i = 0; i < children.size(); i++) {
                 Element child = children.get(i);
                 child.deleteSubelements();
@@ -478,7 +493,11 @@ public class Element extends GenericObservable implements Observable, Observer {
         if (mirroredElement == null) {
             mirroredElement = element;
             element.registerObserver(this);
-            // TODO: All the children should mirror as well
+            for (Element mirroredChild : element.children()) {
+                Element child = new Element();
+                child.mirrorElement(mirroredChild);
+                addChild(child);
+            }
         }
     }
 
@@ -524,6 +543,18 @@ public class Element extends GenericObservable implements Observable, Observer {
             }
 
             text = mirroredElement.getText();
+
+            int numOfChildren = getNumberOfChildren();
+            int numOfMirroredChildren = mirroredElement.getNumberOfChildren();
+            if (numOfChildren < numOfMirroredChildren) {
+                Element newestChild = mirroredElement.getYoungestChild();
+                Element child = new Element();
+                child.mirrorElement(newestChild);
+                addChild(child);
+            } else if (numOfChildren > numOfMirroredChildren) {
+                int childIndex = numOfChildren - 1;
+                children.remove(childIndex);
+            }
         }
     }
 }

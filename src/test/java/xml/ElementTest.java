@@ -130,6 +130,10 @@ public class ElementTest extends TestCase {
         Element orig = new Element("test");
         Element mirroring = new Element();
         mirroring.mirrorElement(orig);
+        Element origChild = new Element("child");
+        orig.addChild(origChild);
+        Element origChild2 = new Element("secondChild");
+        orig.addChild(origChild2);
 
         orig.setTag("testing");
         orig.setAttribute("att", "val");
@@ -138,5 +142,9 @@ public class ElementTest extends TestCase {
         assertEquals("Mirror tag is wrong", orig.getTag(), mirroring.getTag());
         assertEquals("Mirror attribute is wrong", orig.getAttribute("att"), mirroring.getAttribute("att"));
         assertEquals("Mirror text is wrong", orig.getText(), mirroring.getText());
+        assertEquals("Wrong number of mirrored children", 2, mirroring.getNumberOfChildren());
+
+        orig.deleteChild(origChild2);
+        assertEquals("Wrong number of mirrored children", 1, mirroring.getNumberOfChildren());
     }
 }
