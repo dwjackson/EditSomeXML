@@ -34,56 +34,8 @@ import java.awt.event.ActionListener;
  */
 public class EditSomeXMLMenuBar extends JMenuBar {
     public EditSomeXMLMenuBar(ElementTreeData data, final ElementTreeView elementTreeView) {
-        // File Menu
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem newItem = new JMenuItem("New...");
-        newItem.addActionListener(new NewRootActionListener(data.getRoot()));
-        fileMenu.add(newItem);
+        add(new FileMenu(data));
 
-        fileMenu.addSeparator();
-
-        JMenuItem exportItem = new JMenuItem("Export...");
-        exportItem.addActionListener(new ExportActionListener(data));
-        fileMenu.add(exportItem);
-        JMenuItem importItem = new JMenuItem("Import...");
-        importItem.addActionListener(new ImportActionListener(data));
-        fileMenu.add(importItem);
-
-        fileMenu.addSeparator();
-
-        JMenuItem exitItem = new JMenuItem("Exit");
-        exitItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
-            }
-        });
-        fileMenu.add(exitItem);
-        add(fileMenu);
-
-        // Edit Menu
-        JMenu editMenu = new JMenu("Edit");
-        JMenuItem newElementItem = new JMenuItem("New Element...");
-        NewElementActionListener listener;
-        listener = new NewElementActionListener(elementTreeView);
-        newElementItem.addActionListener(listener);
-        editMenu.add(newElementItem);
-        JMenuItem cloneElementItem = new JMenuItem("Clone Element...");
-        cloneElementItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new CloneElementView(elementTreeView);
-            }
-        });
-        editMenu.add(cloneElementItem);
-        JMenuItem deleteItem = new JMenuItem("Delete...");
-        deleteItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new DeleteElementView(elementTreeView);
-            }
-        });
-        editMenu.add(deleteItem);
-        add(editMenu);
+        add(new EditMenu(elementTreeView));
     }
 }
