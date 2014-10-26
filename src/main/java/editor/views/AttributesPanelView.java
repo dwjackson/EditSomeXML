@@ -20,6 +20,7 @@
 
 package editor.views;
 
+import editor.controllers.AttributesPanelController;
 import editor.views.viewlisteners.AttributeDocumentListener;
 import editor.views.viewlisteners.DeleteAttributeListener;
 import xml.Element;
@@ -48,6 +49,7 @@ public class AttributesPanelView extends JPanel {
     private final int NUM_COLS = 3;
     private final int MIN_NUM_ROWS = 1;
     private ArrayList<AttributeDocumentListener> listeners;
+    private AttributesPanelController controller;
 
     /**
      * Initialize the AttributesPanelView with no data
@@ -60,6 +62,8 @@ public class AttributesPanelView extends JPanel {
         attributeNameFields = new ArrayList<JTextField>();
         attributeValueFields = new ArrayList<JTextField>();
         deleteButtons = new ArrayList<JButton>();
+
+        controller = new AttributesPanelController(this);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(new JLabel("Attributes"));
@@ -94,9 +98,12 @@ public class AttributesPanelView extends JPanel {
 
         System.out.println("[DEBUG] Adding attribute");
 
-        int numRows = layout.getRows();
+        // Notify controller to add attribute to element model
+        controller.attachAttributeToElement(name, value);
+
+        // Add the attribute to the UI
         if (getNumberOfAttributeRows() >  0) {
-            layout.setRows(numRows + 1);
+            layout.setRows(layout.getRows() + 1);
         }
 
         JTextField nameField = new JTextField(name, 10);
@@ -107,14 +114,16 @@ public class AttributesPanelView extends JPanel {
         attributesPanel.add(valueField);
         attributeValueFields.add(valueField);
 
+        int attIndex = layout.getRows() - 1;
+        System.out.println("[DEBUG] attIndex = " + attIndex);
+
         AttributeDocumentListener listener;
-        listener = new AttributeDocumentListener(elem, numRows-1, nameField,
+        listener = new AttributeDocumentListener(elem, attIndex, nameField,
                 valueField);
         nameField.getDocument().addDocumentListener(listener);
         valueField.getDocument().addDocumentListener(listener);
         listeners.add(listener);
 
-        int attIndex = numRows - 1;
         JButton deleteButton = new JButton("Delete Attribute");
         deleteButton.addActionListener(new DeleteAttributeListener(attIndex, elem, this));
         deleteButtons.add(deleteButton);
@@ -188,5 +197,12 @@ public class AttributesPanelView extends JPanel {
                 addAttribute(attName, attVal);
             }
         }
+    }
+
+    /**
+     * Get the element associated with this panel
+     */
+    public Element getElement() {
+        return elem;
     }
 }
