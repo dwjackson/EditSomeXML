@@ -4,3 +4,6 @@ target
 # IntelliJIDEA
 *.iml
 .idea
+
+# OS X
+.DS_Store
