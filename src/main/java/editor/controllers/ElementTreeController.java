@@ -53,11 +53,13 @@ public class ElementTreeController extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         int selRow = tree.getRowForLocation(e.getX(), e.getY());
         TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
-        Element elem = (Element) selPath.getLastPathComponent();
-        if (selRow != -1) {
-            if (e.getClickCount() == 2) {
-                elementEditorView.populateWithElementData(elem);
-            }
+        if (selPath != null) {
+	        Element elem = (Element) selPath.getLastPathComponent();
+	        if (selRow != -1) {
+	            if (e.getClickCount() == 2) {
+	                elementEditorView.populateWithElementData(elem);
+	            }
+	        }
         }
     }
 

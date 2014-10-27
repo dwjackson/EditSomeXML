@@ -49,6 +49,7 @@ public class ElementTreeView extends JPanel implements Observer {
 
         model = new ElementTreeModel(data);
         tree = new JTree(model);
+        tree.setToggleClickCount(0);
         add(tree);
 
         controller.setTree(tree);
