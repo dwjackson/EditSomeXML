@@ -66,10 +66,12 @@ public class ElementEditorView extends JPanel {
         // Text
         JPanel textPanel = new JPanel();
         textPanel.add(new JLabel("Text"));
+        JScrollPane textAreaScrollPane = new JScrollPane();
         elementTextArea = new JTextArea();
         elementTextArea.setRows(4);
         elementTextArea.setColumns(40);
-        textPanel.add(elementTextArea);
+        textAreaScrollPane.setViewportView(elementTextArea);
+        textPanel.add(textAreaScrollPane);
         TextDocumentListener textDocumentListener;
         textDocumentListener = new TextDocumentListener(elem);
         documentListeners.add(textDocumentListener);
