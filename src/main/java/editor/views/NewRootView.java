@@ -38,7 +38,7 @@ public class NewRootView extends JFrame {
      *                          view. This controller will update the model.
      */
     public NewRootView(NewRootController newRootController) {
-        setSize(400, 60);
+        setSize(400, 80);
         setTitle("New Root Element");
         setLayout(new FlowLayout());
 
