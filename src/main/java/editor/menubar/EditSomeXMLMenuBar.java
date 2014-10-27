@@ -34,6 +34,8 @@ public class EditSomeXMLMenuBar extends JMenuBar {
 
         add(new EditMenu(elementTreeView));
 
+        add(new SearchMenu());
+
         add(new HelpMenu());
     }
 }
