@@ -20,12 +20,12 @@
 
 package xml;
 
-import sun.net.www.content.text.Generic;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import utility.GenericObservable;
 import utility.Observable;
 import utility.Observer;
-
-import java.util.*;
 
 /**
  * The Element class is used to represent a node in an XML tree. It must have
@@ -151,7 +151,9 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void setTag(String tag) {
         if (tag != null) {
             this.tag = tag.replace(' ', '-');
-            notifyObservers(null);
+            ElementEvent.EventType eventType;
+            eventType = ElementEvent.EventType.DATA_CHANGE;
+            notifyObservers(new ElementEvent(eventType));
         }
     }
 
@@ -173,7 +175,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      * @see Observable
      */
     public void notifyObservers(Object obj) {
-        observable.notifyObservers(null);
+        observable.notifyObservers(obj);
         if (parent != null) {
             parent.notifyObservers(obj);
         }
@@ -306,7 +308,9 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void setAttribute(String key, String value) {
         attributes.set(key, value);
-        notifyObservers(null);
+        ElementEvent.EventType eventType;
+        eventType = ElementEvent.EventType.DATA_CHANGE;
+        notifyObservers(new ElementEvent(eventType));
     }
 
     /**
@@ -317,7 +321,9 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void setAttribute(int index, String key, String value) {
         attributes.setAttribute(index, key, value);
-        notifyObservers(null);
+        ElementEvent.EventType eventType;
+        eventType = ElementEvent.EventType.DATA_CHANGE;
+        notifyObservers(new ElementEvent(eventType));
     }
 
     /**
@@ -377,7 +383,9 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void setText(String text) {
         if (text != null && text.trim().length() > 0) {
             this.text = text;
-            notifyObservers(null);
+            ElementEvent.EventType eventType;
+            eventType = ElementEvent.EventType.DATA_CHANGE;
+            notifyObservers(new ElementEvent(eventType));
         }
     }
 
@@ -388,7 +396,9 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void addChild(Element child) {
         child.setParent(this);
         children.add(child);
-        notifyObservers(null);
+        ElementEvent.EventType eventType;
+        eventType = ElementEvent.EventType.ADD_CHILD;
+        notifyObservers(new ElementEvent(eventType));
     }
 
     /**
@@ -425,7 +435,9 @@ public class Element extends GenericObservable implements Observable, Observer {
     public Element newSubElement(String tag) {
         Element child = new Element(tag);
         addChild(child);
-        notifyObservers(null);
+        ElementEvent.EventType eventType;
+        eventType = ElementEvent.EventType.ADD_CHILD;
+        notifyObservers(new ElementEvent(eventType));
         return child;
     }
 
@@ -470,7 +482,9 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void deleteChild(Element child) {
         if (children.contains(child)) {
             children.remove(child);
-            notifyObservers(null);
+            ElementEvent.EventType eventType;
+            eventType = ElementEvent.EventType.REMOVE_CHILD;
+            notifyObservers(new ElementEvent(eventType));
         }
     }
 
