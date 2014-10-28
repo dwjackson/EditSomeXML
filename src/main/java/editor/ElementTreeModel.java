@@ -20,13 +20,16 @@
 
 package editor;
 
-import xml.Element;
+import java.util.ArrayList;
 
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-import java.util.ArrayList;
+
+import utility.Logger;
+import xml.Element;
+import xml.ElementEvent;
 
 /**
  * The ElementTreeModel is used to map the Element class onto a JTree
@@ -123,8 +126,45 @@ public class ElementTreeModel implements TreeModel {
         listeners.remove(treeModelListener);
     }
 
-    public void elementChanged(Element elem) {
-        fireTreeStructureChanged(elem);
+    public void elementChanged(Element elem, ElementEvent elementEvent) {
+    	switch (elementEvent.getEventType()) {
+    	case DATA_CHANGE:
+    		fireTreeNodesChanged(elem);
+    		break;
+    	case ADD_CHILD:
+    		fireTreeNodesInserted(elem);
+    		break;
+    	case REMOVE_CHILD:
+    		fireTreeNodesRemoved(elem);
+    		break;
+    	case NEW_ROOT:
+    		fireTreeStructureChanged(elem);
+    		break;
+    	default:
+    		Logger.getInstance().write("Invalid event type");
+    		fireTreeStructureChanged(elem);
+    	}
+    }
+    
+    public void fireTreeNodesChanged(Element elem) {
+        TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
+        for (TreeModelListener tml : listeners) {
+            tml.treeNodesChanged(e);
+        }
+    }
+    
+    public void fireTreeNodesInserted(Element elem) {
+    	TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
+        for (TreeModelListener tml : listeners) {
+            tml.treeNodesInserted(e);
+        }
+    }
+    
+    public void fireTreeNodesRemoved(Element elem) {
+    	TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
+        for (TreeModelListener tml : listeners) {
+            tml.treeNodesRemoved(e);
+        }
     }
 
     public void fireTreeStructureChanged(Element oldRoot) {

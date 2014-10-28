@@ -20,13 +20,15 @@
 
 package editor.views;
 
+import javax.swing.JPanel;
+import javax.swing.JTree;
+
+import utility.Observer;
+import xml.Element;
+import xml.ElementEvent;
 import editor.ElementTreeData;
 import editor.ElementTreeModel;
 import editor.controllers.ElementTreeController;
-import utility.Observer;
-import xml.Element;
-
-import javax.swing.*;
 
 /**
  * The ElementTreeView controls the section of the GUI that displays the tree
@@ -63,7 +65,8 @@ public class ElementTreeView extends JPanel implements Observer {
      */
     public void notifyObserver(Object obj) {
         if (data.getRoot() != null) {
-            model.elementChanged(data.getRoot());
+        	ElementEvent ev = (ElementEvent) obj;
+            model.elementChanged(data.getRoot(), ev);
             if (!isVisible()) {
                 setVisible(true);
             }
