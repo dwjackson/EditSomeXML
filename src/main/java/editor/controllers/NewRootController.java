@@ -20,11 +20,12 @@
 
 package editor.controllers;
 
-import editor.views.NewRootView;
-import xml.Element;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import xml.Element;
+import xml.ElementEvent;
+import editor.views.NewRootView;
 
 /**
  * The NewRootController is used to deal with actions initiated by the user in
@@ -61,6 +62,8 @@ public class NewRootController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         root.setTag(view.getRootTag());
         view.teardown();
-        root.notifyObservers(null);
+        ElementEvent.EventType eventType;
+        eventType = ElementEvent.EventType.NEW_ROOT;
+        root.notifyObservers(new ElementEvent(eventType));
     }
 }
