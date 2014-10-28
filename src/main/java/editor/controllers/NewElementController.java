@@ -44,6 +44,6 @@ public class NewElementController implements ActionListener {
         Element child = new Element(view.getTag());
         parent.addChild(child);
         view.dispose();
-        parent.notifyObservers();
+        parent.notifyObservers(null);
     }
 }

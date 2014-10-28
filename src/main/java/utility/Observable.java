@@ -40,7 +40,8 @@ public interface Observable {
     void unregisterObserver(Observer observer);
 
     /**
-     * Notify all obserevrs that this object has changed.
+     * Notify all observers that this object has changed.
+     * @param obj An object to pass to the observers
      */
-    void notifyObservers();
+    void notifyObservers(Object obj);
 }

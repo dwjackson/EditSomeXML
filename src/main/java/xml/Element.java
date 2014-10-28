@@ -151,7 +151,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void setTag(String tag) {
         if (tag != null) {
             this.tag = tag.replace(' ', '-');
-            notifyObservers();
+            notifyObservers(null);
         }
     }
 
@@ -172,10 +172,10 @@ public class Element extends GenericObservable implements Observable, Observer {
     /**
      * @see Observable
      */
-    public void notifyObservers() {
-        observable.notifyObservers();
+    public void notifyObservers(Object obj) {
+        observable.notifyObservers(null);
         if (parent != null) {
-            parent.notifyObservers();
+            parent.notifyObservers(obj);
         }
     }
 
@@ -306,7 +306,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void setAttribute(String key, String value) {
         attributes.set(key, value);
-        notifyObservers();
+        notifyObservers(null);
     }
 
     /**
@@ -317,7 +317,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void setAttribute(int index, String key, String value) {
         attributes.setAttribute(index, key, value);
-        notifyObservers();
+        notifyObservers(null);
     }
 
     /**
@@ -377,7 +377,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void setText(String text) {
         if (text != null && text.trim().length() > 0) {
             this.text = text;
-            notifyObservers();
+            notifyObservers(null);
         }
     }
 
@@ -388,7 +388,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void addChild(Element child) {
         child.setParent(this);
         children.add(child);
-        notifyObservers();
+        notifyObservers(null);
     }
 
     /**
@@ -425,7 +425,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public Element newSubElement(String tag) {
         Element child = new Element(tag);
         addChild(child);
-        notifyObservers();
+        notifyObservers(null);
         return child;
     }
 
@@ -470,7 +470,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void deleteChild(Element child) {
         if (children.contains(child)) {
             children.remove(child);
-            notifyObservers();
+            notifyObservers(null);
         }
     }
 
@@ -563,7 +563,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      * @see utility.Observer
      */
     @Override
-    public void notifyObserver() {
+    public void notifyObserver(Object obj) {
         if (mirroredElement != null) {
             updateFromMirror();
         }

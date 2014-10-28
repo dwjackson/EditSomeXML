@@ -48,6 +48,6 @@ public class ImportActionListener implements ActionListener {
         ElementXMLDeserializer deserializer = new ElementXMLDeserializer();
         Element elem = deserializer.deserializeFromFile(fileName);
         data.setRoot(elem);
-        data.notifyObservers();
+        data.notifyObservers(null);
     }
 }

@@ -27,6 +27,7 @@ package utility;
 public interface Observer {
     /**
      * Notify the observer that the Observable object has changed.
+     * @param obj An object passed by the Observable
      */
-    void notifyObserver();
+    void notifyObserver(Object obj);
 }

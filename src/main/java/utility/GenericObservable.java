@@ -56,9 +56,9 @@ public class GenericObservable implements Observable {
     /**
      * @see Observable
      */
-    public void notifyObservers() {
+    public void notifyObservers(Object obj) {
         for (Observer observer : observers) {
-            observer.notifyObserver();
+            observer.notifyObserver(null);
         }
     }
 }

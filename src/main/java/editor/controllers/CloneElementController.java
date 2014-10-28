@@ -46,7 +46,7 @@ public class CloneElementController implements ActionListener {
                 Element clonedElem = origElem.cloneWithoutChildren();
                 Element parent = origElem.getParent();
                 parent.addChild(clonedElem);
-                parent.notifyObservers();
+                parent.notifyObservers(null);
             }
             view.dispose();
         }

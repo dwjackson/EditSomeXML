@@ -61,7 +61,7 @@ public class ElementTreeView extends JPanel implements Observer {
     /**
      * When the associated element tree root has changed, change the view
      */
-    public void notifyObserver() {
+    public void notifyObserver(Object obj) {
         if (data.getRoot() != null) {
             model.elementChanged(data.getRoot());
             if (!isVisible()) {

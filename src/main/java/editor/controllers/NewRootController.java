@@ -61,6 +61,6 @@ public class NewRootController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         root.setTag(view.getRootTag());
         view.teardown();
-        root.notifyObservers();
+        root.notifyObservers(null);
     }
 }

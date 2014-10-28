@@ -73,7 +73,7 @@ public class ElementTreeData implements Observable {
     }
 
     @Override
-    public void notifyObservers() {
-        root.notifyObservers();
+    public void notifyObservers(Object obj) {
+        root.notifyObservers(null);
     }
 }
