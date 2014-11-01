@@ -6,7 +6,7 @@
 
     <groupId>ca.dwjackson</groupId>
     <artifactId>EditSomeXML</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
 
     <dependencies>
         <dependency>
