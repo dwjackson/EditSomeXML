@@ -20,10 +20,11 @@
 
 package editor.menubar;
 
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+
 import editor.ElementTreeData;
 import editor.views.ElementTreeView;
-
-import javax.swing.*;
 
 /**
  * This is the menu bar for EditSomeXML

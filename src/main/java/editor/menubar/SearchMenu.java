@@ -20,10 +20,13 @@
 
 package editor.menubar;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import editor.views.SearchView;
 
 /**
  * This is the "Search" menu of the menu bar
@@ -36,25 +39,7 @@ public class SearchMenu extends JMenu {
         searchItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame searchFrame = new JFrame();
-                searchFrame.setTitle("Search");
-                searchFrame.setSize(450,200);
-                searchFrame.setLayout(new FlowLayout());
-
-                searchFrame.add(new JLabel("Search for:"));
-                JTextField queryField = new JTextField("", 20);
-                searchFrame.add(queryField);
-
-                JButton searchButton = new JButton("Search");
-                searchFrame.add(searchButton);
-
-                JButton prevButton = new JButton("Prev");
-                searchFrame.add(prevButton);
-
-                JButton nextButton = new JButton("Next");
-                searchFrame.add(nextButton);
-
-                searchFrame.setVisible(true);
+                new SearchView();
             }
         });
         add(searchItem);
