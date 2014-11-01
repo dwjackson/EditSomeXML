@@ -24,18 +24,21 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import editor.ElementTreeData;
+import editor.views.ElementEditorView;
 import editor.views.ElementTreeView;
 
 /**
  * This is the menu bar for EditSomeXML
  */
 public class EditSomeXMLMenuBar extends JMenuBar {
-    public EditSomeXMLMenuBar(JFrame frame, ElementTreeData data, final ElementTreeView elementTreeView) {
+    public EditSomeXMLMenuBar(JFrame frame, ElementTreeData data,
+    		final ElementTreeView elementTreeView,
+    		final ElementEditorView elementEditorView) {
         add(new FileMenu(frame, data));
 
         add(new EditMenu(elementTreeView));
 
-        add(new SearchMenu());
+        add(new SearchMenu(elementEditorView, data));
 
         add(new HelpMenu());
     }

@@ -27,29 +27,53 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import editor.ElementTreeData;
+import editor.controllers.SearchController;
+
 /**
  * This view is used when the user wants to search for particular things
  * within the element tree
  */
 public class SearchView extends JFrame {
-	public SearchView() {
+	private JTextField queryField;
+	private JButton prevButton;
+	private JButton nextButton;
+	
+	public SearchView(ElementEditorView elementEditorView, ElementTreeData data) {
         setTitle("Search");
         setSize(450,200);
         setLayout(new FlowLayout());
+        
+        SearchController controller = new SearchController(this,
+        		elementEditorView, data);
 
         add(new JLabel("Search for:"));
-        JTextField queryField = new JTextField("", 20);
+        queryField = new JTextField("", 20);
         add(queryField);
 
         JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(controller.getSearchActionListener());
         add(searchButton);
 
-        JButton prevButton = new JButton("Prev");
+        prevButton = new JButton("Prev");
+        prevButton.setEnabled(false);
+        prevButton.addActionListener(controller.getPrevActionListener());
         add(prevButton);
 
-        JButton nextButton = new JButton("Next");
+        nextButton = new JButton("Next");
+        nextButton.setEnabled(false);
+        nextButton.addActionListener(controller.getNextActionListener());
         add(nextButton);
 
         setVisible(true);
+	}
+	
+	public String getQuery() {
+		return queryField.getText();
+	}
+	
+	public void enablePrevAndNextButtons() {
+		prevButton.setEnabled(true);
+		nextButton.setEnabled(true);
 	}
 }

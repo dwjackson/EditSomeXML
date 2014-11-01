@@ -77,7 +77,8 @@ public class EditSomeXML extends JFrame {
         add(elementEditorView);
 
         // Set up the menu bar
-        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(this, data, elementTreeView);
+        EditSomeXMLMenuBar menuBar = new EditSomeXMLMenuBar(this, data,
+        		elementTreeView, elementEditorView);
         setJMenuBar(menuBar);
 
         // Make the main frame visible

@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * This class is used to search the content of an element tree
  */
 public class ElementSearcher {
-    private ArrayList<Element> results;
+	private ElementSearchResult results;
     private String query;
     int resultIndex;
 
@@ -37,8 +37,8 @@ public class ElementSearcher {
      * @param query The string for which to look
      */
     public ElementSearcher(Element root, String query) {
+        results = new ElementSearchResult();
         this.query = query.toLowerCase();
-        results = new ArrayList<Element>();
         generateResultsList(root);
         resultIndex = -1;
     }

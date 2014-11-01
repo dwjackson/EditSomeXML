@@ -26,20 +26,23 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import editor.ElementTreeData;
+import editor.views.ElementEditorView;
 import editor.views.SearchView;
 
 /**
  * This is the "Search" menu of the menu bar
  */
 public class SearchMenu extends JMenu {
-    public SearchMenu() {
+    public SearchMenu(final ElementEditorView elementEditorView,
+    		final ElementTreeData data) {
         setText("Search");
 
         JMenuItem searchItem = new JMenuItem("Search...");
         searchItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SearchView();
+                new SearchView(elementEditorView, data);
             }
         });
         add(searchItem);
