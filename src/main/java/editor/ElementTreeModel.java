@@ -182,33 +182,28 @@ public class ElementTreeModel implements TreeModel {
 	 * TreePath object.
      */
     
-    // TODO
     public void fireTreeNodesChanged(Element elem) {
         TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
         for (TreeModelListener tml : listeners) {
+        	// TODO
             tml.treeNodesChanged(e);
         }
     }
     
-    // TODO
     public void fireTreeNodesInserted(Element elem) {
-    	//TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
     	Element child = elem.getYoungestChild();
-    	System.out.println("[DEBUG] child = " + child);
     	Object[] path = (Object[]) elem.getAncestry();
     	int childIndex = elem.getIndexOfChild(child);
-    	System.out.println("[DEBUG] childIndex = " + childIndex);
     	int[] childIndices = {childIndex};
     	Object[] children = {child};
     	TreeModelEvent e = new TreeModelEvent(this, path, childIndices, children);
         for (TreeModelListener tml : listeners) {
             tml.treeNodesInserted(e);
-        	//tml.treeStructureChanged(e); // TODO: REMOVE
         }
     }
     
-    // TODO
     public void fireTreeNodesRemoved(Element elem) {
+    	// TODO
     	TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
         for (TreeModelListener tml : listeners) {
             tml.treeNodesRemoved(e);
