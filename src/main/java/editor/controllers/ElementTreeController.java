@@ -56,7 +56,7 @@ public class ElementTreeController extends MouseAdapter {
         if (selPath != null) {
 	        Element elem = (Element) selPath.getLastPathComponent();
 	        if (selRow != -1) {
-	            if (e.getClickCount() == 2) {
+	            if (e.getClickCount() == 1) {
 	                elementEditorView.populateWithElementData(elem);
 	            }
 	        }

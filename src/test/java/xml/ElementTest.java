@@ -147,4 +147,22 @@ public class ElementTest extends TestCase {
         orig.deleteChild(origChild2);
         assertEquals("Wrong number of mirrored children", 1, mirroring.getNumberOfChildren());
     }
+    
+    @Test
+    public void testGetAncestry() {
+    	Element root = new Element("root");
+    	Element child = root.newSubElement("child");
+    	Element grandchild = child.newSubElement("grandchild");
+    	
+    	Element[] ancestry = grandchild.getAncestry();
+    	System.out.println("[TEST] getAncestry() done");
+    	
+    	assertNotNull("Ancestry array is null", ancestry);
+    	System.out.println("[TEST] array null test done");
+    	System.out.println("[TEST] array.length = " + ancestry.length);
+    	assertEquals("Ancestry array is the wrong length", 3, ancestry.length);
+    	assertEquals("root is not first element in ancestry", root, ancestry[0]);
+    	assertEquals("child is not secon element in ancestry", child, ancestry[1]);
+    	assertEquals("grandchild is not third element in ancestry", grandchild, ancestry[2]);
+    }
 }

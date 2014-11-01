@@ -45,13 +45,13 @@ public class ElementTreeView extends JPanel implements Observer {
      * @param data The element tree data
      * @param controller The controller for this tree view
      */
-    public ElementTreeView(ElementTreeData data, ElementTreeController controller) {
+    public ElementTreeView(ElementTreeData data,
+    		ElementTreeController controller) {
         this.data = data;
         data.registerObserver(this);
 
         model = new ElementTreeModel(data);
         tree = new JTree(model);
-        tree.setToggleClickCount(0);
         add(tree);
 
         controller.setTree(tree);
@@ -61,12 +61,14 @@ public class ElementTreeView extends JPanel implements Observer {
     }
 
     /**
-     * When the associated element tree root has changed, change the view
+     * When the associated element tree has changed, change the view. This
+     * applies to any element in the tree, not just the root element
      */
+    // TODO: This tree needs to observe all elements in the tree
     public void notifyObserver(Object obj) {
         if (data.getRoot() != null) {
         	ElementEvent ev = (ElementEvent) obj;
-            model.elementChanged(data.getRoot(), ev);
+            model.elementChanged(ev.getElement(), ev);
             if (!isVisible()) {
                 setVisible(true);
             }

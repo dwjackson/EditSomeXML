@@ -64,6 +64,6 @@ public class NewRootController implements ActionListener {
         view.teardown();
         ElementEvent.EventType eventType;
         eventType = ElementEvent.EventType.NEW_ROOT;
-        root.notifyObservers(new ElementEvent(eventType));
+        root.notifyObservers(new ElementEvent(eventType, root));
     }
 }

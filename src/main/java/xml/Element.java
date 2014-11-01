@@ -153,7 +153,7 @@ public class Element extends GenericObservable implements Observable, Observer {
             this.tag = tag.replace(' ', '-');
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.DATA_CHANGE;
-            notifyObservers(new ElementEvent(eventType));
+            notifyObservers(new ElementEvent(eventType, this));
         }
     }
 
@@ -310,7 +310,7 @@ public class Element extends GenericObservable implements Observable, Observer {
         attributes.set(key, value);
         ElementEvent.EventType eventType;
         eventType = ElementEvent.EventType.DATA_CHANGE;
-        notifyObservers(new ElementEvent(eventType));
+        notifyObservers(new ElementEvent(eventType, this));
     }
 
     /**
@@ -323,7 +323,7 @@ public class Element extends GenericObservable implements Observable, Observer {
         attributes.setAttribute(index, key, value);
         ElementEvent.EventType eventType;
         eventType = ElementEvent.EventType.DATA_CHANGE;
-        notifyObservers(new ElementEvent(eventType));
+        notifyObservers(new ElementEvent(eventType, this));
     }
 
     /**
@@ -385,7 +385,7 @@ public class Element extends GenericObservable implements Observable, Observer {
             this.text = text;
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.DATA_CHANGE;
-            notifyObservers(new ElementEvent(eventType));
+            notifyObservers(new ElementEvent(eventType, this));
         }
     }
 
@@ -398,7 +398,7 @@ public class Element extends GenericObservable implements Observable, Observer {
         children.add(child);
         ElementEvent.EventType eventType;
         eventType = ElementEvent.EventType.ADD_CHILD;
-        notifyObservers(new ElementEvent(eventType));
+        notifyObservers(new ElementEvent(eventType, this));
     }
 
     /**
@@ -437,7 +437,7 @@ public class Element extends GenericObservable implements Observable, Observer {
         addChild(child);
         ElementEvent.EventType eventType;
         eventType = ElementEvent.EventType.ADD_CHILD;
-        notifyObservers(new ElementEvent(eventType));
+        notifyObservers(new ElementEvent(eventType, this));
         return child;
     }
 
@@ -484,7 +484,7 @@ public class Element extends GenericObservable implements Observable, Observer {
             children.remove(child);
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.REMOVE_CHILD;
-            notifyObservers(new ElementEvent(eventType));
+            notifyObservers(new ElementEvent(eventType, this));
         }
     }
 
@@ -581,5 +581,25 @@ public class Element extends GenericObservable implements Observable, Observer {
         if (mirroredElement != null) {
             updateFromMirror();
         }
+    }
+    
+    /**
+     * Get an array of Elements that starts at the root of the tree and goes
+     * down from parent-to-child until this element.
+     * @return the ancestry of this element, as an array of elements
+     */
+    public Element[] getAncestry() {
+    	int numAncestors = 1;
+    	Element currElem = this;
+    	while ((currElem = currElem.getParent()) != null) {
+    		numAncestors++;
+    	}
+    	currElem = this;
+    	Element[] ancestors = new Element[numAncestors];
+    	for (int i = numAncestors - 1; i >= 0; i--) {
+    		ancestors[i] = currElem;
+    		currElem = currElem.getParent();
+    	}
+    	return ancestors;
     }
 }

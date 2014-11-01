@@ -10,12 +10,18 @@ public class ElementEvent {
     }
 
     private EventType eventType;
+    private Element element;
 
-    public ElementEvent(EventType eventType) {
+    public ElementEvent(EventType eventType, Element element) {
         this.eventType = eventType;
+        this.element = element;
     }
 
     public EventType getEventType() {
         return eventType;
+    }
+    
+    public Element getElement() {
+    	return element;
     }
 }

@@ -36,10 +36,8 @@ import java.awt.event.WindowEvent;
  * The EditSomeXML class is the main editor class of EditSomeXML.
  */
 public class EditSomeXML extends JFrame {
-    public EditSomeXML() {
-        ElementTreeData data = new ElementTreeData(new Element());
-
-        // Set up the main window
+	
+	private void setUpFrame() {
         setSize(800, 600);
         setTitle("EditSomeXML");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -59,6 +57,12 @@ public class EditSomeXML extends JFrame {
             }
         });
         setLayout(new FlowLayout());
+	}
+	
+    public EditSomeXML() {
+        ElementTreeData data = new ElementTreeData(new Element());
+
+        setUpFrame(); // Set up the main window
 
         // Set up the tree view
         ElementTreeController elementTreeController;

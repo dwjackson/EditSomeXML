@@ -22,6 +22,7 @@ package editor.controllers;
 
 import editor.views.NewElementView;
 import xml.Element;
+import xml.ElementEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +45,5 @@ public class NewElementController implements ActionListener {
         Element child = new Element(view.getTag());
         parent.addChild(child);
         view.dispose();
-        parent.notifyObservers(null);
     }
 }

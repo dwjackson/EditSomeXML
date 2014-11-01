@@ -86,7 +86,7 @@ public class ElementTreeModel implements TreeModel {
     /**
      * Determine if this element has children
      * @param node The tree node (Element) to check for children
-     * @return fase if the node has children, true if not
+     * @return false if the node has children, true if not
      */
     @Override
     public boolean isLeaf(Object node) {
@@ -126,26 +126,63 @@ public class ElementTreeModel implements TreeModel {
         listeners.remove(treeModelListener);
     }
 
+    /**
+     * When an element in the tree is changed, this method is called to update
+     * the tree
+     * @param elem The element that has changed
+     * @param elementEvent The type of event/change
+     */
     public void elementChanged(Element elem, ElementEvent elementEvent) {
     	switch (elementEvent.getEventType()) {
     	case DATA_CHANGE:
+    		System.out.println("[DEBUG] elementChanged(): Data change");
     		fireTreeNodesChanged(elem);
     		break;
     	case ADD_CHILD:
+    		System.out.println("[DEBUG] elementChanged(): Child added");
     		fireTreeNodesInserted(elem);
     		break;
     	case REMOVE_CHILD:
+    		System.out.println("[DEBUG] elementChanged(): Child removed");
     		fireTreeNodesRemoved(elem);
     		break;
     	case NEW_ROOT:
+    		System.out.println("[DEBUG] elementChanged(): New root");
     		fireTreeStructureChanged(elem);
     		break;
     	default:
+    		System.out.println("[DEBUG] elementChanged(): Undefined change");
     		Logger.getInstance().write("Invalid event type");
     		fireTreeStructureChanged(elem);
     	}
     }
     
+    /* TODO: Fix these methods as they are clearly not working properly
+     * 
+	 * TreeModelEvent(Object source, Object[] path)
+	 * Used to create an event when the node structure has changed in some
+	 * way,identifying the path to the root of a modified subtree as an array
+	 * of Objects.
+	 * 
+	 * TreeModelEvent(Object source, Object[] path, int[] childIndices,
+	 *                Object[] children)
+	 * Used to create an event when nodes have been changed, inserted, or
+	 * removed, identifying the path to the parent of the modified items as an
+	 * array of Objects.
+	 * 
+	 * TreeModelEvent(Object source, TreePath path)
+	 * Used to create an event when the node structure has changed in some
+	 * way, identifying the path to the root of the modified subtree as a
+	 * TreePath object.
+	 * 
+	 * TreeModelEvent(Object source, TreePath path, int[] childIndices,
+	 *                Object[] children)
+	 * Used to create an event when nodes have been changed, inserted, or
+	 * removed, identifying the path to the parent of the modified items as a
+	 * TreePath object.
+     */
+    
+    // TODO
     public void fireTreeNodesChanged(Element elem) {
         TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
         for (TreeModelListener tml : listeners) {
@@ -153,13 +190,24 @@ public class ElementTreeModel implements TreeModel {
         }
     }
     
+    // TODO
     public void fireTreeNodesInserted(Element elem) {
-    	TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
+    	//TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
+    	Element child = elem.getYoungestChild();
+    	System.out.println("[DEBUG] child = " + child);
+    	Object[] path = (Object[]) elem.getAncestry();
+    	int childIndex = elem.getIndexOfChild(child);
+    	System.out.println("[DEBUG] childIndex = " + childIndex);
+    	int[] childIndices = {childIndex};
+    	Object[] children = {child};
+    	TreeModelEvent e = new TreeModelEvent(this, path, childIndices, children);
         for (TreeModelListener tml : listeners) {
             tml.treeNodesInserted(e);
+        	//tml.treeStructureChanged(e); // TODO: REMOVE
         }
     }
     
+    // TODO
     public void fireTreeNodesRemoved(Element elem) {
     	TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
         for (TreeModelListener tml : listeners) {
@@ -167,6 +215,11 @@ public class ElementTreeModel implements TreeModel {
         }
     }
 
+    /**
+     * This method is called when the tree structure has changed in a major
+     * way. This will re-draw and collapse the tree.
+     * @param oldRoot The previous root element of the tree
+     */
     public void fireTreeStructureChanged(Element oldRoot) {
         TreeModelEvent e = new TreeModelEvent(this, new Object[] {oldRoot});
         for (TreeModelListener tml : listeners) {
