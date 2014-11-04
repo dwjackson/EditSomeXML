@@ -165,4 +165,17 @@ public class ElementTest extends TestCase {
     	assertEquals("child is not secon element in ancestry", child, ancestry[1]);
     	assertEquals("grandchild is not third element in ancestry", grandchild, ancestry[2]);
     }
+    
+    @Test
+    public void testMoveElement() {
+    	Element root = new Element("root");
+    	Element child = root.newSubElement("child");
+    	Element grandchild = child.newSubElement("grandchild");
+    	
+    	child.moveElement(grandchild, root);
+    	
+    	assertEquals("Child element still has children", 0, child.getNumberOfChildren());
+    	assertEquals("Root doesn't have enough children", 2, root.getNumberOfChildren());
+    	assertTrue("Grandchild's parent is still Child and not Root", grandchild.getParent().equals(root));
+    }
 }

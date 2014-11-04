@@ -602,4 +602,16 @@ public class Element extends GenericObservable implements Observable, Observer {
     	}
     	return ancestors;
     }
+    
+    /**
+     * Move a child of this element to a new section of the tree
+     * @param childToMove The child element to move
+     * @param newParent the new parent of the child element
+     */
+    public void moveElement(Element childToMove, Element newParent) {
+    	if (children.contains(childToMove) && newParent != null) {
+    		children.remove(childToMove);
+    		newParent.addChild(childToMove);
+    	}
+    }
 }
