@@ -64,7 +64,6 @@ public class ElementTreeView extends JPanel implements Observer {
      * When the associated element tree has changed, change the view. This
      * applies to any element in the tree, not just the root element
      */
-    // TODO: This tree needs to observe all elements in the tree
     public void notifyObserver(Object obj) {
         if (data.getRoot() != null) {
         	ElementEvent ev = (ElementEvent) obj;

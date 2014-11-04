@@ -21,7 +21,9 @@
 package editor.menubar;
 
 import editor.ElementTreeData;
+import utility.Logger;
 import xml.Element;
+import xml.ElementEvent;
 import xml.ElementXMLDeserializer;
 
 import javax.swing.*;
@@ -48,6 +50,7 @@ public class ImportActionListener implements ActionListener {
         ElementXMLDeserializer deserializer = new ElementXMLDeserializer();
         Element elem = deserializer.deserializeFromFile(fileName);
         data.setRoot(elem);
-        data.notifyObservers(null);
+        ElementEvent.EventType eventType = ElementEvent.EventType.NEW_ROOT;
+        data.notifyObservers(new ElementEvent(eventType, elem));
     }
 }
