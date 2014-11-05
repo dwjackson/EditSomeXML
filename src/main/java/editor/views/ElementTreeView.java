@@ -20,8 +20,7 @@
 
 package editor.views;
 
-import javax.swing.JPanel;
-import javax.swing.JTree;
+import javax.swing.*;
 
 import utility.Observer;
 import xml.Element;
@@ -52,7 +51,8 @@ public class ElementTreeView extends JPanel implements Observer {
 
         model = new ElementTreeModel(data);
         tree = new JTree(model);
-        add(tree);
+        JScrollPane treeScrollPane = new JScrollPane(tree);
+        add(treeScrollPane);
 
         controller.setTree(tree);
         tree.addMouseListener(controller);
