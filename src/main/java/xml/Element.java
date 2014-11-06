@@ -36,6 +36,10 @@ import utility.Observer;
  * @see GenericObservable
  */
 public class Element extends GenericObservable implements Observable, Observer {
+	private enum RepresentationType {
+		NONE, TAG, ATTRIBUTE_VALUE
+	}
+	
     private String tag;
     private String text;
     private ElementAttributes attributes;
@@ -43,7 +47,8 @@ public class Element extends GenericObservable implements Observable, Observer {
     private GenericObservable observable;
     private Element parent;
     private Element mirroredElement;
-    private String representation;
+    private RepresentationType representationType;
+    private String representationAttribute;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
@@ -58,7 +63,8 @@ public class Element extends GenericObservable implements Observable, Observer {
         observable = new GenericObservable();
         parent = null;
         mirroredElement = null;
-        representation = null;
+        representationType = RepresentationType.NONE;
+        representationAttribute = null;
     }
 
     /**
@@ -67,6 +73,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public Element(String tagName) {
         this();
+        representationType = RepresentationType.TAG;
         setTag(tagName);
     }
 
@@ -153,10 +160,12 @@ public class Element extends GenericObservable implements Observable, Observer {
     public void setTag(String tag) {
         if (tag != null) {
             this.tag = tag.replace(' ', '-');
+            if (representationType == RepresentationType.NONE) {
+            	representationType = RepresentationType.TAG;
+            }
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.DATA_CHANGE;
             notifyObservers(new ElementEvent(eventType, this));
-            representation = tag;
         }
     }
 
@@ -427,6 +436,18 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     @Override
     public String toString() {
+    	String representation;
+    	switch(representationType) {
+    	case TAG:
+    		representation = tag;
+    		break;
+    	case ATTRIBUTE_VALUE:
+    		representation = attributes.getValue(representationAttribute);
+    		break;
+    	case NONE:
+    	default:
+    		representation = null;
+    	}
         return representation;
     }
 
@@ -626,7 +647,8 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void setRepresentationToAttributeValue(String attName) {
         if (attName != null && attributes.contains(attName)) {
-            representation = attributes.getValue(attName);
+        	representationType = RepresentationType.ATTRIBUTE_VALUE;
+        	representationAttribute = attName;
         }
     }
 
@@ -634,6 +656,6 @@ public class Element extends GenericObservable implements Observable, Observer {
      * Set the textual representation of this element to be its tag
      */
     public void setRepresentationToTag() {
-        representation = tag;
+        representationType = RepresentationType.TAG;
     }
 }
