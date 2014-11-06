@@ -68,7 +68,6 @@ public class Element extends GenericObservable implements Observable, Observer {
     public Element(String tagName) {
         this();
         setTag(tagName);
-        representation = tagName;
     }
 
     /**
@@ -157,6 +156,7 @@ public class Element extends GenericObservable implements Observable, Observer {
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.DATA_CHANGE;
             notifyObservers(new ElementEvent(eventType, this));
+            representation = tag;
         }
     }
 

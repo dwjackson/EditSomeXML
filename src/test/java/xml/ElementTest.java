@@ -193,5 +193,9 @@ public class ElementTest extends TestCase {
 
         elem.setRepresentationToTag();
         assertEquals("Changing representation back to tag didn't work", tag, elem.toString());
+
+        elem = new Element();
+        elem.setTag(tag);
+        assertEquals("Setting the tag on an element doesn't set representation", tag, elem.toString());
     }
 }
