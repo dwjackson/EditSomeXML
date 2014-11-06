@@ -178,4 +178,20 @@ public class ElementTest extends TestCase {
     	assertEquals("Root doesn't have enough children", 2, root.getNumberOfChildren());
     	assertTrue("Grandchild's parent is still Child and not Root", grandchild.getParent().equals(root));
     }
+
+    @Test
+    public void testRepresentation() {
+        String tag = "elem";
+        Element elem = new Element(tag);
+        assertEquals("Initial representation is not the element's tag", tag, elem.toString());
+
+        String attName = "name";
+        String attVal = "testing";
+        elem.setAttribute(attName, attVal);
+        elem.setRepresentationToAttributeValue(attName);
+        assertEquals("Representation has not been changed correctly", attVal, elem.toString());
+
+        elem.setRepresentationToTag();
+        assertEquals("Changing representation back to tag didn't work", tag, elem.toString());
+    }
 }

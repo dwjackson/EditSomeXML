@@ -43,6 +43,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     private GenericObservable observable;
     private Element parent;
     private Element mirroredElement;
+    private String representation;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
@@ -57,6 +58,7 @@ public class Element extends GenericObservable implements Observable, Observer {
         observable = new GenericObservable();
         parent = null;
         mirroredElement = null;
+        representation = null;
     }
 
     /**
@@ -66,6 +68,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     public Element(String tagName) {
         this();
         setTag(tagName);
+        representation = tagName;
     }
 
     /**
@@ -424,7 +427,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     @Override
     public String toString() {
-        return tag;
+        return representation;
     }
 
     /**
@@ -613,5 +616,24 @@ public class Element extends GenericObservable implements Observable, Observer {
     		children.remove(childToMove);
     		newParent.addChild(childToMove);
     	}
+    }
+
+    /**
+     * Change the representation of this element to the value of an attribute
+     * of this element
+     * @param attName The name of the attribute to use as this element's
+     *                textual representation
+     */
+    public void setRepresentationToAttributeValue(String attName) {
+        if (attName != null && attributes.contains(attName)) {
+            representation = attributes.getValue(attName);
+        }
+    }
+
+    /**
+     * Set the textual representation of this element to be its tag
+     */
+    public void setRepresentationToTag() {
+        representation = tag;
     }
 }
