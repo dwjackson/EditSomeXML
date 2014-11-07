@@ -23,3 +23,7 @@ All notable chanegs to EditSomeXML will be documented in this file.
 
 ### Fixed
 - Selecting a grandchild element no longer collapses the tree
+
+## 0.2.1 - 2014-11-03
+### Fixed
+- Importing works again
