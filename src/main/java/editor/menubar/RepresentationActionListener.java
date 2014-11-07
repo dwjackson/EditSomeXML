@@ -21,9 +21,11 @@
 package editor.menubar;
 
 import editor.views.ElementTreeView;
+import editor.views.RepresentationView;
 import xml.Element;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +46,7 @@ public class RepresentationActionListener implements ActionListener {
         Element elem = elementTreeView.getSelectedElement();
 
         if (elem != null) {
-            new RepresentationFrame(elem);
+            new RepresentationView(elem);
         } else {
             // TODO: Show an error window
         }

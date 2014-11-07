@@ -1,4 +1,4 @@
-package editor.menubar;
+package editor.views;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 import xml.Element;
 
-public class RepresentationFrame extends JFrame {
+public class RepresentationView extends JFrame {
 	private final String TAG_STR = "Tag";
 	private final String ATTRIBUTE_VALUE_STR = "Attribute Value";
 	
@@ -33,7 +33,7 @@ public class RepresentationFrame extends JFrame {
 	private JComboBox<String> repComboBox;
 	private JComboBox<String> attributeComboBox;
 	
-	public RepresentationFrame(Element elem) {
+	public RepresentationView(Element elem) {
         setTitle("Element Representation");
         setSize(300, 200);
         setLayout(new FlowLayout());
