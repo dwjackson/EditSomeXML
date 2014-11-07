@@ -32,6 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import xml.Element;
+import editor.controllers.RepresentationController;
 
 public class RepresentationView extends JFrame {
 	private final String TAG_STR = "Tag";
@@ -87,6 +88,7 @@ public class RepresentationView extends JFrame {
         add(attributeComboBox);
 
         JButton okButton = new JButton("OK");
+        okButton.addActionListener(new RepresentationController(this));
         add(okButton);
 
         setVisible(true);
