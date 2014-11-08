@@ -35,6 +35,10 @@ public class RepresentationController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (view.setForAll()) {
+			// TODO: Deal with the "set for all" checkbox
+		}
+		
 		Element elem = view.getElement();
 		switch(view.getRepresentationType()) {
 		case TAG:

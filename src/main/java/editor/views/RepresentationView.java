@@ -55,6 +55,7 @@ public class RepresentationView extends JFrame {
 	private JComboBox<String> repComboBox;
 	private JComboBox<String> attributeComboBox;
 	private Element elem;
+	private JCheckBox setForAllCheckBox;
 	
 	public RepresentationView(Element elem) {
 		this.elem = elem;
@@ -78,7 +79,7 @@ public class RepresentationView extends JFrame {
         add(repComboBox);
 
         add(new JLabel("Set for all of this type of element"));
-        JCheckBox setForAllCheckBox = new JCheckBox();
+        setForAllCheckBox = new JCheckBox();
         add(setForAllCheckBox);
         
         String[] atts = new String[elem.getNumberOfAttributes()];
@@ -122,5 +123,9 @@ public class RepresentationView extends JFrame {
 			attName = (String) attributeComboBox.getSelectedItem();
 		}
 		return attName;
+	}
+	
+	public boolean setForAll() {
+		return setForAllCheckBox.isSelected();
 	}
 }
