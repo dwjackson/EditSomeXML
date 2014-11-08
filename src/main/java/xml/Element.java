@@ -470,11 +470,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      * @return true if this is the root element, false if it's not
      */
     public boolean isRoot() {
-        boolean rootStatus = false;
-        if (parent == null) {
-            rootStatus = true;
-        }
-        return rootStatus;
+    	return (parent == null);
     }
 
     /**
@@ -644,18 +640,47 @@ public class Element extends GenericObservable implements Observable, Observer {
      * of this element
      * @param attName The name of the attribute to use as this element's
      *                textual representation
+     * @param setForChildren true if should set all children with the same tag
+     *                       to have the same type of representation
      */
-    public void setRepresentationToAttributeValue(String attName) {
-        if (attName != null && attributes.contains(attName)) {
-        	representationType = RepresentationType.ATTRIBUTE_VALUE;
-        	representationAttribute = attName;
-        }
+    public void setRepresentationToAttributeValue(String attName,
+    		boolean setForChildren) {
+    	if (!setForChildren) {
+	        if (attName != null && attributes.contains(attName)) {
+	        	representationType = RepresentationType.ATTRIBUTE_VALUE;
+	        	representationAttribute = attName;
+	        }
+    	} else {
+    		for (Element child : children) {
+    			child.setRepresentationToAttributeValue(attName, true);
+    		}
+    	}
     }
 
     /**
      * Set the textual representation of this element to be its tag
+     * @param setForChildren true if should set all children with the same tag
+     *                       to have the same type of representation
      */
-    public void setRepresentationToTag() {
-        representationType = RepresentationType.TAG;
+    public void setRepresentationToTag(boolean setForChildren) {
+    	if (!setForChildren) {
+    		representationType = RepresentationType.TAG;
+    	} else {
+    		for (Element child : children) {
+    			child.setRepresentationToTag(true);
+    		}
+    	}
+    }
+    
+    /**
+     * Given any arbitrary element in the tree, return the root of that tree
+     * @return the root element of the tree of which this element is a part
+     */
+    public Element getRoot() {
+    	Element elem = this;
+    	while (!elem.isRoot()) {
+    		elem = elem.getParent();
+    	}
+    	return elem;
     }
 }
