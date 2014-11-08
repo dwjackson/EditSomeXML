@@ -35,6 +35,14 @@ import java.awt.event.ActionListener;
 public class EditMenu extends JMenu {
     public EditMenu(final ElementTreeView elementTreeView) {
         setText("Edit");
+        
+        JMenuItem undoItem = new JMenuItem("Undo");
+        add(undoItem);
+        
+        JMenuItem redoItem = new JMenuItem("Redo");
+        add(redoItem);
+        
+        addSeparator();
 
         JMenuItem newElementItem = new JMenuItem("New Child Element...");
         NewElementActionListener listener;
