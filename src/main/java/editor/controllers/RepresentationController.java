@@ -35,11 +35,13 @@ public class RepresentationController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (view.setForAll()) {
-			// TODO: Deal with the "set for all" checkbox
-		}
-		
 		Element elem = view.getElement();
+		
+		if (view.setForAll()) {
+			// TODO: Deal with the "set for all" check-box and set the
+			// representation to be the same for all elements with the same
+			// tag as this element
+		}
 		switch(view.getRepresentationType()) {
 		case TAG:
 			elem.setRepresentationToTag();

@@ -188,10 +188,10 @@ public class ElementTest extends TestCase {
         String attName = "name";
         String attVal = "testing";
         elem.setAttribute(attName, attVal);
-        elem.setRepresentationToAttributeValue(attName);
+        elem.setRepresentationToAttributeValue(attName, false);
         assertEquals("Representation has not been changed correctly", attVal, elem.toString());
 
-        elem.setRepresentationToTag();
+        elem.setRepresentationToTag(false);
         assertEquals("Changing representation back to tag didn't work", tag, elem.toString());
 
         elem = new Element();
