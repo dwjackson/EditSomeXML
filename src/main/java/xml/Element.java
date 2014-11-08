@@ -23,6 +23,9 @@ package xml;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import utility.Command;
+import utility.CommandHistory;
+import utility.Commandable;
 import utility.GenericObservable;
 import utility.Observable;
 import utility.Observer;
@@ -35,7 +38,11 @@ import utility.Observer;
  * @see Observable
  * @see GenericObservable
  */
-public class Element extends GenericObservable implements Observable, Observer {
+public class Element extends GenericObservable implements
+	Observable,
+	Observer,
+	Commandable {
+	
 	public enum RepresentationType {
 		NONE, TAG, ATTRIBUTE_VALUE
 	}
@@ -49,6 +56,7 @@ public class Element extends GenericObservable implements Observable, Observer {
     private Element mirroredElement;
     private RepresentationType representationType;
     private String representationAttribute;
+    private CommandHistory commandHistory;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
@@ -65,6 +73,7 @@ public class Element extends GenericObservable implements Observable, Observer {
         mirroredElement = null;
         representationType = RepresentationType.NONE;
         representationAttribute = null;
+        commandHistory = new CommandHistory();
     }
 
     /**
@@ -284,6 +293,7 @@ public class Element extends GenericObservable implements Observable, Observer {
      */
     public void setParent(Element parent) {
         this.parent = parent;
+        commandHistory = null; // Only root has the history
     }
 
     /**
@@ -681,4 +691,48 @@ public class Element extends GenericObservable implements Observable, Observer {
     	}
     	return elem;
     }
+
+    /**
+     * Only the root element can contain a command history, so the command
+     * has to propagate up the tree if it is initiated somewhere below the
+     * root element.
+     * 
+     * @see utility.Commandable
+     * 
+     * @param cmd The command to perform
+     */
+	@Override
+	public void performCommand(Command cmd) {
+		if (commandHistory != null) {
+			commandHistory.performCommand(cmd);
+		} else {
+			parent.performCommand(cmd);
+		}
+	}
+
+	/**
+     * @see utility.Commandable
+     */
+	@Override
+	public void undo() {
+		if (commandHistory != null) {
+			commandHistory.undo();
+		} else {
+			parent.undo();
+		}
+	}
+
+	/**
+     * @see utility.Commandable
+     */
+	@Override
+	public void redo() {
+		if (commandHistory != null) {
+			commandHistory.redo();
+		} else {
+			parent.redo();
+		}
+	}
+    
+    
 }

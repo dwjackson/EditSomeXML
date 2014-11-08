@@ -21,7 +21,10 @@
 package xml;
 
 import junit.framework.TestCase;
+
 import org.junit.Test;
+
+import xml.commands.ChangeTagCommand;
 
 public class ElementTest extends TestCase {
     @Test
@@ -197,5 +200,21 @@ public class ElementTest extends TestCase {
         elem = new Element();
         elem.setTag(tag);
         assertEquals("Setting the tag on an element doesn't set representation", tag, elem.toString());
+    }
+    
+    @Test
+    public void testChangeTagCommand() {
+    	String tag = "elem";
+    	String testingTag = "testing";
+    	Element elem = new Element(tag);
+    	
+    	elem.performCommand(new ChangeTagCommand(elem, testingTag));
+    	assertEquals("Tag not set correctly", testingTag, elem.getTag());
+    	
+    	elem.undo();
+    	assertEquals("Tag setting not undone", tag, elem.getTag());
+    	
+    	elem.redo();
+    	assertEquals("Tag setting not redone", testingTag, elem.getTag());
     }
 }
