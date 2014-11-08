@@ -644,13 +644,12 @@ public class Element extends GenericObservable implements Observable, Observer {
      *                       to have the same type of representation
      */
     public void setRepresentationToAttributeValue(String attName,
-    		boolean setForChildren) {
-    	if (!setForChildren) {
-	        if (attName != null && attributes.contains(attName)) {
-	        	representationType = RepresentationType.ATTRIBUTE_VALUE;
-	        	representationAttribute = attName;
-	        }
-    	} else {
+    	boolean setForChildren) {
+	    if (attName != null && attributes.contains(attName)) {
+	        representationType = RepresentationType.ATTRIBUTE_VALUE;
+	        representationAttribute = attName;
+	    }
+    	if (setForChildren) {
     		for (Element child : children) {
     			child.setRepresentationToAttributeValue(attName, true);
     		}
@@ -663,9 +662,8 @@ public class Element extends GenericObservable implements Observable, Observer {
      *                       to have the same type of representation
      */
     public void setRepresentationToTag(boolean setForChildren) {
-    	if (!setForChildren) {
-    		representationType = RepresentationType.TAG;
-    	} else {
+    	representationType = RepresentationType.TAG;
+    	if (setForChildren) {
     		for (Element child : children) {
     			child.setRepresentationToTag(true);
     		}
