@@ -23,6 +23,7 @@ package editor.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import xml.Element;
 import editor.views.RepresentationView;
 
 public class RepresentationController implements ActionListener {
@@ -34,7 +35,18 @@ public class RepresentationController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO
+		Element elem = view.getElement();
+		switch(view.getRepresentationType()) {
+		case TAG:
+			elem.setRepresentationToTag();
+			break;
+		case ATTRIBUTE_VALUE:
+			String attName = view.getAttributeName();
+			elem.setRepresentationToAttributeValue(attName);
+			break;
+		default:
+			// Do nothing
+		}
 		
 		view.dispose();
 	}

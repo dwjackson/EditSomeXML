@@ -36,7 +36,7 @@ import utility.Observer;
  * @see GenericObservable
  */
 public class Element extends GenericObservable implements Observable, Observer {
-	private enum RepresentationType {
+	public enum RepresentationType {
 		NONE, TAG, ATTRIBUTE_VALUE
 	}
 	

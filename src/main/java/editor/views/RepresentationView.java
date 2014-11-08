@@ -24,6 +24,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.lang.model.element.ElementKind;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -53,8 +54,11 @@ public class RepresentationView extends JFrame {
 	
 	private JComboBox<String> repComboBox;
 	private JComboBox<String> attributeComboBox;
+	private Element elem;
 	
 	public RepresentationView(Element elem) {
+		this.elem = elem;
+		
         setTitle("Element Representation");
         setSize(300, 200);
         setLayout(new FlowLayout());
@@ -92,5 +96,31 @@ public class RepresentationView extends JFrame {
         add(okButton);
 
         setVisible(true);
+	}
+	
+	public Element getElement() {
+		return elem;
+	}
+	
+	public Element.RepresentationType getRepresentationType() {
+		Element.RepresentationType repType;
+		String repStr = (String) repComboBox.getSelectedItem();
+		if (repStr.equalsIgnoreCase(TAG_STR)) {
+			repType = Element.RepresentationType.TAG;
+		} else if (repStr.equals(ATTRIBUTE_VALUE_STR)) {
+			repType = Element.RepresentationType.ATTRIBUTE_VALUE;
+		} else {
+			repType = Element.RepresentationType.NONE;
+		}
+		return repType;
+	}
+	
+	public String getAttributeName() {
+		String attName = null;
+		Element.RepresentationType repType = getRepresentationType();
+		if (repType == Element.RepresentationType.ATTRIBUTE_VALUE) {
+			attName = (String) attributeComboBox.getSelectedItem();
+		}
+		return attName;
 	}
 }
