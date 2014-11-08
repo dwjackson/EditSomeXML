@@ -42,4 +42,16 @@ public interface Commandable {
 	 * Redo the most recently undone command
 	 */
 	public void redo();
+	
+	/**
+	 * Determine if there's a command to undo
+	 * @return true if there is a command available to be undone, false if not
+	 */
+	public boolean canUndo();
+	
+	/**
+	 * Determine if there is a command to redo
+	 * @return true if there is a command available to redo, false if not
+	 */
+	public boolean canRedo();
 }

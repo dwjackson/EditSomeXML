@@ -82,7 +82,7 @@ public class CommandHistory {
 	 * Undo the most recently performed command
 	 */
 	public void undo() {
-		if (commands.size() > 0) {
+		if (canUndo()) {
 			Command cmd = commands.get(currCommandIdx);
 			cmd.undo();
 			currCommandIdx--;
@@ -93,12 +93,26 @@ public class CommandHistory {
 	 * Redo the most recently undone command
 	 */
 	public void redo() {
-		int numCmds = commands.size();
-		boolean currCommandIsMostRecent = (numCmds == currCommandIdx - 1);
-		if (!currCommandIsMostRecent) {
+		if (canRedo()) {
 			currCommandIdx++;
 			Command cmd = commands.get(currCommandIdx);
 			cmd.perform();
 		}
+	}
+	
+	/**
+	 * Determine if there is a command to undo
+	 * @return true if there is a command to undo, false if not
+	 */
+	public boolean canUndo() {
+		return (currCommandIdx > 0);
+	}
+	
+	/**
+	 * Determine if there is a command to redo
+	 * @return true if there is a command to redo, false if not
+	 */
+	public boolean canRedo() {
+		return (currCommandIdx < commands.size() - 1);
 	}
 }

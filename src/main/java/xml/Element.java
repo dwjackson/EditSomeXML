@@ -734,6 +734,26 @@ public class Element extends GenericObservable implements
 			parent.redo();
 		}
 	}
-    
-    
+
+	/**
+	 * @see utility.Commandable
+	 */
+	@Override
+	public boolean canUndo() {
+		if (commandHistory == null) {
+			return parent.canUndo();
+		}
+		return commandHistory.canUndo();
+	}
+
+	/**
+	 * @see utility.Commandable
+	 */
+	@Override
+	public boolean canRedo() {
+		if (commandHistory == null) {
+			return parent.canRedo();
+		}
+		return commandHistory.canRedo();
+	}   
 }
