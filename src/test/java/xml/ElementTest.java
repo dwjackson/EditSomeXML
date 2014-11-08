@@ -25,6 +25,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import xml.commands.ChangeTagCommand;
+import xml.commands.ChangeTextCommand;
 
 public class ElementTest extends TestCase {
     @Test
@@ -208,6 +209,8 @@ public class ElementTest extends TestCase {
     	String testingTag = "testing";
     	Element elem = new Element(tag);
     	
+    	assertEquals("Original tag not set", tag, elem.getTag());
+    	
     	elem.performCommand(new ChangeTagCommand(elem, testingTag));
     	assertEquals("Tag not set correctly", testingTag, elem.getTag());
     	
@@ -216,5 +219,24 @@ public class ElementTest extends TestCase {
     	
     	elem.redo();
     	assertEquals("Tag setting not redone", testingTag, elem.getTag());
+    }
+    
+    @Test
+    public void testChangeTextCommand() {
+    	String text = "This is a test";
+    	String newText = "This is the text after a change";
+    	Element elem = new Element("elem");
+    	
+    	elem.setText(text);
+    	assertEquals("Original text not set correctly", text, elem.getText());
+    	
+    	elem.performCommand(new ChangeTextCommand(elem, newText));
+    	assertEquals("Text not set correctly by command", newText, elem.getText());
+    	
+    	elem.undo();
+    	assertEquals("Text change not undone", text, elem.getText());
+    	
+    	elem.redo();
+    	assertEquals("Text change not redone", newText, elem.getText());
     }
 }
