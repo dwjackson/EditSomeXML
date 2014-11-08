@@ -24,6 +24,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import xml.commands.AddChildCommand;
 import xml.commands.ChangeTagCommand;
 import xml.commands.ChangeTextCommand;
 
@@ -238,5 +239,25 @@ public class ElementTest extends TestCase {
     	
     	elem.redo();
     	assertEquals("Text change not redone", newText, elem.getText());
+    }
+    
+    @Test
+    public void testAddChildCommand() {
+    	Element elem = new Element("element");
+    	Element child = new Element("child");
+    	
+    	assertEquals("Wrong initial number of children", 0, elem.getNumberOfChildren());
+    	
+    	elem.performCommand(new AddChildCommand(elem, child));
+    	assertEquals("Wrong number of children after add", 1, elem.getNumberOfChildren());
+    	assertEquals("Child has wrong parent", elem, child.getParent());
+    	
+    	elem.undo();
+    	assertEquals("Wrong number of children after undo of add", 0, elem.getNumberOfChildren());
+    	assertNull("Child's parent is not null", child.getParent());
+    	
+    	elem.redo();
+    	assertEquals("Wrong number of children after redo of add", 1, elem.getNumberOfChildren());
+    	assertEquals("Child's parent is not correct", elem, child.getParent());
     }
 }

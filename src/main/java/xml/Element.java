@@ -511,6 +511,7 @@ public class Element extends GenericObservable implements
      */
     public void deleteChild(Element child) {
         if (children.contains(child)) {
+        	child.setParent(null);
             children.remove(child);
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.REMOVE_CHILD;
