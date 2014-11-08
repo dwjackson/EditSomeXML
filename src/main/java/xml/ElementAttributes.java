@@ -22,7 +22,6 @@ package xml;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * The ElementAttributes holds the attributes of an Element
@@ -41,7 +40,7 @@ public class ElementAttributes {
     }
 
     /**
-     * Get an iterable to go through the names of the attributes
+     * Get an Iterable to go through the names of the attributes
      * @return An Iterable for the attribute names
      */
     public Iterable<String> names() {
@@ -87,7 +86,6 @@ public class ElementAttributes {
      * @param index The attribute's index
      */
     public void remove(int index) {
-        String attName = attributeNames.get(index);
         attributes.remove(index);
         attributeNames.remove(index);
     }
