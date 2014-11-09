@@ -20,6 +20,7 @@
 
 package editor.menubar;
 
+import editor.menubar.actionlisteners.NewElementActionListener;
 import editor.views.CloneElementView;
 import editor.views.DeleteElementView;
 import editor.views.ElementTreeView;

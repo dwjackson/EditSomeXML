@@ -20,11 +20,10 @@
 
 package editor.menubar;
 
+import editor.menubar.actionlisteners.RepresentationActionListener;
 import editor.views.ElementTreeView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * The view menu is used to change how things look in the UI

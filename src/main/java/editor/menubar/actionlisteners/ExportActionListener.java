@@ -18,7 +18,7 @@
  * 
  */
 
-package editor.menubar;
+package editor.menubar.actionlisteners;
 
 import editor.ElementTreeData;
 import utility.Logger;

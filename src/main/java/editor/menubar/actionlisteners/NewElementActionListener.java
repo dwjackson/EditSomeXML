@@ -18,7 +18,7 @@
  * 
  */
 
-package editor.menubar;
+package editor.menubar.actionlisteners;
 
 import editor.views.ElementTreeView;
 import editor.views.NewElementView;
