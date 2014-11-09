@@ -22,7 +22,6 @@ package editor.controllers;
 
 import editor.views.NewElementView;
 import xml.Element;
-import xml.ElementEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
