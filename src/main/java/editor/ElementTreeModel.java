@@ -142,7 +142,8 @@ public class ElementTreeModel implements TreeModel {
     		System.out.println("[DEBUG] elementChanged(): Child added");
     		fireTreeNodesInserted(elem);
     		break;
-    	case REMOVE_CHILD:
+        case REMOVE_CHILD:
+            // TODO
     		System.out.println("[DEBUG] elementChanged(): Child removed");
     		fireTreeNodesRemoved(elem);
     		break;
