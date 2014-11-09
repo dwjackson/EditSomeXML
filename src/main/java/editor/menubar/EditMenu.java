@@ -21,10 +21,13 @@
 package editor.menubar;
 
 import editor.menubar.actionlisteners.NewElementActionListener;
+import editor.menubar.actionlisteners.RedoActionListener;
+import editor.menubar.actionlisteners.UndoActionListener;
 import editor.views.CloneElementView;
 import editor.views.DeleteElementView;
 import editor.views.ElementTreeView;
 import editor.views.MirrorElementView;
+import xml.Element;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -36,11 +39,14 @@ import java.awt.event.ActionListener;
 public class EditMenu extends JMenu {
     public EditMenu(final ElementTreeView elementTreeView) {
         setText("Edit");
-        
+
+        Element root = elementTreeView.getRoot();
         JMenuItem undoItem = new JMenuItem("Undo");
+        undoItem.addActionListener(new UndoActionListener(root));
         add(undoItem);
         
         JMenuItem redoItem = new JMenuItem("Redo");
+        redoItem.addActionListener(new RedoActionListener(root));
         add(redoItem);
         
         addSeparator();
