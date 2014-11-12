@@ -41,7 +41,6 @@ public class DeleteElementController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         parent.deleteSubelements();
-        parent.notifyObservers(null);
         view.dispose();
     }
 }

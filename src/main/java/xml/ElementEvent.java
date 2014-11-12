@@ -30,18 +30,46 @@ public class ElementEvent {
     }
 
     private EventType eventType;
-    private Element element;
+    private Element parent;
+    private Element child;
+    int childIndex;
 
-    public ElementEvent(EventType eventType, Element element) {
+    public ElementEvent(EventType eventType, Element parent) {
         this.eventType = eventType;
-        this.element = element;
+        this.parent = parent;
+        this.child = null;
+    }
+    
+    public ElementEvent(EventType eventType, Element parent, Element child,
+                        int childIndex) {
+    	this.eventType = eventType;
+    	this.parent = parent;
+    	this.child = child;
+    	this.childIndex = childIndex;
     }
 
     public EventType getEventType() {
         return eventType;
     }
     
+    /**
+     * Get the element associated with this event
+     * @return the element associated with this event
+     * @deprecated Use getParent() instead
+     */
     public Element getElement() {
-    	return element;
+    	return parent;
+    }
+    
+    public Element getParent() {
+    	return parent;
+    }
+    
+    public Element getChild() {
+    	return child;
+    }
+    
+    public int getChildIndex() {
+    	return childIndex;
     }
 }

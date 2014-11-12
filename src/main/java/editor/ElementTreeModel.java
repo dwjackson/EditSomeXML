@@ -143,9 +143,8 @@ public class ElementTreeModel implements TreeModel {
     		fireTreeNodesInserted(elem);
     		break;
         case REMOVE_CHILD:
-            // TODO
     		System.out.println("[DEBUG] elementChanged(): Child removed");
-    		fireTreeNodesRemoved(elem);
+    		fireTreeNodesRemoved(elem, elementEvent.getChild(), elementEvent.getChildIndex());
     		break;
     	case NEW_ROOT:
     		System.out.println("[DEBUG] elementChanged(): New root");
@@ -203,9 +202,13 @@ public class ElementTreeModel implements TreeModel {
         }
     }
     
-    public void fireTreeNodesRemoved(Element elem) {
-    	// TODO
-    	TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
+    public void fireTreeNodesRemoved(Element parent, Element child,
+                                     int childIndex) {
+    	Object[] path = parent.getAncestry();
+    	int[] childIndices = {childIndex};
+    	Object[] children = {child};
+    	TreeModelEvent e;
+    	e = new TreeModelEvent(parent, path, childIndices, children);
         for (TreeModelListener tml : listeners) {
             tml.treeNodesRemoved(e);
         }
