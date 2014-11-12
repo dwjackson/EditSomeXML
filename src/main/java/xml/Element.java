@@ -422,6 +422,23 @@ public class Element extends GenericObservable implements
         eventType = ElementEvent.EventType.ADD_CHILD;
         notifyObservers(new ElementEvent(eventType, this));
     }
+    
+    /**
+     * Add a child at a particular index
+     * 
+     * This will move the other child
+     * elements "down" (to a higher index). The index has to be less than or
+     * equal to the total number of children in order to fit the child into
+     * the existing children.
+     * 
+     * @param child The child to add
+     * @param index The index at which to add the child
+     */
+    public void addChildAtIndex(Element child, int index) {
+    	if (index >= 0 && index <= children.size()) {
+    		children.add(index, child);
+    	}
+    }
 
     /**
      * Determine the index of a child element
