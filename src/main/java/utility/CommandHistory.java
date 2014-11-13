@@ -105,7 +105,7 @@ public class CommandHistory {
 	 * @return true if there is a command to undo, false if not
 	 */
 	public boolean canUndo() {
-		return (currCommandIdx > 0);
+		return (currCommandIdx >= 0);
 	}
 	
 	/**
