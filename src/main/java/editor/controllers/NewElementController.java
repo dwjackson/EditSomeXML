@@ -20,11 +20,12 @@
 
 package editor.controllers;
 
-import editor.views.NewElementView;
-import xml.Element;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import xml.Element;
+import xml.commands.AddChildCommand;
+import editor.views.NewElementView;
 
 /**
  * The NewElementController deals with the actions of the NewElementView
@@ -42,7 +43,7 @@ public class NewElementController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Element child = new Element(view.getTag());
-        parent.addChild(child);
+        parent.performCommand(new AddChildCommand(parent, child));
         view.dispose();
     }
 }
