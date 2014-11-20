@@ -157,35 +157,9 @@ public class ElementTreeModel implements TreeModel {
     	}
     }
     
-    /* TODO: Fix these methods as they are clearly not working properly
-     * 
-	 * TreeModelEvent(Object source, Object[] path)
-	 * Used to create an event when the node structure has changed in some
-	 * way,identifying the path to the root of a modified subtree as an array
-	 * of Objects.
-	 * 
-	 * TreeModelEvent(Object source, Object[] path, int[] childIndices,
-	 *                Object[] children)
-	 * Used to create an event when nodes have been changed, inserted, or
-	 * removed, identifying the path to the parent of the modified items as an
-	 * array of Objects.
-	 * 
-	 * TreeModelEvent(Object source, TreePath path)
-	 * Used to create an event when the node structure has changed in some
-	 * way, identifying the path to the root of the modified subtree as a
-	 * TreePath object.
-	 * 
-	 * TreeModelEvent(Object source, TreePath path, int[] childIndices,
-	 *                Object[] children)
-	 * Used to create an event when nodes have been changed, inserted, or
-	 * removed, identifying the path to the parent of the modified items as a
-	 * TreePath object.
-     */
-    
     public void fireTreeNodesChanged(Element elem) {
         TreeModelEvent e = new TreeModelEvent(this, new Object[] {elem});
         for (TreeModelListener tml : listeners) {
-        	// TODO
             tml.treeNodesChanged(e);
         }
     }
