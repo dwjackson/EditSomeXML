@@ -57,6 +57,7 @@ public class Element extends GenericObservable implements
     private RepresentationType representationType;
     private String representationAttribute;
     private CommandHistory commandHistory;
+    private Element youngestChild;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
@@ -74,6 +75,7 @@ public class Element extends GenericObservable implements
         representationType = RepresentationType.NONE;
         representationAttribute = null;
         commandHistory = new CommandHistory();
+        youngestChild = null;
     }
 
     /**
@@ -225,14 +227,7 @@ public class Element extends GenericObservable implements
      * @return the youngest child or null if none
      */
     public Element getYoungestChild() {
-        // TODO: Fix this, the youngest is not guaranteed to be at the end of
-        // the list of children
-        Element child = null;
-        int idx = children.size() - 1;
-        if (idx >= 0) {
-            child = children.get(idx);
-        }
-        return child;
+        return youngestChild;
     }
 
     /**
@@ -420,6 +415,7 @@ public class Element extends GenericObservable implements
     public void addChild(Element child) {
         child.setParent(this);
         children.add(child);
+        youngestChild = child;
         int idx = getIndexOfChild(child);
         ElementEvent.EventType eventType;
         eventType = ElementEvent.EventType.ADD_CHILD;
@@ -441,6 +437,7 @@ public class Element extends GenericObservable implements
     	if (index >= 0 && index <= children.size()) {
     	    child.setParent(this);
     		children.add(index, child);
+    		youngestChild = child;
     		ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.ADD_CHILD;
             notifyObservers(new ElementEvent(eventType, this, child, index));
