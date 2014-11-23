@@ -25,7 +25,6 @@ import xml.Element;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.Format;
 import java.text.NumberFormat;
 
 /**

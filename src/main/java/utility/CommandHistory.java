@@ -59,7 +59,7 @@ public class CommandHistory {
 	public void performCommand(Command cmd) {
 		int numCmds = commands.size();
 		boolean commandHistoryIsEmpty = (numCmds == 0);
-		boolean currCommandIsMostRecent = (numCmds == currCommandIdx - 1);
+		boolean currCommandIsMostRecent = (numCmds == currCommandIdx + 1);
 		
 		if (commandHistoryIsEmpty) {
 			cmd.perform();

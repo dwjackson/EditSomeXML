@@ -20,11 +20,12 @@
 
 package editor.controllers;
 
-import editor.views.CloneElementView;
-import xml.Element;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import xml.Element;
+import xml.commands.CloneElementCommand;
+import editor.views.CloneElementView;
 
 /**
  * the CloneElementController handles events from the CloneElementView
@@ -40,14 +41,19 @@ public class CloneElementController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Element origElem = view.getElement();
-        int numberOfClones = view.getNumberOfClones();
+        int numClones = view.getNumberOfClones();
         if (origElem != null && !origElem.isRoot()) {
+        	Element parent = origElem.getParent();
+        	CloneElementCommand cmd;
+        	cmd = new CloneElementCommand(parent, origElem, numClones);
+        	parent.performCommand(cmd);
+        	/*
+        	Element parent = origElem.getParent();
             for (int i = 0; i < numberOfClones; i++) {
                 Element clonedElem = origElem.cloneWithoutChildren();
-                Element parent = origElem.getParent();
                 parent.addChild(clonedElem);
-                parent.notifyObservers(null);
             }
+            */
             view.dispose();
         }
     }
