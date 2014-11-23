@@ -31,15 +31,15 @@ import java.awt.event.ActionListener;
  */
 public class DeleteElementController implements ActionListener {
     private DeleteElementView view;
-    private Element parent;
 
-    public DeleteElementController(DeleteElementView view, Element parent) {
+    public DeleteElementController(DeleteElementView view) {
         this.view = view;
-        this.parent = parent;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        Element elem = view.getElement();
+        Element parent = elem.getParent();
         parent.deleteSubelements();
         view.dispose();
     }
