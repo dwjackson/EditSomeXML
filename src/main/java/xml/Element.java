@@ -542,11 +542,7 @@ public class Element extends GenericObservable implements
      */
     public void deleteSubelements() {
         if (getNumberOfChildren() > 0) {
-            for (int i = 0; i < children.size(); i++) {
-                Element child = children.get(i);
-                child.deleteSubelements();
-                deleteChild(child);
-            }
+            children.clear();
         }
     }
 
