@@ -437,6 +437,9 @@ public class Element extends GenericObservable implements
     public void addChildAtIndex(Element child, int index) {
     	if (index >= 0 && index <= children.size()) {
     		children.add(index, child);
+    		ElementEvent.EventType eventType;
+            eventType = ElementEvent.EventType.ADD_CHILD;
+            notifyObservers(new ElementEvent(eventType, this));
     	}
     }
 
