@@ -28,6 +28,8 @@ public class ElementEvent {
     public enum EventType {
         NONE, ADD_CHILD, REMOVE_CHILD, DATA_CHANGE, NEW_ROOT
     }
+    
+    private static final int NULL_INDEX = -1;
 
     private EventType eventType;
     private Element parent;
@@ -35,9 +37,7 @@ public class ElementEvent {
     int childIndex;
 
     public ElementEvent(EventType eventType, Element parent) {
-        this.eventType = eventType;
-        this.parent = parent;
-        this.child = null;
+        this(eventType, parent, null, NULL_INDEX);
     }
     
     public ElementEvent(EventType eventType, Element parent, Element child,

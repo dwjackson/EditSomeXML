@@ -225,6 +225,8 @@ public class Element extends GenericObservable implements
      * @return the youngest child or null if none
      */
     public Element getYoungestChild() {
+        // TODO: Fix this, the youngest is not guaranteed to be at the end of
+        // the list of children
         Element child = null;
         int idx = children.size() - 1;
         if (idx >= 0) {
@@ -418,9 +420,10 @@ public class Element extends GenericObservable implements
     public void addChild(Element child) {
         child.setParent(this);
         children.add(child);
+        int idx = getIndexOfChild(child);
         ElementEvent.EventType eventType;
         eventType = ElementEvent.EventType.ADD_CHILD;
-        notifyObservers(new ElementEvent(eventType, this));
+        notifyObservers(new ElementEvent(eventType, this, child, idx));
     }
     
     /**
@@ -440,7 +443,7 @@ public class Element extends GenericObservable implements
     		children.add(index, child);
     		ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.ADD_CHILD;
-            notifyObservers(new ElementEvent(eventType, this));
+            notifyObservers(new ElementEvent(eventType, this, child, index));
     	}
     }
 

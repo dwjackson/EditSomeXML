@@ -135,23 +135,18 @@ public class ElementTreeModel implements TreeModel {
     public void elementChanged(Element elem, ElementEvent elementEvent) {
     	switch (elementEvent.getEventType()) {
     	case DATA_CHANGE:
-    		System.out.println("[DEBUG] elementChanged(): Data change");
     		fireTreeNodesChanged(elem);
     		break;
     	case ADD_CHILD:
-    		System.out.println("[DEBUG] elementChanged(): Child added");
-    		fireTreeNodesInserted(elem);
+    		fireTreeNodesInserted(elem, elementEvent.getChild());
     		break;
         case REMOVE_CHILD:
-    		System.out.println("[DEBUG] elementChanged(): Child removed");
     		fireTreeNodesRemoved(elem, elementEvent.getChild(), elementEvent.getChildIndex());
     		break;
     	case NEW_ROOT:
-    		System.out.println("[DEBUG] elementChanged(): New root");
     		fireTreeStructureChanged(elem);
     		break;
     	default:
-    		System.out.println("[DEBUG] elementChanged(): Undefined change");
     		Logger.getInstance().write("Invalid event type");
     		fireTreeStructureChanged(elem);
     	}
@@ -164,8 +159,7 @@ public class ElementTreeModel implements TreeModel {
         }
     }
     
-    public void fireTreeNodesInserted(Element elem) {
-    	Element child = elem.getYoungestChild();
+    public void fireTreeNodesInserted(Element elem, Element child) {
     	Object[] path = (Object[]) elem.getAncestry();
     	int childIndex = elem.getIndexOfChild(child);
     	int[] childIndices = {childIndex};
