@@ -27,17 +27,22 @@ import xml.Element;
 
 import javax.swing.*;
 import javax.swing.text.Document;
+
+import java.awt.Component;
 import java.util.ArrayList;
 
 /**
  * The ElementEditorView is used to edit the currently-selected element.
  */
 public class ElementEditorView extends JPanel {
+    private JPanel tagPanel;
     private JTextField tagField;
     private AttributesPanelView attributesPanel;
+    private JPanel textPanel;
     private JTextArea elementTextArea;
     private Element elem;
     private ArrayList<ElementDocumentListener> documentListeners;
+    private JLabel mirrorLabel;
 
     /**
      * Create the ElementEditorView and leave all of its fields blank
@@ -49,7 +54,7 @@ public class ElementEditorView extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Tag
-        JPanel tagPanel = new JPanel();
+        tagPanel = new JPanel();
         tagPanel.add(new JLabel("Tag"));
         tagField = new JTextField("", 20);
         TagDocumentListener tagDocumentListener;
@@ -64,7 +69,7 @@ public class ElementEditorView extends JPanel {
         add(attributesPanel);
 
         // Text
-        JPanel textPanel = new JPanel();
+        textPanel = new JPanel();
         textPanel.add(new JLabel("Text"));
         JScrollPane textAreaScrollPane = new JScrollPane();
         elementTextArea = new JTextArea();
@@ -78,6 +83,9 @@ public class ElementEditorView extends JPanel {
         Document doc = elementTextArea.getDocument();
         doc.addDocumentListener(textDocumentListener);
         add(textPanel);
+        
+        // Is this element mirroring another element? If so, can't edit it
+        mirrorLabel = new JLabel("Element is mirroring and is not editable");
 
         setVisible(true);
     }
@@ -95,6 +103,14 @@ public class ElementEditorView extends JPanel {
         }
         tagField.setText(elem.getTag());
         elementTextArea.setText(elem.getText());
+        
+        if (elem.isMirroring()) {
+            add(mirrorLabel);
+            mirrorLabel.setVisible(true);
+        } else {
+            enableAllFields();
+            mirrorLabel.setVisible(false);
+        }
     }
 
     /**
@@ -109,5 +125,46 @@ public class ElementEditorView extends JPanel {
         tagField.setText("");
         attributesPanel.resetAttributes();
         elementTextArea.setText("");
+        disableAllFields();
+    }
+    
+    /**
+     * Disable every field in the editor
+     */
+    public void disableAllFields() {
+        tagPanel.setEnabled(false);
+        for (Component child : tagPanel.getComponents()) {
+            child.setEnabled(false);
+        }
+        
+        attributesPanel.setEnabled(false);
+        for (Component child : attributesPanel.getComponents()) {
+            child.setEnabled(false);
+        }
+        
+        textPanel.setEnabled(false);
+        for (Component child : textPanel.getComponents()) {
+            child.setEnabled(false);
+        }
+    }
+    
+    /**
+     * Enable every field in the editor
+     */
+    public void enableAllFields() {
+        tagPanel.setEnabled(true);
+        for (Component child : tagPanel.getComponents()) {
+            child.setEnabled(true);
+        }
+        
+        attributesPanel.setEnabled(true);
+        for (Component child : attributesPanel.getComponents()) {
+            child.setEnabled(true);
+        }
+        
+        textPanel.setEnabled(true);
+        for (Component child : textPanel.getComponents()) {
+            child.setEnabled(true);
+        }
     }
 }

@@ -556,7 +556,7 @@ public class Element extends GenericObservable implements
      * mirroring element to change its own data.
      */
     protected void updateFromMirror() {
-        tag = mirroredElement.getTag();
+        setTag(mirroredElement.getTag());
 
         int numOfAtts = getNumberOfAttributes();
         int numMirroredAtts = mirroredElement.getNumberOfAttributes();
@@ -773,5 +773,16 @@ public class Element extends GenericObservable implements
 			return parent.canRedo();
 		}
 		return commandHistory.canRedo();
-	}   
+	}
+	
+	/**
+	 * Determine if this element is mirroring another element
+	 * @return true if this element is mirroring another element
+	 */
+	public boolean isMirroring() {
+	    if (mirroredElement != null) {
+	        return true;
+	    }
+	    return false;
+	}
 }
