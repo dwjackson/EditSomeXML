@@ -47,13 +47,6 @@ public class CloneElementController implements ActionListener {
         	CloneElementCommand cmd;
         	cmd = new CloneElementCommand(parent, origElem, numClones);
         	parent.performCommand(cmd);
-        	/*
-        	Element parent = origElem.getParent();
-            for (int i = 0; i < numberOfClones; i++) {
-                Element clonedElem = origElem.cloneWithoutChildren();
-                parent.addChild(clonedElem);
-            }
-            */
             view.dispose();
         }
     }
