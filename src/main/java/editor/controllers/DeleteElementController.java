@@ -20,11 +20,12 @@
 
 package editor.controllers;
 
-import editor.views.DeleteElementView;
-import xml.Element;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import xml.Element;
+import xml.commands.DeleteChildCommand;
+import editor.views.DeleteElementView;
 
 /**
  * This controller is used in the deletion of elements
@@ -38,9 +39,11 @@ public class DeleteElementController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        Element elem = view.getElement();
-        Element parent = elem.getParent();
-        parent.deleteSubelements();
+        Element childToDelete = view.getElement();
+        Element parent = childToDelete.getParent();
+        DeleteChildCommand cmd;
+        cmd = new DeleteChildCommand(parent, childToDelete);
+        parent.performCommand(cmd);
         view.dispose();
     }
 }
