@@ -20,11 +20,12 @@
 
 package editor.controllers;
 
-import editor.views.MirrorElementView;
-import xml.Element;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import xml.Element;
+import xml.commands.MirrorElementCommand;
+import editor.views.MirrorElementView;
 
 /**
  * This controller is used when the user wants to mirror an element
@@ -39,13 +40,10 @@ public class MirrorElementController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Element mirroredElement = view.getMirroredElement();
-        System.out.println("[DEBUG] mirroredElement = " + mirroredElement);
         if (mirroredElement != null && mirroredElement != view.getRoot()) {
-            Element parent = mirroredElement.getParent();
-            System.out.println("[DEBUG] parent = " + parent);
-            Element mirrorElement = new Element();
-            mirrorElement.mirrorElement(mirroredElement);
-            parent.addChild(mirrorElement);
+            MirrorElementCommand cmd;
+            cmd = new MirrorElementCommand(mirroredElement);
+            mirroredElement.performCommand(cmd);
 
             view.dispose();
         }
