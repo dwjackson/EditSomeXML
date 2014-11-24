@@ -42,29 +42,6 @@ public class RepresentationController implements ActionListener {
 	            view.getRepresentationType(), view.getAttributeName(),
 	            view.setForAll());
 	    elem.performCommand(cmd);
-	    /* TODO: Delete this
-		Element elem;
-		boolean setForAll = false;
-		
-		if (!view.setForAll()) {
-			elem = view.getElement();
-		} else {
-			elem = view.getElement().getRoot();
-			setForAll = true;
-		}
-		
-		switch(view.getRepresentationType()) {
-		case TAG:
-			elem.setRepresentationToTag(setForAll);
-			break;
-		case ATTRIBUTE_VALUE:
-			String attName = view.getAttributeName();
-			elem.setRepresentationToAttributeValue(attName, setForAll);
-			break;
-		default:
-			// Do nothing
-		}
-		*/
 		
 		view.dispose();
 	}
