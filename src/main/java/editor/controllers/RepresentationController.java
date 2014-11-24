@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import xml.Element;
+import xml.commands.ChangeRepresentationCommand;
 import editor.views.RepresentationView;
 
 public class RepresentationController implements ActionListener {
@@ -35,6 +36,13 @@ public class RepresentationController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+	    Element elem = view.getElement();
+	    ChangeRepresentationCommand cmd;
+	    cmd = new ChangeRepresentationCommand(elem,
+	            view.getRepresentationType(), view.getAttributeName(),
+	            view.setForAll());
+	    elem.performCommand(cmd);
+	    /* TODO: Delete this
 		Element elem;
 		boolean setForAll = false;
 		
@@ -56,6 +64,7 @@ public class RepresentationController implements ActionListener {
 		default:
 			// Do nothing
 		}
+		*/
 		
 		view.dispose();
 	}
