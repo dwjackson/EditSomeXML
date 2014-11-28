@@ -36,7 +36,7 @@ public class ElementJSONSerializer implements ElementSerializer {
         sb.append(String.format(TAG_FMT, root.getTag()));
         
         if (root.getNumberOfAttributes() > 0) {
-            sb.append(" \"attributes\": [");
+            sb.append(", \"attributes\": [");
             String attName, attVal;
             for (int i = 0; i < root.getNumberOfAttributes(); i++) {
                 attName = root.getAttributeName(i);
@@ -45,6 +45,14 @@ public class ElementJSONSerializer implements ElementSerializer {
                 if (i + 1 < root.getNumberOfAttributes()) {
                     sb.append(", ");
                 }
+            }
+            sb.append("]");
+        }
+        
+        if (root.hasChildren()) {
+            sb.append(", \"children\": [");
+            for (Element child : root.children()) {
+                sb.append(serializeToString(child));
             }
             sb.append("]");
         }

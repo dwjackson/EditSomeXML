@@ -38,7 +38,12 @@ public class ElementJSONSerializerTest extends TestCase {
         root.setAttribute("att", "val");
         root.setAttribute("attribute", "value");
         jsonStr = serializer.serializeToString(root);
-        String correct = "{\"tag\": \"test\" \"attributes\": [{\"att\": \"val\"}, {\"attribute\": \"value\"}]}";
+        String correct = "{\"tag\": \"test\", \"attributes\": [{\"att\": \"val\"}, {\"attribute\": \"value\"}]}";
         assertEquals(ATTRIBUTES_FAIL, correct, jsonStr);
+        
+        root.newSubElement("child");
+        correct = "{\"tag\": \"test\", \"attributes\": [{\"att\": \"val\"}, {\"attribute\": \"value\"}], \"children\": [{\"tag\": \"child\"}]}";
+        jsonStr = serializer.serializeToString(root);
+        assertEquals("Child not serializing correctly", correct, jsonStr);
     }
 }
