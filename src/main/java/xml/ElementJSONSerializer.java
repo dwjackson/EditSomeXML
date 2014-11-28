@@ -1,0 +1,62 @@
+/*
+ * EditSomeXML is a graphical XML editor
+ * 
+ * Copyright (C) 2014  David Jackson
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+package xml;
+
+import com.google.gson.Gson;
+
+public class ElementJSONSerializer implements ElementSerializer {
+    private final String TAG_FMT = "\"tag\": \"%s\"";
+    private final String ATTRIBUTE_FMT = "{\"%s\": \"%s\"}";
+
+    @Override
+    public String serializeToString(Element root) {
+        if (root == null) {
+            return null;
+        }
+        
+        StringBuilder sb = new StringBuilder("{");
+        sb.append(String.format(TAG_FMT, root.getTag()));
+        
+        if (root.getNumberOfAttributes() > 0) {
+            sb.append(" \"attributes\": [");
+            String attName, attVal;
+            for (int i = 0; i < root.getNumberOfAttributes(); i++) {
+                attName = root.getAttributeName(i);
+                attVal = root.getAttribute(attName);
+                sb.append(String.format(ATTRIBUTE_FMT, attName, attVal));
+                if (i + 1 < root.getNumberOfAttributes()) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("]");
+        }
+        
+        sb.append("}");
+        return sb.toString();
+    }
+
+    @Override
+    public void serializeToFile(Element root, String fileName) {
+        // TODO Auto-generated method stub
+
+    }
+
+}

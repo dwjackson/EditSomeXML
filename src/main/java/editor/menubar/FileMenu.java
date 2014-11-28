@@ -39,6 +39,14 @@ public class FileMenu extends JMenu {
         newItem.addActionListener(new NewRootActionListener(data.getRoot()));
         add(newItem);
 
+        JMenuItem saveItem = new JMenuItem("Save");
+        saveItem.setEnabled(false); // TODO: Remove
+        // TODO: Add action listener
+        add(saveItem);
+        JMenuItem saveAsItem = new JMenuItem("Save As...");
+        // TODO: Add action listener
+        add(saveAsItem);
+        
         addSeparator();
 
         JMenuItem exportItem = new JMenuItem("Export...");
