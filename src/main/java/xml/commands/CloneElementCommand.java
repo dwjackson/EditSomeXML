@@ -24,10 +24,11 @@ import utility.Command;
 import xml.Element;
 
 public class CloneElementCommand implements Command {
-	Element parent;
-	Element clonedElement;
-	int numberOfClones;
-	Element[] clones;
+	private Element parent;
+	private Element clonedElement;
+	private int numberOfClones;
+	private Element[] clones;
+	private final String NAME = "Clone Element";
 	
 	public CloneElementCommand(Element parent, Element childToClone,
                                int numberOfClones) {
@@ -55,4 +56,7 @@ public class CloneElementCommand implements Command {
 		clones = null;
 	}
 
+	public String getName() {
+	    return NAME;
+	}
 }

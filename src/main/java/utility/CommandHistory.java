@@ -115,4 +115,26 @@ public class CommandHistory {
 	public boolean canRedo() {
 		return (currCommandIdx < commands.size() - 1);
 	}
+	
+	/**
+	 * Get the name of the current command that can be undone
+	 * @return the name of the undo-able command, null if can't undo
+	 */
+	public String getNameOfUndoCommand() {
+	    if (canUndo()) {
+	        return commands.get(currCommandIdx).getName();
+	    }
+	    return null;
+	}
+	
+	/**
+	 * Get the name of the current command that can be redone
+	 * @return the name of the redo-able command, null if can't redo
+	 */
+	public String getNameOfRedoCommand() {
+	    if (canRedo()) {
+	        return commands.get(currCommandIdx + 1).getName();
+	    }
+	    return null;
+	}
 }

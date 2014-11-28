@@ -35,4 +35,10 @@ public interface Command {
 	 * Undo the action represented by the command
 	 */
 	void undo();
+	
+	/**
+	 * Get the name of this command (can appear in undo lists)
+	 * @return the name of this command
+	 */
+	String getName();
 }

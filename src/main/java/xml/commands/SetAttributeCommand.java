@@ -27,6 +27,7 @@ public class SetAttributeCommand extends ElementCommand implements Command {
 	private String attName;
 	private String attVal;
 	private String oldVal;
+	private final String NAME = "Set Attribute";
 
 	public SetAttributeCommand(Element element, String key, String val) {
 		super(element);
@@ -50,4 +51,7 @@ public class SetAttributeCommand extends ElementCommand implements Command {
 		}
 	}
 
+	public String getName() {
+	    return NAME;
+	}
 }

@@ -26,6 +26,7 @@ import xml.Element;
 public class ChangeTextCommand extends ElementCommand implements Command {
 	private String text;
 	private String oldText;
+	private final String NAME = "Change Text";
 	
 	public ChangeTextCommand(Element element, String text) {
 		super(element);
@@ -43,4 +44,7 @@ public class ChangeTextCommand extends ElementCommand implements Command {
 		element.setText(oldText);
 	}
 
+	public String getName() {
+	    return NAME;
+	}
 }

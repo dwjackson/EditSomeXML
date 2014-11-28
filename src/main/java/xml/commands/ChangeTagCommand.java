@@ -26,6 +26,7 @@ import xml.Element;
 public class ChangeTagCommand extends ElementCommand implements Command {
 	private String tag;
 	private String oldTag;
+	private final String NAME = "Change Tag";
 	
 	public ChangeTagCommand(Element element, String tag) {
 		super(element);
@@ -43,4 +44,7 @@ public class ChangeTagCommand extends ElementCommand implements Command {
 		element.setTag(oldTag);
 	}
 
+	public String getName() {
+	    return NAME;
+	}
 }

@@ -27,6 +27,7 @@ public class MirrorElementCommand implements Command {
     private Element parent;
     private Element mirroredElement;
     private Element mirroringElement;
+    private final String NAME = "Mirror Element";
     
     public MirrorElementCommand(Element elementToMirror) {
         parent = elementToMirror.getParent();
@@ -47,4 +48,7 @@ public class MirrorElementCommand implements Command {
         mirroringElement = null;
     }
 
+    public String getName() {
+        return NAME;
+    }
 }

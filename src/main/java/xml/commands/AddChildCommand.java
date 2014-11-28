@@ -25,6 +25,7 @@ import xml.Element;
 
 public class AddChildCommand extends ElementCommand implements Command {
 	private Element child;
+	private final String NAME = "Add Child";
 	
 	public AddChildCommand(Element parent, Element child) {
 		super(parent);
@@ -41,4 +42,7 @@ public class AddChildCommand extends ElementCommand implements Command {
 		element.deleteChild(child);
 	}
 
+	public String getName() {
+	    return NAME;
+	}
 }

@@ -29,6 +29,7 @@ public class ChangeRepresentationCommand implements Command {
     private Element.RepresentationType representationType;
     private String attributeName;
     private boolean setForAll;
+    private final String NAME = "Change Representation";
 
     public ChangeRepresentationCommand(Element element,
             RepresentationType representationType, String attributeName,
@@ -78,4 +79,7 @@ public class ChangeRepresentationCommand implements Command {
         start.setRepresentationToTag(setForAll);
     }
 
+    public String getName() {
+        return NAME;
+    }
 }

@@ -26,7 +26,8 @@ import xml.Element;
 public class DeleteChildCommand implements Command {
 	private Element parent;
 	private Element child;
-	int childIndex;
+	private int childIndex;
+	private final String NAME = "Delete Child";
 	
 	public DeleteChildCommand(Element parent, Element child) {
 		this.parent = parent;
@@ -44,4 +45,7 @@ public class DeleteChildCommand implements Command {
 		parent.addChildAtIndex(child, childIndex);
 	}
 
+	public String getName() {
+	    return NAME;
+	}
 }
