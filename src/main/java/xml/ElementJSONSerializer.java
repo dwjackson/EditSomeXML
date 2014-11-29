@@ -20,6 +20,10 @@
 
 package xml;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import utility.GUIDCreator;
 
 public class ElementJSONSerializer implements ElementSerializer {
@@ -80,7 +84,14 @@ public class ElementJSONSerializer implements ElementSerializer {
 
     @Override
     public void serializeToFile(Element root, String fileName) {
-        // TODO Auto-generated method stub
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            writer.write(serializeToString(root));
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -20,31 +20,39 @@
 
 package editor.menubar;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import xml.Element;
 import editor.ElementTreeData;
 import editor.menubar.actionlisteners.ExportActionListener;
 import editor.menubar.actionlisteners.ImportActionListener;
 import editor.menubar.actionlisteners.NewRootActionListener;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import editor.menubar.actionlisteners.SaveActionListener;
+import editor.menubar.actionlisteners.SaveAsActionListener;
 
 /**
  * This is the "File" menu of the menu bar
  */
 public class FileMenu extends JMenu {
     public FileMenu(final JFrame frame, ElementTreeData data) {
+        Element root = data.getRoot();
+        
         setText("File");
         JMenuItem newItem = new JMenuItem("New...");
-        newItem.addActionListener(new NewRootActionListener(data.getRoot()));
+        newItem.addActionListener(new NewRootActionListener(root));
         add(newItem);
 
         JMenuItem saveItem = new JMenuItem("Save");
-        saveItem.setEnabled(false); // TODO: Remove
-        // TODO: Add action listener
+        saveItem.setEnabled(false);
+        saveItem.addActionListener(new SaveActionListener());
         add(saveItem);
         JMenuItem saveAsItem = new JMenuItem("Save As...");
-        // TODO: Add action listener
+        saveAsItem.addActionListener(new SaveAsActionListener(root));
         add(saveAsItem);
         
         addSeparator();
