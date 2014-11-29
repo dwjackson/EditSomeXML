@@ -33,7 +33,7 @@ import editor.menubar.actionlisteners.ExportActionListener;
 import editor.menubar.actionlisteners.ImportActionListener;
 import editor.menubar.actionlisteners.NewRootActionListener;
 import editor.menubar.actionlisteners.SaveActionListener;
-import editor.menubar.actionlisteners.SaveAsActionListener;
+import editor.menubar.actionlisteners.SaveActionListener;
 
 /**
  * This is the "File" menu of the menu bar
@@ -47,12 +47,14 @@ public class FileMenu extends JMenu {
         newItem.addActionListener(new NewRootActionListener(root));
         add(newItem);
 
+        SaveActionListener saveListener = new SaveActionListener(data);
         JMenuItem saveItem = new JMenuItem("Save");
-        saveItem.setEnabled(false);
-        saveItem.addActionListener(new SaveActionListener());
+        saveItem.setActionCommand("SAVE");
+        saveItem.addActionListener(saveListener);
         add(saveItem);
         JMenuItem saveAsItem = new JMenuItem("Save As...");
-        saveAsItem.addActionListener(new SaveAsActionListener(root));
+        saveAsItem.setActionCommand("SAVE_AS");
+        saveAsItem.addActionListener(saveListener);
         add(saveAsItem);
         
         addSeparator();
