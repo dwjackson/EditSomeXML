@@ -26,6 +26,7 @@ import java.util.Collection;
 import utility.Command;
 import utility.CommandHistory;
 import utility.Commandable;
+import utility.GUIDValue;
 import utility.GenericObservable;
 import utility.Observable;
 import utility.Observer;
@@ -58,6 +59,7 @@ public class Element extends GenericObservable implements
     private String representationAttribute;
     private CommandHistory commandHistory;
     private Element youngestChild;
+    private GUIDValue guid;
 
     /**
      * Initialize an Element with no data in it. This element is invalid until
@@ -76,6 +78,7 @@ public class Element extends GenericObservable implements
         representationAttribute = null;
         commandHistory = new CommandHistory();
         youngestChild = null;
+        guid = null;
     }
 
     /**
@@ -784,5 +787,32 @@ public class Element extends GenericObservable implements
 	        return true;
 	    }
 	    return false;
+	}
+	
+	/**
+	 * Get the element that this element is mirroring
+	 * @return the mirrored elemennt or null if none
+	 */
+	public Element getMirroredElement() {
+	    return mirroredElement;
+	}
+	
+	/**
+	 * Set this element's globally unique identifier
+	 * @param guidVal the identifier's value
+	 */
+	public void setGUID(GUIDValue guidVal) {
+	    guid = guidVal;
+	}
+	
+	/**
+	 * Get this element's GUID in string format
+	 * @return this element's GUID as a string
+	 */
+	public String getGUID() {
+	    if (guid != null) {
+	        return guid.getStringValue();
+	    }
+	    return null;
 	}
 }

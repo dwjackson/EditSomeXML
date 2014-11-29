@@ -20,11 +20,17 @@
 
 package xml;
 
-import com.google.gson.Gson;
+import utility.GUIDCreator;
 
 public class ElementJSONSerializer implements ElementSerializer {
     private final String TAG_FMT = "\"tag\": \"%s\"";
     private final String ATTRIBUTE_FMT = "{\"%s\": \"%s\"}";
+    
+    private GUIDCreator guidCreator;
+    
+    public ElementJSONSerializer() {
+        guidCreator = new GUIDCreator();
+    }
 
     @Override
     public String serializeToString(Element root) {
@@ -32,29 +38,40 @@ public class ElementJSONSerializer implements ElementSerializer {
             return null;
         }
         
-        StringBuilder sb = new StringBuilder("{");
-        sb.append(String.format(TAG_FMT, root.getTag()));
-        
-        if (root.getNumberOfAttributes() > 0) {
-            sb.append(", \"attributes\": [");
-            String attName, attVal;
-            for (int i = 0; i < root.getNumberOfAttributes(); i++) {
-                attName = root.getAttributeName(i);
-                attVal = root.getAttribute(attName);
-                sb.append(String.format(ATTRIBUTE_FMT, attName, attVal));
-                if (i + 1 < root.getNumberOfAttributes()) {
-                    sb.append(", ");
-                }
-            }
-            sb.append("]");
+        if (root.getGUID() == null) {
+            root.setGUID(guidCreator.getNewGUID());
         }
         
-        if (root.hasChildren()) {
-            sb.append(", \"children\": [");
-            for (Element child : root.children()) {
-                sb.append(serializeToString(child));
+        StringBuilder sb = new StringBuilder("{");
+        
+        if (!root.isMirroring()) {
+            sb.append(String.format(TAG_FMT, root.getTag()));
+            
+            if (root.getNumberOfAttributes() > 0) {
+                sb.append(", \"attributes\": [");
+                String attName, attVal;
+                for (int i = 0; i < root.getNumberOfAttributes(); i++) {
+                    attName = root.getAttributeName(i);
+                    attVal = root.getAttribute(attName);
+                    sb.append(String.format(ATTRIBUTE_FMT, attName, attVal));
+                    if (i + 1 < root.getNumberOfAttributes()) {
+                        sb.append(", ");
+                    }
+                }
+                sb.append("]");
             }
-            sb.append("]");
+            
+            if (root.hasChildren()) {
+                sb.append(", \"children\": [");
+                for (Element child : root.children()) {
+                    sb.append(serializeToString(child));
+                }
+                sb.append("]");
+            }
+        } else {
+            Element mirroredElem = root.getMirroredElement();
+            String guid = mirroredElem.getGUID();
+            sb.append(String.format("\"mirroring\": \"%s\"", guid));
         }
         
         sb.append("}");
