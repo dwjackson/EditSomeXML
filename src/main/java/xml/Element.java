@@ -815,4 +815,26 @@ public class Element extends GenericObservable implements
 	    }
 	    return null;
 	}
+	
+	/**
+	 * Find an element in the tree by its GUID value and return that element
+	 * if it is found
+	 * @param guidVal The GUID value of the element
+	 * @return The element identified by the GUID, null if not found
+	 */
+	public Element getElementByGUID(GUIDValue guidVal) {
+	    if (guidVal == null) {
+	        return null;
+	    }
+	    
+	    Element elem = null;
+        if (guid.equals(guidVal)) {
+            elem = this;
+        } else {
+            for (Element child : children) {
+                elem = child.getElementByGUID(guidVal);
+            }
+        }
+	    return elem;
+	}
 }
