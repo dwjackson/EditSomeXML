@@ -33,9 +33,6 @@ public class OpenActionListener implements ActionListener {
         root = deserializer.deserializeFromFile(fileName);
         
         data.setRoot(root);
-        // TODO: Move the following two lines into the data.setRoot() method
-        ElementEvent.EventType eventType = ElementEvent.EventType.NEW_ROOT;
-        data.notifyObservers(new ElementEvent(eventType, root));
     }
 
 }

@@ -50,7 +50,5 @@ public class ImportActionListener implements ActionListener {
         ElementXMLDeserializer deserializer = new ElementXMLDeserializer();
         Element elem = deserializer.deserializeFromFile(fileName);
         data.setRoot(elem);
-        ElementEvent.EventType eventType = ElementEvent.EventType.NEW_ROOT;
-        data.notifyObservers(new ElementEvent(eventType, elem));
     }
 }

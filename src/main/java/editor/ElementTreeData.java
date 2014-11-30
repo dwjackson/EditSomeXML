@@ -23,6 +23,7 @@ package editor;
 import utility.Observable;
 import utility.Observer;
 import xml.Element;
+import xml.ElementEvent;
 
 import java.util.ArrayList;
 
@@ -70,6 +71,10 @@ public class ElementTreeData implements Observable {
         for (Observer observer : observers) {
             root.registerObserver(observer);
         }
+        
+        ElementEvent.EventType eventType = ElementEvent.EventType.NEW_ROOT;
+        notifyObservers(new ElementEvent(eventType, root));
+        
         return root;
     }
 
