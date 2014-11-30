@@ -7,7 +7,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import xml.Element;
-import xml.ElementEvent;
 import xml.ElementJSONDeserializer;
 import editor.ElementTreeData;
 
