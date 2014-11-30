@@ -267,19 +267,6 @@ public class Element extends GenericObservable implements
     }
 
     /**
-     * Get the index of a known child
-     * @param elem The child element to look for
-     * @return the index of the child if it's found, -1 if not
-     */
-    public int getChildIndex(Element elem) {
-        int index = -1;
-        if (children.contains(elem)) {
-            index = children.indexOf(elem);
-        }
-        return index;
-    }
-
-    /**
      * Get this Element's parent element, if it exists
      * @return This Element's parent or null if it doesn't have one
      */
