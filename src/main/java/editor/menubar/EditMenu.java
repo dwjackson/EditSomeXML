@@ -20,6 +20,14 @@
 
 package editor.menubar;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import xml.Element;
+import editor.menubar.actionlisteners.MoveUpDownActionListener;
 import editor.menubar.actionlisteners.NewElementActionListener;
 import editor.menubar.actionlisteners.RedoActionListener;
 import editor.menubar.actionlisteners.UndoActionListener;
@@ -27,11 +35,6 @@ import editor.views.CloneElementView;
 import editor.views.DeleteElementView;
 import editor.views.ElementTreeView;
 import editor.views.MirrorElementView;
-import xml.Element;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * This is the "Edit" menu of the menu bar
@@ -83,5 +86,20 @@ public class EditMenu extends JMenu {
             }
         });
         add(deleteItem);
+        
+        addSeparator();
+        
+        MoveUpDownActionListener moveUpDownListener;
+        moveUpDownListener = new MoveUpDownActionListener(elementTreeView);
+        
+        JMenuItem moveUpItem = new JMenuItem("Move Up");
+        moveUpItem.setActionCommand("MOVE_UP");
+        moveUpItem.addActionListener(moveUpDownListener);
+        add(moveUpItem);
+        
+        JMenuItem moveDownItem = new JMenuItem("Move Down");
+        moveDownItem.setActionCommand("MOVE_DOWN");
+        moveDownItem.addActionListener(moveUpDownListener);
+        add(moveDownItem);
     }
 }

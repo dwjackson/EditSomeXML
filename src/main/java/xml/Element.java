@@ -835,8 +835,19 @@ public class Element extends GenericObservable implements
 	            && newIndex < getNumberOfChildren()
 	            && children.contains(child)) {
 	        int currIndex = getIndexOfChild(child);
+	        
+	        ElementEvent.EventType eventType;
+	        ElementEvent ev;
+	        
 	        children.remove(currIndex);
+	        eventType = ElementEvent.EventType.REMOVE_CHILD;
+	        ev = new ElementEvent(eventType, this, child, currIndex);
+	        notifyObservers(ev);
+	        
 	        children.add(newIndex, child);
+	        eventType = ElementEvent.EventType.ADD_CHILD;
+	        ev = new ElementEvent(eventType, this, child, newIndex);
+	        notifyObservers(ev);
 	    }
 	}
 }
