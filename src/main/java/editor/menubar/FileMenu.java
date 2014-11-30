@@ -32,7 +32,7 @@ import editor.ElementTreeData;
 import editor.menubar.actionlisteners.ExportActionListener;
 import editor.menubar.actionlisteners.ImportActionListener;
 import editor.menubar.actionlisteners.NewRootActionListener;
-import editor.menubar.actionlisteners.SaveActionListener;
+import editor.menubar.actionlisteners.OpenActionListener;
 import editor.menubar.actionlisteners.SaveActionListener;
 
 /**
@@ -43,9 +43,14 @@ public class FileMenu extends JMenu {
         Element root = data.getRoot();
         
         setText("File");
+        
         JMenuItem newItem = new JMenuItem("New...");
         newItem.addActionListener(new NewRootActionListener(root));
         add(newItem);
+        
+        JMenuItem openItem = new JMenuItem("Open...");
+        openItem.addActionListener(new OpenActionListener(data));
+        add(openItem);
 
         SaveActionListener saveListener = new SaveActionListener(data);
         JMenuItem saveItem = new JMenuItem("Save");

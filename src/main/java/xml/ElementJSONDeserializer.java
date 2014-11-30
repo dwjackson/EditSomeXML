@@ -20,7 +20,7 @@ public class ElementJSONDeserializer {
             root = elem;
         }
         
-        if (obj.get("mirroring") != null) {
+        if (obj.get("mirroring") == null) {
             elem.setTag((String) obj.get("tag"));
             
             JSONArray attsArray = (JSONArray) obj.get("attributes");
