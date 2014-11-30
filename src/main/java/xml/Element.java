@@ -837,4 +837,19 @@ public class Element extends GenericObservable implements
         }
 	    return elem;
 	}
+	
+	/**
+	 * Move a child to a different index, if possible.
+	 * @param child The child to move
+	 * @param newIndex The index to which to move the child
+	 */
+	public void moveChild(Element child, int newIndex) {
+	    if (child != null && newIndex >= 0
+	            && newIndex < getNumberOfChildren()
+	            && children.contains(child)) {
+	        int currIndex = getIndexOfChild(child);
+	        children.remove(currIndex);
+	        children.add(newIndex, child);
+	    }
+	}
 }
