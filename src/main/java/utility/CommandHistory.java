@@ -65,16 +65,25 @@ public class CommandHistory {
 			cmd.perform();
 			commands.add(cmd);
 			currCommandIdx = 0;
-		} else if (currCommandIsMostRecent) {
-			cmd.perform();
-			commands.add(cmd);
-			currCommandIdx = commands.indexOf(cmd);
 		} else {
-			deleteHistoryToEndFromCurrent();
-			assert(commands.size() == currCommandIdx + 1);
-			cmd.perform();
-			commands.add(cmd);
-			currCommandIdx++;
+			Command mostRecentCommand = commands.get(currCommandIdx);
+			if (cmd.canCombine(mostRecentCommand)) {
+				Command combinedCommand = mostRecentCommand.combine(cmd);
+				undo();
+				combinedCommand.perform();
+				commands.add(combinedCommand);
+				currCommandIdx = commands.indexOf(combinedCommand);
+			} else if (currCommandIsMostRecent) {
+				cmd.perform();
+				commands.add(cmd);
+				currCommandIdx = commands.indexOf(cmd);
+			} else {
+				deleteHistoryToEndFromCurrent();
+				assert (commands.size() == currCommandIdx + 1);
+				cmd.perform();
+				commands.add(cmd);
+				currCommandIdx++;
+			}
 		}
 	}
 	
