@@ -29,8 +29,12 @@ public class ChangeTextCommand extends ElementCommand implements Command {
 	private final String NAME = "Change Text";
 	
 	public ChangeTextCommand(Element element, String text) {
+		this(element, text, new String(element.getText()));
+	}
+
+	public ChangeTextCommand(Element element, String text, String oldText) {
 		super(element);
-		oldText = new String(element.getText());
+		this.oldText = oldText;
 		this.text = text;
 	}
 	
@@ -46,5 +50,33 @@ public class ChangeTextCommand extends ElementCommand implements Command {
 
 	public String getName() {
 	    return NAME;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public String getOldText() {
+		return oldText;
+	}
+
+	@Override
+	public boolean canCombine() {
+		return true;
+	}
+
+	@Override
+	public Command combine(Command cmd) {
+		if (cmd.getClass() != getClass()) {
+			return null;
+		}
+
+		ChangeTextCommand chainCommand = (ChangeTextCommand) cmd;
+		String combinedText = text + chainCommand.getText();
+
+		ChangeTextCommand combinedCommand;
+		combinedCommand = new ChangeTextCommand(element, text, oldText);
+
+		return combinedCommand;
 	}
 }

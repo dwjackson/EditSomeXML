@@ -29,9 +29,13 @@ public class ChangeTagCommand extends ElementCommand implements Command {
 	private final String NAME = "Change Tag";
 	
 	public ChangeTagCommand(Element element, String tag) {
+		this(element, tag, new String(element.getTag()));
+	}
+
+	public ChangeTagCommand(Element element, String tag, String oldTag) {
 		super(element);
 		this.tag = tag;
-		oldTag = new String(element.getTag());
+		this.oldTag = oldTag;
 	}
 
 	@Override
@@ -46,5 +50,33 @@ public class ChangeTagCommand extends ElementCommand implements Command {
 
 	public String getName() {
 	    return NAME;
+	}
+
+	public String getOldTag() {
+		return oldTag;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	@Override
+	public boolean canCombine() {
+		return true;
+	}
+
+	@Override
+	public Command combine(Command cmd) {
+		if (cmd.getClass() != getClass()) {
+			return null;
+		}
+
+		ChangeTagCommand chainCommand = (ChangeTagCommand) cmd;
+		String combinedTag = tag + chainCommand.getTag();
+
+		ChangeTagCommand combinedCommand;
+		combinedCommand = new ChangeTagCommand(element, combinedTag, oldTag);
+
+		return combinedCommand;
 	}
 }

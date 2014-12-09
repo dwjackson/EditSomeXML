@@ -45,4 +45,14 @@ public class AddChildCommand extends ElementCommand implements Command {
 	public String getName() {
 	    return NAME;
 	}
+
+	@Override
+	public boolean canCombine() {
+		return false;
+	}
+
+	@Override
+	public Command combine(Command cmd) {
+		return null;
+	}
 }

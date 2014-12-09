@@ -41,4 +41,22 @@ public interface Command {
 	 * @return the name of this command
 	 */
 	String getName();
+
+	/**
+	 * Determine if commands of this class can be combined into a single
+	 * command
+	 * @return true if this command can be combined with other commands of the
+	 *         same class
+	 */
+	boolean canCombine();
+
+	/**
+	 * Combine this command with another command of the same class. The object
+	 * that calls this method should be the first one in the chronological
+	 * sequence of commands.
+	 *
+	 * @param cmd The command with which to combine this command
+	 * @return the combined command or null if the combination is impossible
+	 */
+	Command combine(Command cmd);
 }

@@ -54,4 +54,16 @@ public class SetAttributeCommand extends ElementCommand implements Command {
 	public String getName() {
 	    return NAME;
 	}
+
+	@Override
+	public boolean canCombine() {
+		// TODO
+		return false;
+	}
+
+	@Override
+	public Command combine(Command cmd) {
+		// TODO
+		return null;
+	}
 }
