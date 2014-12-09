@@ -30,11 +30,16 @@ public class SetAttributeCommand extends ElementCommand implements Command {
 	private final String NAME = "Set Attribute";
 
 	public SetAttributeCommand(Element element, String key, String val) {
+		this(element, key, val, element.getAttribute(key));
+	}
+
+	public SetAttributeCommand(Element element, String key, String val,
+							   String oldVal) {
 		super(element);
 		attName = key;
 		attVal = val;
-		
-		oldVal = element.getAttribute(key);
+
+		this.oldVal = oldVal;
 	}
 	
 	@Override
@@ -55,15 +60,46 @@ public class SetAttributeCommand extends ElementCommand implements Command {
 	    return NAME;
 	}
 
+	public String getAttributeName() {
+		return attName;
+	}
+
+	public String getAttributeValue() {
+		return attVal;
+	}
+
+	public String getOldAttributeValue() {
+		return oldVal;
+	}
+
 	@Override
 	public boolean canCombine(Command cmd) {
-		// TODO
-		return false;
+		if (cmd.getClass() != getClass()) {
+			return false;
+		}
+
+		SetAttributeCommand setAttributeCommand = (SetAttributeCommand) cmd;
+		boolean attributeMatch;
+		attributeMatch = setAttributeCommand.getAttributeName() == attName;
+		return attributeMatch;
 	}
 
 	@Override
 	public Command combine(Command cmd) {
-		// TODO
-		return null;
+		if (cmd.getClass() != getClass()) {
+			return null;
+		}
+
+		SetAttributeCommand chainCommand = (SetAttributeCommand) cmd;
+		if (chainCommand.getAttributeName() != attName) {
+			return null;
+		}
+
+		String combinedValue = attVal + chainCommand.getAttributeValue();
+
+		SetAttributeCommand combinedCommand;
+		combinedCommand = new SetAttributeCommand(element, attName, combinedValue, oldVal);
+
+		return combinedCommand;
 	}
 }
