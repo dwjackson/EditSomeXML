@@ -50,7 +50,7 @@ public class DeleteChildCommand implements Command {
 	}
 
 	@Override
-	public boolean canCombine() {
+	public boolean canCombine(Command cmd) {
 		return false;
 	}
 

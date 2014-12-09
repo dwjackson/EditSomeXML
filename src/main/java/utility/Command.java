@@ -44,11 +44,13 @@ public interface Command {
 
 	/**
 	 * Determine if commands of this class can be combined into a single
-	 * command
+	 * command with another command
+	 * @param cmd The command to check against to determine if this command
+	 *            can be combined
 	 * @return true if this command can be combined with other commands of the
 	 *         same class
 	 */
-	boolean canCombine();
+	boolean canCombine(Command cmd);
 
 	/**
 	 * Combine this command with another command of the same class. The object

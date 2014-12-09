@@ -61,8 +61,8 @@ public class ChangeTagCommand extends ElementCommand implements Command {
 	}
 
 	@Override
-	public boolean canCombine() {
-		return true;
+	public boolean canCombine(Command cmd) {
+		return (cmd.getClass() == getClass());
 	}
 
 	@Override
