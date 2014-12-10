@@ -79,7 +79,7 @@ public class ChangeTextCommand extends ElementCommand implements Command {
 		}
 
 		ChangeTextCommand chainCommand = (ChangeTextCommand) cmd;
-		String combinedText = text + chainCommand.getText();
+		String combinedText = chainCommand.getText();
 
 		ChangeTextCommand combinedCommand;
 		combinedCommand = new ChangeTextCommand(element, text, oldText);
