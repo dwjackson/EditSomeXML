@@ -55,7 +55,6 @@ public class ElementEvent {
     /**
      * Get the element associated with this event
      * @return the element associated with this event
-     * @deprecated Use getParent() instead
      */
     public Element getElement() {
     	return parent;
