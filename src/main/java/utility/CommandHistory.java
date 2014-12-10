@@ -45,9 +45,9 @@ public class CommandHistory {
 	 * Delete the history of commands from the current command to the end, but
 	 * not deleting the current command itself
 	 */
-	private void deleteHistoryToEndFromCurrent() {
+	private void deleteHistoryToEndFromNext() {
 		int numCommands = commands.size();
-		for (int i = currCommandIdx; i < numCommands; i++) {
+		for (int i = currCommandIdx + 1; i < numCommands; i++) {
 			commands.remove(i);
 		}
 	}
@@ -68,6 +68,9 @@ public class CommandHistory {
 		} else {
 			Command mostRecentCommand = commands.get(currCommandIdx);
 			if (cmd.canCombine(mostRecentCommand)) {
+				if (!currCommandIsMostRecent) {
+					deleteHistoryToEndFromNext();
+				}
 				Command combinedCommand = mostRecentCommand.combine(cmd);
 				undo();
 				combinedCommand.perform();
@@ -78,7 +81,7 @@ public class CommandHistory {
 				commands.add(cmd);
 				currCommandIdx = commands.indexOf(cmd);
 			} else {
-				deleteHistoryToEndFromCurrent();
+				deleteHistoryToEndFromNext();
 				assert (commands.size() == currCommandIdx + 1);
 				cmd.perform();
 				commands.add(cmd);
