@@ -60,9 +60,16 @@ public class ChangeTagCommand extends ElementCommand implements Command {
 		return tag;
 	}
 
+	public Element getElement() {
+		return element;
+	}
+
 	@Override
 	public boolean canCombine(Command cmd) {
-		return (cmd.getClass() == getClass());
+		if (cmd.getClass() != getClass()) {
+			return false;
+		}
+		return (((ChangeTagCommand)cmd).getElement() == element);
 	}
 
 	@Override

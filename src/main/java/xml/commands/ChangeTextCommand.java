@@ -60,9 +60,16 @@ public class ChangeTextCommand extends ElementCommand implements Command {
 		return oldText;
 	}
 
+	public Element getElement() {
+		return element;
+	}
+
 	@Override
 	public boolean canCombine(Command cmd) {
-		return (cmd.getClass() == getClass());
+		if (cmd.getClass() != getClass()) {
+			return false;
+		}
+		return (((ChangeTextCommand)cmd).getElement() == element);
 	}
 
 	@Override
