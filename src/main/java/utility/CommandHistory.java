@@ -73,6 +73,7 @@ public class CommandHistory {
 				}
 				Command combinedCommand = mostRecentCommand.combine(cmd);
 				undo();
+				commands.remove(currCommandIdx + 1);
 				combinedCommand.perform();
 				commands.add(combinedCommand);
 				currCommandIdx = commands.indexOf(combinedCommand);

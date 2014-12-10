@@ -74,12 +74,8 @@ public class ChangeTagCommand extends ElementCommand implements Command {
 
 	@Override
 	public Command combine(Command cmd) {
-		if (cmd.getClass() != getClass()) {
-			return null;
-		}
-
 		ChangeTagCommand chainCommand = (ChangeTagCommand) cmd;
-		String combinedTag = tag + chainCommand.getTag();
+		String combinedTag = chainCommand.getTag();
 
 		ChangeTagCommand combinedCommand;
 		combinedCommand = new ChangeTagCommand(element, combinedTag, oldTag);

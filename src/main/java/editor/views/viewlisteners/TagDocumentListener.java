@@ -21,6 +21,7 @@
 package editor.views.viewlisteners;
 
 import xml.Element;
+import xml.commands.ChangeTagCommand;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -36,7 +37,9 @@ public class TagDocumentListener extends ElementDocumentListener implements Docu
     private void updateElementTag(DocumentEvent documentEvent) {
         if (elem != null) {
             String str = getStringFromEvent(documentEvent);
-            elem.setTag(str);
+            //elem.setTag(str); // TODO: Remove
+            ChangeTagCommand cmd = new ChangeTagCommand(elem, str);
+            elem.performCommand(cmd);
         }
     }
 
