@@ -20,6 +20,7 @@
 
 package editor.views.viewlisteners;
 
+import editor.views.ElementEditorView;
 import xml.Element;
 import xml.commands.ChangeTagCommand;
 
@@ -30,16 +31,21 @@ import javax.swing.event.DocumentListener;
  * The TagDocumentListener updates an element's tag when the user edits it
  */
 public class TagDocumentListener extends ElementDocumentListener implements DocumentListener {
-    public TagDocumentListener(Element element) {
+    private ElementEditorView view;
+
+    public TagDocumentListener(Element element, ElementEditorView view) {
         super(element);
+        this.view = view;
     }
 
     private void updateElementTag(DocumentEvent documentEvent) {
         if (elem != null) {
+            view.stopObserving();
             String str = getStringFromEvent(documentEvent);
             //elem.setTag(str); // TODO: Remove
             ChangeTagCommand cmd = new ChangeTagCommand(elem, str);
             elem.performCommand(cmd);
+            view.startObserving();
         }
     }
 
