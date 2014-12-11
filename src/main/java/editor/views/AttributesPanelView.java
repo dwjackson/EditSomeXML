@@ -122,7 +122,7 @@ public class AttributesPanelView extends JPanel {
 
         AttributeDocumentListener listener;
         listener = new AttributeDocumentListener(elem, attIndex, nameField,
-                valueField);
+                valueField, editorView);
         nameField.getDocument().addDocumentListener(listener);
         valueField.getDocument().addDocumentListener(listener);
         listeners.add(listener);

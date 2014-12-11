@@ -20,6 +20,7 @@
 
 package editor.views.viewlisteners;
 
+import editor.views.ElementEditorView;
 import xml.Element;
 
 import javax.swing.*;
@@ -39,15 +40,18 @@ public class AttributeDocumentListener extends ElementDocumentListener
     private int attributeIndex;
     private JTextField nameField;
     private JTextField valueField;
+    private ElementEditorView editorView;
 
     public AttributeDocumentListener(Element element,
                                      int attributeIndex,
                                      JTextField nameField,
-                                     JTextField valueField) {
+                                     JTextField valueField,
+                                     ElementEditorView editorView) {
         super(element);
         this.attributeIndex = attributeIndex;
         this.nameField = nameField;
         this.valueField = valueField;
+        this.editorView = editorView;
     }
 
     private Source determineSource(DocumentEvent event) {
@@ -63,11 +67,13 @@ public class AttributeDocumentListener extends ElementDocumentListener
     private void updateAttribute(DocumentEvent event) {
         String text = getStringFromEvent(event);
 
+        editorView.stopObserving();
         if (determineSource(event) == Source.NAME) {
             elem.renameAttribute(attributeIndex, text);
         } else if (determineSource(event) == Source.VALUE) {
             elem.setAttribute(elem.getAttributeName(attributeIndex), text);
         }
+        editorView.startObserving();
     }
 
     @Override
