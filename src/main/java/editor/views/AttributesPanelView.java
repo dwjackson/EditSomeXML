@@ -50,13 +50,17 @@ public class AttributesPanelView extends JPanel {
     private final int MIN_NUM_ROWS = 1;
     private ArrayList<AttributeDocumentListener> listeners;
     private AttributesPanelController controller;
+    private ElementEditorView editorView;
 
     /**
      * Initialize the AttributesPanelView with no data
      * @param element The element whose attributes this view represents
+     * @param editorView The editor with which these attributes are associated
      */
-    public AttributesPanelView(Element element) {
+    public AttributesPanelView(Element element, ElementEditorView editorView) {
         elem = element;
+        this.editorView = editorView;
+
         listeners = new ArrayList<AttributeDocumentListener>();
 
         attributeNameFields = new ArrayList<JTextField>();
@@ -96,6 +100,8 @@ public class AttributesPanelView extends JPanel {
             return; // Bail out if no element is set
         }
 
+        editorView.stopObserving();
+
         // Notify controller to add attribute to element model
         controller.attachAttributeToElement(name, value);
 
@@ -127,6 +133,8 @@ public class AttributesPanelView extends JPanel {
         attributesPanel.add(deleteButton);
 
         attributesPanel.updateUI();
+
+        editorView.startObserving();
     }
 
     /**

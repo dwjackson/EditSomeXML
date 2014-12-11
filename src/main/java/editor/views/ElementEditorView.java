@@ -32,7 +32,6 @@ import javax.swing.text.Document;
 
 import java.awt.Component;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 
 /**
  * The ElementEditorView is used to edit the currently-selected element.
@@ -70,7 +69,7 @@ public class ElementEditorView extends JPanel implements Observer {
         add(tagPanel);
 
         // Attributes
-        attributesPanel = new AttributesPanelView(elem);
+        attributesPanel = new AttributesPanelView(elem, this);
         add(attributesPanel);
 
         // Text
