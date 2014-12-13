@@ -20,11 +20,11 @@
 
 package editor.menubar;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import xml.Element;
 import editor.menubar.actionlisteners.MoveUpDownActionListener;
@@ -45,22 +45,34 @@ public class EditMenu extends JMenu {
 
         Element root = elementTreeView.getRoot();
         JMenuItem undoItem = new JMenuItem("Undo");
+        KeyStroke undoShortcut = KeyStroke.getKeyStroke('Z',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        undoItem.setAccelerator(undoShortcut);
         undoItem.addActionListener(new UndoActionListener(root));
         add(undoItem);
         
         JMenuItem redoItem = new JMenuItem("Redo");
+        KeyStroke redoShortcut = KeyStroke.getKeyStroke('Y',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        redoItem.setAccelerator(redoShortcut);
         redoItem.addActionListener(new RedoActionListener(root));
         add(redoItem);
         
         addSeparator();
 
         JMenuItem newElementItem = new JMenuItem("New Child Element...");
+        KeyStroke newElementShortcut = KeyStroke.getKeyStroke('E',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        newElementItem.setAccelerator(newElementShortcut);
         NewElementActionListener listener;
         listener = new NewElementActionListener(elementTreeView);
         newElementItem.addActionListener(listener);
         add(newElementItem);
 
         JMenuItem cloneElementItem = new JMenuItem("Clone Element...");
+        KeyStroke cloneShortcut = KeyStroke.getKeyStroke('L',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        cloneElementItem.setAccelerator(cloneShortcut);
         cloneElementItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -70,6 +82,9 @@ public class EditMenu extends JMenu {
         add(cloneElementItem);
 
         JMenuItem mirrorItem = new JMenuItem("Mirror Element...");
+        KeyStroke mirrorShortcut = KeyStroke.getKeyStroke('M',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        mirrorItem.setAccelerator(mirrorShortcut);
         mirrorItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -79,6 +94,9 @@ public class EditMenu extends JMenu {
         add(mirrorItem);
 
         JMenuItem deleteItem = new JMenuItem("Delete Element...");
+        KeyStroke deleteShortcut = KeyStroke.getKeyStroke('D',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        deleteItem.setAccelerator(deleteShortcut);
         deleteItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
