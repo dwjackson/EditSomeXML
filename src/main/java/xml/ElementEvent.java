@@ -26,7 +26,13 @@ package xml;
  */
 public class ElementEvent {
     public enum EventType {
-        NONE, ADD_CHILD, REMOVE_CHILD, DATA_CHANGE, NEW_ROOT
+        NONE,
+        ADD_CHILD,
+        REMOVE_CHILD,
+        DATA_CHANGE,
+        NEW_ROOT,
+        ATTRIBUTE_CHANGE,
+        TEXT_CHANGE
     }
     
     private static final int NULL_INDEX = -1;
