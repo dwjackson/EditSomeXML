@@ -350,6 +350,10 @@ public class Element extends GenericObservable implements
      */
     public void renameAttribute(String oldKey, String newKey) {
         attributes.rename(oldKey, newKey);
+        ElementEvent.EventType eventType;
+        eventType = ElementEvent.EventType.ATTRIBUTE_CHANGE;
+        ElementEvent event = new ElementEvent(eventType, this);
+        notifyObservers(event);
     }
 
     /**
