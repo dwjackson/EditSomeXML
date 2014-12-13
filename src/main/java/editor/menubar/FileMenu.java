@@ -20,12 +20,11 @@
 
 package editor.menubar;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import xml.Element;
 import editor.ElementTreeData;
@@ -45,15 +44,24 @@ public class FileMenu extends JMenu {
         setText("File");
         
         JMenuItem newItem = new JMenuItem("New...");
+        KeyStroke newShortcut = KeyStroke.getKeyStroke('N',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        newItem.setAccelerator(newShortcut);
         newItem.addActionListener(new NewRootActionListener(root));
         add(newItem);
         
         JMenuItem openItem = new JMenuItem("Open...");
+        KeyStroke openShortcut = KeyStroke.getKeyStroke('O',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        openItem.setAccelerator(openShortcut);
         openItem.addActionListener(new OpenActionListener(data));
         add(openItem);
 
         SaveActionListener saveListener = new SaveActionListener(data);
         JMenuItem saveItem = new JMenuItem("Save");
+        KeyStroke saveShortcut = KeyStroke.getKeyStroke('S',
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        saveItem.setAccelerator(saveShortcut);
         saveItem.setActionCommand("SAVE");
         saveItem.addActionListener(saveListener);
         add(saveItem);
