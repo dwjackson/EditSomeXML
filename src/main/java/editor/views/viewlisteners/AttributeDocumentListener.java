@@ -22,6 +22,7 @@ package editor.views.viewlisteners;
 
 import editor.views.ElementEditorView;
 import xml.Element;
+import xml.commands.RenameAttributeCommand;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -69,9 +70,14 @@ public class AttributeDocumentListener extends ElementDocumentListener
 
         editorView.stopObserving();
         if (determineSource(event) == Source.NAME) {
-            elem.renameAttribute(attributeIndex, text);
+            String oldAttributeName;
+            oldAttributeName = elem.getAttributeName(attributeIndex);
+            RenameAttributeCommand cmd = new RenameAttributeCommand(elem,
+                    text, oldAttributeName, attributeIndex);
+            elem.performCommand(cmd);
         } else if (determineSource(event) == Source.VALUE) {
             elem.setAttribute(elem.getAttributeName(attributeIndex), text);
+            // TODO: Use command
         }
         editorView.startObserving();
     }
