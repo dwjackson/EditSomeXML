@@ -72,6 +72,10 @@ public class SetAttributeCommand extends ElementCommand implements Command {
 		return oldVal;
 	}
 
+	public Element getElement() {
+		return element;
+	}
+
 	@Override
 	public boolean canCombine(Command cmd) {
 		if (cmd.getClass() != getClass()) {
@@ -81,22 +85,17 @@ public class SetAttributeCommand extends ElementCommand implements Command {
 		SetAttributeCommand setAttributeCommand = (SetAttributeCommand) cmd;
 		boolean attributeMatch;
 		attributeMatch = setAttributeCommand.getAttributeName() == attName;
-		return attributeMatch;
+
+		boolean elementMatch = setAttributeCommand.getElement() == element;
+
+		return (elementMatch && attributeMatch);
 	}
 
 	@Override
 	public Command combine(Command cmd) {
-		if (cmd.getClass() != getClass()) {
-			return null;
-		}
-
 		SetAttributeCommand chainCommand = (SetAttributeCommand) cmd;
-		if (chainCommand.getAttributeName() != attName) {
-			return null;
-		}
 
-		String combinedValue = attVal + chainCommand.getAttributeValue();
-
+		String combinedValue = chainCommand.getAttributeValue();
 		SetAttributeCommand combinedCommand;
 		combinedCommand = new SetAttributeCommand(element, attName, combinedValue, oldVal);
 
