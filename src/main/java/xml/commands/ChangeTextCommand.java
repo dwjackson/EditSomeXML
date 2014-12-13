@@ -32,6 +32,14 @@ public class ChangeTextCommand extends ElementCommand implements Command {
 		this(element, text, new String(element.getText()));
 	}
 
+	/**
+	 * Initialize this command with the element whose text to change, the new
+	 * value of the element's textual content and the old value of the
+	 * element's textual content
+	 * @param element The element whose text to modify
+	 * @param text The new value of the element's text
+	 * @param oldText The old value of the element's text
+	 */
 	public ChangeTextCommand(Element element, String text, String oldText) {
 		super(element);
 		this.oldText = oldText;
@@ -74,15 +82,11 @@ public class ChangeTextCommand extends ElementCommand implements Command {
 
 	@Override
 	public Command combine(Command cmd) {
-		if (cmd.getClass() != getClass()) {
-			return null;
-		}
-
 		ChangeTextCommand chainCommand = (ChangeTextCommand) cmd;
 		String combinedText = chainCommand.getText();
 
 		ChangeTextCommand combinedCommand;
-		combinedCommand = new ChangeTextCommand(element, text, oldText);
+		combinedCommand = new ChangeTextCommand(element, combinedText, oldText);
 
 		return combinedCommand;
 	}

@@ -20,7 +20,9 @@
 
 package editor.views.viewlisteners;
 
+import editor.views.ElementEditorView;
 import xml.Element;
+import xml.commands.ChangeTextCommand;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -30,14 +32,23 @@ import javax.swing.event.DocumentListener;
  * text content of an element in the UI
  */
 public class TextDocumentListener extends ElementDocumentListener implements DocumentListener {
-    public TextDocumentListener(Element element) {
+    private ElementEditorView view;
+
+    public TextDocumentListener(Element element, ElementEditorView view) {
         super(element);
+        this.view = view;
     }
 
     private void updateElementText(DocumentEvent documentEvent) {
         if (elem != null) {
+            view.stopObserving();
+
             String text = getStringFromEvent(documentEvent);
-            elem.setText(text);
+            String oldText = elem.getText();
+            ChangeTextCommand cmd = new ChangeTextCommand(elem, text, oldText);
+            elem.performCommand(cmd);
+
+            view.startObserving();
         }
     }
 

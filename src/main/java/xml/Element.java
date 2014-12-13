@@ -398,12 +398,10 @@ public class Element extends GenericObservable implements
      * @param text The text to assign to this element
      */
     public void setText(String text) {
-        if (text != null && text.trim().length() > 0) {
-            this.text = text;
-            ElementEvent.EventType eventType;
-            eventType = ElementEvent.EventType.DATA_CHANGE;
-            notifyObservers(new ElementEvent(eventType, this));
-        }
+        this.text = text;
+        ElementEvent.EventType eventType;
+        eventType = ElementEvent.EventType.TEXT_CHANGE;
+        notifyObservers(new ElementEvent(eventType, this));
     }
 
     /**

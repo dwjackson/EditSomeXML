@@ -79,7 +79,10 @@ public class ElementXMLDeserializer {
                     for (int i = 0; i < length; i++) {
                         sb.append(ch[start+i]);
                     }
-                    curr.setText(sb.toString());
+                    String str = sb.toString();
+                    if (str.trim().length() > 0) {
+                        curr.setText(str);
+                    }
                 }
             };
             saxParser.parse(fileName, handler);

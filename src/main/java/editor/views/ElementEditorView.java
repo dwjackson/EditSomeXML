@@ -82,7 +82,7 @@ public class ElementEditorView extends JPanel implements Observer {
         textAreaScrollPane.setViewportView(elementTextArea);
         textPanel.add(textAreaScrollPane);
         TextDocumentListener textDocumentListener;
-        textDocumentListener = new TextDocumentListener(elem);
+        textDocumentListener = new TextDocumentListener(elem, this);
         documentListeners.add(textDocumentListener);
         Document doc = elementTextArea.getDocument();
         doc.addDocumentListener(textDocumentListener);
