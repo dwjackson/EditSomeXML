@@ -23,6 +23,7 @@ package editor.views.viewlisteners;
 import editor.views.ElementEditorView;
 import xml.Element;
 import xml.commands.RenameAttributeCommand;
+import xml.commands.SetAttributeCommand;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -76,8 +77,11 @@ public class AttributeDocumentListener extends ElementDocumentListener
                     text, oldAttributeName, attributeIndex);
             elem.performCommand(cmd);
         } else if (determineSource(event) == Source.VALUE) {
-            elem.setAttribute(elem.getAttributeName(attributeIndex), text);
-            // TODO: Use command
+            String attName = elem.getAttributeName(attributeIndex);
+            String attVal = elem.getAttribute(attName);
+            SetAttributeCommand cmd;
+            cmd = new SetAttributeCommand(elem, attName, text, attVal);
+            elem.performCommand(cmd);
         }
         editorView.startObserving();
     }
