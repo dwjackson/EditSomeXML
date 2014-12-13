@@ -36,10 +36,26 @@ public class ElementEvent {
     private Element child;
     int childIndex;
 
-    public ElementEvent(EventType eventType, Element parent) {
-        this(eventType, parent, null, NULL_INDEX);
+    /**
+     * Initialize the element event by specifying its type and the element to
+     * which this event applies.
+     * @param eventType The type of event
+     * @param element The element to which this event applies
+     */
+    public ElementEvent(EventType eventType, Element element) {
+        this(eventType, element, null, NULL_INDEX);
     }
-    
+
+    /**
+     * Initialize this element event by supplying the type of event, the parent
+     * of the element to which this event applies, the child element to which
+     * this event applies, and the index of the child element to which this
+     * event applies.
+     * @param eventType The type of the event
+     * @param parent The parent of the element to which this event applies
+     * @param child The element to which this event applies
+     * @param childIndex The index of the element to which this event applies
+     */
     public ElementEvent(EventType eventType, Element parent, Element child,
                         int childIndex) {
     	this.eventType = eventType;
@@ -48,6 +64,10 @@ public class ElementEvent {
     	this.childIndex = childIndex;
     }
 
+    /**
+     * Get the type of this event
+     * @return the event type
+     */
     public EventType getEventType() {
         return eventType;
     }
@@ -59,15 +79,27 @@ public class ElementEvent {
     public Element getElement() {
     	return parent;
     }
-    
+
+    /**
+     * Get the parent of the element to which this event applies
+     * @return the parent of the element to which this event applies
+     */
     public Element getParent() {
     	return parent;
     }
-    
+
+    /**
+     * Get the child element to which this event applies
+     * @return the child element to which this event applies
+     */
     public Element getChild() {
     	return child;
     }
-    
+
+    /**
+     * Get the index of the child element to which this event applies
+     * @return The index of the child element to which this event applies
+     */
     public int getChildIndex() {
     	return childIndex;
     }
