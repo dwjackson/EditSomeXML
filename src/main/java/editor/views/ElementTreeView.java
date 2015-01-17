@@ -53,22 +53,6 @@ public class ElementTreeView extends JPanel implements Observer {
 
         model = new ElementTreeModel(data);
         tree = new JTree(model);
-        tree.setTransferHandler(new TransferHandler() {
-            @Override
-            public boolean canImport(TransferSupport suport) {
-                boolean canImport = false;
-                // TODO
-                return canImport;
-            }
-
-            @Override
-            public boolean importData(JComponent comp, Transferable t) {
-                boolean inserted = false;
-                // TODO
-                return inserted;
-            }
-        });
-        tree.setDragEnabled(true);
         JScrollPane treeScrollPane = new JScrollPane(tree);
         add(treeScrollPane);
 
