@@ -193,7 +193,7 @@ public class ElementTest extends TestCase {
         String attName = "name";
         String attVal = "testing";
         elem.setAttribute(attName, attVal);
-        elem.setRepresentationToAttributeValue(attName, false);
+        elem.setRepresentationToAttributeValue(attName, false, elem.getTag());
         assertEquals("Representation has not been changed correctly", attVal, elem.toString());
 
         elem.setRepresentationToTag(false);

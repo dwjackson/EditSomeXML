@@ -58,7 +58,7 @@ public class ChangeRepresentationCommand implements Command {
             start.setRepresentationToTag(setForAll);
             break;
         case ATTRIBUTE_VALUE:
-            start.setRepresentationToAttributeValue(attributeName, setForAll);
+            start.setRepresentationToAttributeValue(attributeName, setForAll, start.getTag());
             break;
         default:
             // Do nothing

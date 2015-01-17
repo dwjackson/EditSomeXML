@@ -43,11 +43,11 @@ public class Element extends GenericObservable implements
 	Observable,
 	Observer,
 	Commandable {
-	
-	public enum RepresentationType {
-		NONE, TAG, ATTRIBUTE_VALUE
-	}
-	
+
+    public enum RepresentationType {
+        NONE, TAG, ATTRIBUTE_VALUE
+    }
+
     private String tag;
     private String text;
     private ElementAttributes attributes;
@@ -83,6 +83,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Create a new element, initialize it with a tag
+     *
      * @param tagName The name of the tag to give to this element
      */
     public Element(String tagName) {
@@ -93,6 +94,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get an exact (deep) copy of this element, but without children
+     *
      * @return a copy of this element
      */
     public Element cloneWithoutChildren() {
@@ -112,6 +114,7 @@ public class Element extends GenericObservable implements
      * Determine if this element is equivalent to another Element. This does
      * not take the element's children into account, just the actual element
      * itself.
+     *
      * @param obj The object to which to compare
      * @return true if the elements match, false otherwise
      */
@@ -151,6 +154,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Determine if this element has the same parent as another element
+     *
      * @param elem The element to compare with
      * @return true if they are siblings, false if not
      */
@@ -160,6 +164,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get the element's tag
+     *
      * @return The element's tag
      */
     public String getTag() {
@@ -169,13 +174,14 @@ public class Element extends GenericObservable implements
     /**
      * Set this element's tag, which serves as an identifier for this type of
      * element.
+     *
      * @param tag The tag to apply to this element
      */
     public void setTag(String tag) {
         if (tag != null) {
             this.tag = tag.replace(' ', '-');
             if (representationType == RepresentationType.NONE) {
-            	representationType = RepresentationType.TAG;
+                representationType = RepresentationType.TAG;
             }
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.DATA_CHANGE;
@@ -209,8 +215,9 @@ public class Element extends GenericObservable implements
 
     /**
      * Return this element's children as a collection
-     * @see java.util.Collection
+     *
      * @return This element's children, as a Collection
+     * @see java.util.Collection
      */
     public Collection<Element> getChildren() {
         return children;
@@ -218,8 +225,9 @@ public class Element extends GenericObservable implements
 
     /**
      * Get this Elements' children as an Iterable
-     * @see java.lang.Iterable
+     *
      * @return this Element's children as an Iterable
+     * @see java.lang.Iterable
      */
     public Iterable<Element> children() {
         return children;
@@ -227,6 +235,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get this element's youngest (most-recently-added) child
+     *
      * @return the youngest child or null if none
      */
     public Element getYoungestChild() {
@@ -235,6 +244,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Determine if this element has children
+     *
      * @return true if this element has childre, false if it doesn't
      */
     public boolean hasChildren() {
@@ -247,6 +257,7 @@ public class Element extends GenericObservable implements
     /**
      * Get the child at a particular index. Child elements have an order:
      * those added earlier will precede those added later.
+     *
      * @param index The index of the child
      * @return The child Element if it's found, null if it isn't
      */
@@ -260,6 +271,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Determine the number of children that this Element has
+     *
      * @return the number of children that this Element has
      */
     public int getNumberOfChildren() {
@@ -268,6 +280,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get this Element's parent element, if it exists
+     *
      * @return This Element's parent or null if it doesn't have one
      */
     public Element getParent() {
@@ -276,6 +289,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Set this element's parent
+     *
      * @param parent The new parent to give this element
      */
     public void setParent(Element parent) {
@@ -285,8 +299,9 @@ public class Element extends GenericObservable implements
 
     /**
      * Get a Set of the attribute names
-     * @see java.util.Set
+     *
      * @return a Set of the attribute names
+     * @see java.util.Set
      */
     public Iterable<String> attributeNames() {
         return attributes.names();
@@ -294,6 +309,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get the value of a particular attribute
+     *
      * @param key The attribute's name
      * @return The value of the attribute
      */
@@ -303,6 +319,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get an attribute's name from its index
+     *
      * @param index The attribute's index
      * @return the attribute's name
      */
@@ -312,7 +329,8 @@ public class Element extends GenericObservable implements
 
     /**
      * Set the value of an attribute
-     * @param key The attribute's name
+     *
+     * @param key   The attribute's name
      * @param value The attribute's value/content
      */
     public void setAttribute(String key, String value) {
@@ -324,8 +342,9 @@ public class Element extends GenericObservable implements
 
     /**
      * Set an attribute's name and value, based on the index of that attribute
+     *
      * @param index The attribute's index
-     * @param key The attribute's name
+     * @param key   The attribute's name
      * @param value The attribute's value/content
      */
     public void setAttribute(int index, String key, String value) {
@@ -337,6 +356,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Remove an attribute from this element
+     *
      * @param key The attribute's key
      */
     public void removeAttribute(String key) {
@@ -345,6 +365,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Rename an existing attribute
+     *
      * @param oldKey The current/old key for the attribute
      * @param newKey The new key for the attribute
      */
@@ -358,7 +379,8 @@ public class Element extends GenericObservable implements
 
     /**
      * Rename an attribute based on its index
-     * @param index The attribute's index
+     *
+     * @param index  The attribute's index
      * @param newKey The attribute's new name
      */
     public void renameAttribute(int index, String newKey) {
@@ -371,6 +393,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get the total number of attributes that the Element has
+     *
      * @return the number of attributes that the Element has
      */
     public int getNumberOfAttributes() {
@@ -379,6 +402,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Determine if this element has textual content
+     *
      * @return true if this element has assigned text, false if not
      */
     public boolean hasText() {
@@ -387,6 +411,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Get this Element's textual content
+     *
      * @return This element's text
      */
     public String getText() {
@@ -395,6 +420,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Set this element's textual content
+     *
      * @param text The text to assign to this element
      */
     public void setText(String text) {
@@ -406,6 +432,7 @@ public class Element extends GenericObservable implements
 
     /**
      * Add a child to this Element
+     *
      * @param child The child to add to this Element
      */
     public void addChild(Element child) {
@@ -417,31 +444,32 @@ public class Element extends GenericObservable implements
         eventType = ElementEvent.EventType.ADD_CHILD;
         notifyObservers(new ElementEvent(eventType, this, child, idx));
     }
-    
+
     /**
      * Add a child at a particular index
-     * 
+     * <p/>
      * This will move the other child
      * elements "down" (to a higher index). The index has to be less than or
      * equal to the total number of children in order to fit the child into
      * the existing children.
-     * 
+     *
      * @param child The child to add
      * @param index The index at which to add the child
      */
     public void addChildAtIndex(Element child, int index) {
-    	if (index >= 0 && index <= children.size()) {
-    	    child.setParent(this);
-    		children.add(index, child);
-    		youngestChild = child;
-    		ElementEvent.EventType eventType;
+        if (index >= 0 && index <= children.size()) {
+            child.setParent(this);
+            children.add(index, child);
+            youngestChild = child;
+            ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.ADD_CHILD;
             notifyObservers(new ElementEvent(eventType, this, child, index));
-    	}
+        }
     }
 
     /**
      * Determine the index of a child element
+     *
      * @param child The child Element whose index to search for
      * @return The index of the child if found, -1 in case of any error
      */
@@ -459,27 +487,29 @@ public class Element extends GenericObservable implements
 
     /**
      * When converting an Element to a String, use the tag
+     *
      * @return the element's tag
      */
     @Override
     public String toString() {
-    	String representation;
-    	switch(representationType) {
-    	case TAG:
-    		representation = tag;
-    		break;
-    	case ATTRIBUTE_VALUE:
-    		representation = attributes.getValue(representationAttribute);
-    		break;
-    	case NONE:
-    	default:
-    		representation = null;
-    	}
+        String representation;
+        switch (representationType) {
+            case TAG:
+                representation = tag;
+                break;
+            case ATTRIBUTE_VALUE:
+                representation = attributes.getValue(representationAttribute);
+                break;
+            case NONE:
+            default:
+                representation = null;
+        }
         return representation;
     }
 
     /**
      * Add a sub-element (child) to this element and return the new Element
+     *
      * @param tag The child's tag
      * @return the new child element
      */
@@ -494,14 +524,16 @@ public class Element extends GenericObservable implements
 
     /**
      * Determine if this is the root element in a tree (i.e. it has no parent)
+     *
      * @return true if this is the root element, false if it's not
      */
     public boolean isRoot() {
-    	return (parent == null);
+        return (parent == null);
     }
 
     /**
      * Compare an entire tree to see if they are equivalent
+     *
      * @param elem The element in the other tree
      * @return true if the trees match, false otherwise
      */
@@ -524,12 +556,13 @@ public class Element extends GenericObservable implements
 
     /**
      * Delete a child from this element
+     *
      * @param child The child to delete
      */
     public void deleteChild(Element child) {
         if (children.contains(child)) {
-        	int idx = getIndexOfChild(child);
-        	child.setParent(null);
+            int idx = getIndexOfChild(child);
+            child.setParent(null);
             children.remove(child);
             ElementEvent.EventType eventType;
             eventType = ElementEvent.EventType.REMOVE_CHILD;
@@ -603,6 +636,7 @@ public class Element extends GenericObservable implements
     /**
      * Mirror another element. When the mirrored element changes, this element
      * will change so that it has the same content as the mirrored element.
+     *
      * @param element The element to mirror
      */
     public void mirrorElement(Element element) {
@@ -627,200 +661,210 @@ public class Element extends GenericObservable implements
             updateFromMirror();
         }
     }
-    
+
     /**
      * Get an array of Elements that starts at the root of the tree and goes
      * down from parent-to-child until this element.
+     *
      * @return the ancestry of this element, as an array of elements
      */
     public Element[] getAncestry() {
-    	int numAncestors = 1;
-    	Element currElem = this;
-    	while ((currElem = currElem.getParent()) != null) {
-    		numAncestors++;
-    	}
-    	currElem = this;
-    	Element[] ancestors = new Element[numAncestors];
-    	for (int i = numAncestors - 1; i >= 0; i--) {
-    		ancestors[i] = currElem;
-    		currElem = currElem.getParent();
-    	}
-    	return ancestors;
+        int numAncestors = 1;
+        Element currElem = this;
+        while ((currElem = currElem.getParent()) != null) {
+            numAncestors++;
+        }
+        currElem = this;
+        Element[] ancestors = new Element[numAncestors];
+        for (int i = numAncestors - 1; i >= 0; i--) {
+            ancestors[i] = currElem;
+            currElem = currElem.getParent();
+        }
+        return ancestors;
     }
-    
+
     /**
      * Move a child of this element to a new section of the tree
+     *
      * @param childToMove The child element to move
-     * @param newParent the new parent of the child element
+     * @param newParent   the new parent of the child element
      */
     public void moveElement(Element childToMove, Element newParent) {
-    	if (children.contains(childToMove) && newParent != null) {
-    		children.remove(childToMove);
-    		newParent.addChild(childToMove);
-    	}
+        if (children.contains(childToMove) && newParent != null) {
+            children.remove(childToMove);
+            newParent.addChild(childToMove);
+        }
     }
 
     /**
      * Change the representation of this element to the value of an attribute
      * of this element
-     * @param attName The name of the attribute to use as this element's
-     *                textual representation
+     *  @param attName        The name of the attribute to use as this element's
+     *                       textual representation
      * @param setForChildren true if should set all children with the same tag
-     *                       to have the same type of representation
+     * @param tag
      */
     public void setRepresentationToAttributeValue(String attName,
-    	boolean setForChildren) {
-	    if (attName != null && attributes.contains(attName)) {
-	        representationType = RepresentationType.ATTRIBUTE_VALUE;
-	        representationAttribute = attName;
-	    }
-    	if (setForChildren) {
-    		for (Element child : children) {
-    			child.setRepresentationToAttributeValue(attName, true);
-    		}
-    	}
+                                                  boolean setForChildren,
+                                                  String tag) {
+        if (attName != null && attributes.contains(attName)
+            && this.tag.equals(tag)) {
+            representationType = RepresentationType.ATTRIBUTE_VALUE;
+            representationAttribute = attName;
+        }
+        if (setForChildren) {
+            for (Element child : children) {
+                child.setRepresentationToAttributeValue(attName, true, tag);
+            }
+        }
     }
 
     /**
      * Set the textual representation of this element to be its tag
+     *
      * @param setForChildren true if should set all children with the same tag
      *                       to have the same type of representation
      */
     public void setRepresentationToTag(boolean setForChildren) {
-    	representationType = RepresentationType.TAG;
-    	if (setForChildren) {
-    		for (Element child : children) {
-    			child.setRepresentationToTag(true);
-    		}
-    	}
+        representationType = RepresentationType.TAG;
+        if (setForChildren) {
+            for (Element child : children) {
+                child.setRepresentationToTag(true);
+            }
+        }
     }
-    
+
     /**
      * Given any arbitrary element in the tree, return the root of that tree
+     *
      * @return the root element of the tree of which this element is a part
      */
     public Element getRoot() {
-    	Element elem = this;
-    	while (!elem.isRoot()) {
-    		elem = elem.getParent();
-    	}
-    	return elem;
+        Element elem = this;
+        while (!elem.isRoot()) {
+            elem = elem.getParent();
+        }
+        return elem;
     }
 
     /**
      * Only the root element can contain a command history, so the command
      * has to propagate up the tree if it is initiated somewhere below the
      * root element.
-     * 
-     * @see utility.Commandable
-     * 
+     *
      * @param cmd The command to perform
-     */
-	@Override
-	public void performCommand(Command cmd) {
-		if (commandHistory != null) {
-			commandHistory.performCommand(cmd);
-		} else {
-			parent.performCommand(cmd);
-		}
-	}
-
-	/**
      * @see utility.Commandable
      */
-	@Override
-	public void undo() {
-		if (commandHistory != null) {
-			commandHistory.undo();
-		} else {
-			parent.undo();
-		}
-	}
+    @Override
+    public void performCommand(Command cmd) {
+        if (commandHistory != null) {
+            commandHistory.performCommand(cmd);
+        } else {
+            parent.performCommand(cmd);
+        }
+    }
 
-	/**
+    /**
      * @see utility.Commandable
      */
-	@Override
-	public void redo() {
-		if (commandHistory != null) {
-			commandHistory.redo();
-		} else {
-			parent.redo();
-		}
-	}
+    @Override
+    public void undo() {
+        if (commandHistory != null) {
+            commandHistory.undo();
+        } else {
+            parent.undo();
+        }
+    }
 
-	/**
-	 * @see utility.Commandable
-	 */
-	@Override
-	public boolean canUndo() {
-		if (commandHistory == null) {
-			return parent.canUndo();
-		}
-		return commandHistory.canUndo();
-	}
+    /**
+     * @see utility.Commandable
+     */
+    @Override
+    public void redo() {
+        if (commandHistory != null) {
+            commandHistory.redo();
+        } else {
+            parent.redo();
+        }
+    }
 
-	/**
-	 * @see utility.Commandable
-	 */
-	@Override
-	public boolean canRedo() {
-		if (commandHistory == null) {
-			return parent.canRedo();
-		}
-		return commandHistory.canRedo();
-	}
-	
-	/**
-	 * Determine if this element is mirroring another element
-	 * @return true if this element is mirroring another element
-	 */
-	public boolean isMirroring() {
-	    if (mirroredElement != null) {
-	        return true;
-	    }
-	    return false;
-	}
-	
-	/**
-	 * Get the element that this element is mirroring
-	 * @return the mirrored elemennt or null if none
-	 */
-	public Element getMirroredElement() {
-	    return mirroredElement;
-	}
-	
-	/**
-	 * Set this element's globally unique identifier
-	 * @param guidVal the identifier's value
-	 */
-	public void setGUID(GUIDValue guidVal) {
-	    guid = guidVal;
-	}
-	
-	/**
-	 * Get this element's GUID in string format
-	 * @return this element's GUID as a string
-	 */
-	public String getGUID() {
-	    if (guid != null) {
-	        return guid.getStringValue();
-	    }
-	    return null;
-	}
-	
-	/**
-	 * Find an element in the tree by its GUID value and return that element
-	 * if it is found
-	 * @param guidVal The GUID value of the element
-	 * @return The element identified by the GUID, null if not found
-	 */
-	public Element getElementByGUID(GUIDValue guidVal) {
-	    if (guidVal == null) {
-	        return null;
-	    }
-	    
-	    Element elem = null;
+    /**
+     * @see utility.Commandable
+     */
+    @Override
+    public boolean canUndo() {
+        if (commandHistory == null) {
+            return parent.canUndo();
+        }
+        return commandHistory.canUndo();
+    }
+
+    /**
+     * @see utility.Commandable
+     */
+    @Override
+    public boolean canRedo() {
+        if (commandHistory == null) {
+            return parent.canRedo();
+        }
+        return commandHistory.canRedo();
+    }
+
+    /**
+     * Determine if this element is mirroring another element
+     *
+     * @return true if this element is mirroring another element
+     */
+    public boolean isMirroring() {
+        if (mirroredElement != null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get the element that this element is mirroring
+     *
+     * @return the mirrored elemennt or null if none
+     */
+    public Element getMirroredElement() {
+        return mirroredElement;
+    }
+
+    /**
+     * Set this element's globally unique identifier
+     *
+     * @param guidVal the identifier's value
+     */
+    public void setGUID(GUIDValue guidVal) {
+        guid = guidVal;
+    }
+
+    /**
+     * Get this element's GUID in string format
+     *
+     * @return this element's GUID as a string
+     */
+    public String getGUID() {
+        if (guid != null) {
+            return guid.getStringValue();
+        }
+        return null;
+    }
+
+    /**
+     * Find an element in the tree by its GUID value and return that element
+     * if it is found
+     *
+     * @param guidVal The GUID value of the element
+     * @return The element identified by the GUID, null if not found
+     */
+    public Element getElementByGUID(GUIDValue guidVal) {
+        if (guidVal == null) {
+            return null;
+        }
+
+        Element elem = null;
         if (guid.equals(guidVal)) {
             elem = this;
         } else {
@@ -828,32 +872,33 @@ public class Element extends GenericObservable implements
                 elem = child.getElementByGUID(guidVal);
             }
         }
-	    return elem;
-	}
-	
-	/**
-	 * Move a child to a different index, if possible.
-	 * @param child The child to move
-	 * @param newIndex The index to which to move the child
-	 */
-	public void moveChild(Element child, int newIndex) {
-	    if (child != null && newIndex >= 0
-	            && newIndex < getNumberOfChildren()
-	            && children.contains(child)) {
-	        int currIndex = getIndexOfChild(child);
-	        
-	        ElementEvent.EventType eventType;
-	        ElementEvent ev;
-	        
-	        children.remove(currIndex);
-	        eventType = ElementEvent.EventType.REMOVE_CHILD;
-	        ev = new ElementEvent(eventType, this, child, currIndex);
-	        notifyObservers(ev);
-	        
-	        children.add(newIndex, child);
-	        eventType = ElementEvent.EventType.ADD_CHILD;
-	        ev = new ElementEvent(eventType, this, child, newIndex);
-	        notifyObservers(ev);
-	    }
-	}
+        return elem;
+    }
+
+    /**
+     * Move a child to a different index, if possible.
+     *
+     * @param child    The child to move
+     * @param newIndex The index to which to move the child
+     */
+    public void moveChild(Element child, int newIndex) {
+        if (child != null && newIndex >= 0
+            && newIndex < getNumberOfChildren()
+            && children.contains(child)) {
+            int currIndex = getIndexOfChild(child);
+
+            ElementEvent.EventType eventType;
+            ElementEvent ev;
+
+            children.remove(currIndex);
+            eventType = ElementEvent.EventType.REMOVE_CHILD;
+            ev = new ElementEvent(eventType, this, child, currIndex);
+            notifyObservers(ev);
+
+            children.add(newIndex, child);
+            eventType = ElementEvent.EventType.ADD_CHILD;
+            ev = new ElementEvent(eventType, this, child, newIndex);
+            notifyObservers(ev);
+        }
+    }
 }
