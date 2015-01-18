@@ -60,6 +60,9 @@ public class ChangeRepresentationCommand implements Command {
         case ATTRIBUTE_VALUE:
             start.setRepresentationToAttributeValue(attributeName, setForAll, start.getTag());
             break;
+        case TEXT_VALUE:
+            start.setRepresentationToText();
+            break;
         default:
             // Do nothing
         }

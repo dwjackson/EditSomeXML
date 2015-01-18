@@ -45,7 +45,7 @@ public class Element extends GenericObservable implements
 	Commandable {
 
     public enum RepresentationType {
-        NONE, TAG, ATTRIBUTE_VALUE
+        NONE, TAG, ATTRIBUTE_VALUE, TEXT_VALUE
     }
 
     private String tag;
@@ -500,6 +500,9 @@ public class Element extends GenericObservable implements
             case ATTRIBUTE_VALUE:
                 representation = attributes.getValue(representationAttribute);
                 break;
+            case TEXT_VALUE:
+                representation = text;
+                break;
             case NONE:
             default:
                 representation = null;
@@ -732,6 +735,13 @@ public class Element extends GenericObservable implements
                 child.setRepresentationToTag(true);
             }
         }
+    }
+
+    /**
+     * Set the textual representation of the element to be its textual content
+     */
+    public void setRepresentationToText() {
+        representationType = RepresentationType.TEXT_VALUE;
     }
 
     /**
