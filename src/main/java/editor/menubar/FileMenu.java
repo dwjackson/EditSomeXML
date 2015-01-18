@@ -72,10 +72,10 @@ public class FileMenu extends JMenu {
         
         addSeparator();
 
-        JMenuItem exportItem = new JMenuItem("Export...");
+        JMenuItem exportItem = new JMenuItem("Export XML...");
         exportItem.addActionListener(new ExportActionListener(data));
         add(exportItem);
-        JMenuItem importItem = new JMenuItem("Import...");
+        JMenuItem importItem = new JMenuItem("Import XML...");
         importItem.addActionListener(new ImportActionListener(data));
         add(importItem);
 
