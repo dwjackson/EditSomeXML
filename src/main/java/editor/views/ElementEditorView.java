@@ -30,7 +30,11 @@ import xml.ElementEvent;
 import javax.swing.*;
 import javax.swing.text.Document;
 
-import java.awt.Component;
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -61,6 +65,18 @@ public class ElementEditorView extends JPanel implements Observer {
         tagPanel = new JPanel();
         tagPanel.add(new JLabel("Tag"));
         tagField = new JTextField("", 20);
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fontFile;
+        String fileName = "Inconsolata.ttf";
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream(fileName);
+            Font inconsolata = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            tagField.setFont(inconsolata.deriveFont(14f));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        }
         TagDocumentListener tagDocumentListener;
         tagDocumentListener = new TagDocumentListener(elem, this);
         documentListeners.add(tagDocumentListener);
