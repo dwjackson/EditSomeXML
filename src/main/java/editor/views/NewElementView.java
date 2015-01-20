@@ -31,8 +31,8 @@ import java.awt.*;
  * new element
  */
 public class NewElementView extends JFrame {
-    private JTextField tagField;
-    private JTextField parentTagField;
+    private MonospaceJTextField tagField;
+    private MonospaceJTextField parentTagField;
 
     public NewElementView(ElementTreeView elementTreeView) {
         setSize(500,100);
@@ -40,11 +40,11 @@ public class NewElementView extends JFrame {
         setTitle("New Element");
 
         add(new JLabel("Tag"));
-        tagField = new JTextField("", 20);
+        tagField = new MonospaceJTextField("", 20);
         add(tagField);
 
         add(new JLabel("Parent:"));
-        parentTagField = new JTextField("", 20);
+        parentTagField = new MonospaceJTextField("", 20);
         parentTagField.setEditable(false);
         Element parent = elementTreeView.getSelectedElement();
         if (parent == null) {
