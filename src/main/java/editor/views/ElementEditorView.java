@@ -64,19 +64,7 @@ public class ElementEditorView extends JPanel implements Observer {
         // Tag
         tagPanel = new JPanel();
         tagPanel.add(new JLabel("Tag"));
-        tagField = new JTextField("", 20);
-        ClassLoader classLoader = getClass().getClassLoader();
-        File fontFile;
-        String fileName = "Inconsolata.ttf";
-        try {
-            InputStream inputStream = classLoader.getResourceAsStream(fileName);
-            Font inconsolata = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            tagField.setFont(inconsolata.deriveFont(14f));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        }
+        tagField = new MonospaceJTextField("", 20);
         TagDocumentListener tagDocumentListener;
         tagDocumentListener = new TagDocumentListener(elem, this);
         documentListeners.add(tagDocumentListener);
