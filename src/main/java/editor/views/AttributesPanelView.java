@@ -42,8 +42,8 @@ public class AttributesPanelView extends JPanel {
 
     private Element elem;
     private JPanel attributesPanel;
-    private ArrayList<JTextField> attributeNameFields;
-    private ArrayList<JTextField> attributeValueFields;
+    private ArrayList<MonospaceJTextField> attributeNameFields;
+    private ArrayList<MonospaceJTextField> attributeValueFields;
     private ArrayList<JButton> deleteButtons;
     private GridLayout layout;
     private final int NUM_COLS = 3;
@@ -63,8 +63,8 @@ public class AttributesPanelView extends JPanel {
 
         listeners = new ArrayList<AttributeDocumentListener>();
 
-        attributeNameFields = new ArrayList<JTextField>();
-        attributeValueFields = new ArrayList<JTextField>();
+        attributeNameFields = new ArrayList<MonospaceJTextField>();
+        attributeValueFields = new ArrayList<MonospaceJTextField>();
         deleteButtons = new ArrayList<JButton>();
 
         controller = new AttributesPanelController(this);
@@ -110,11 +110,11 @@ public class AttributesPanelView extends JPanel {
             layout.setRows(layout.getRows() + 1);
         }
 
-        JTextField nameField = new JTextField(name, 10);
+        MonospaceJTextField nameField = new MonospaceJTextField(name, 10);
         attributesPanel.add(nameField);
         attributeNameFields.add(nameField);
 
-        JTextField valueField = new JTextField(value, 10);
+        MonospaceJTextField valueField = new MonospaceJTextField(value, 10);
         attributesPanel.add(valueField);
         attributeValueFields.add(valueField);
 
@@ -156,10 +156,10 @@ public class AttributesPanelView extends JPanel {
     }
 
     public void resetAttributes() {
-        for (JTextField field : attributeNameFields) {
+        for (MonospaceJTextField field : attributeNameFields) {
             attributesPanel.remove(field);
         }
-        for (JTextField field : attributeValueFields) {
+        for (MonospaceJTextField field : attributeValueFields) {
             attributesPanel.remove(field);
         }
         for (JButton button : deleteButtons) {
