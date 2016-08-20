@@ -1,3 +1,9 @@
+<!--
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+
 EditSomeXML
 ===========
 
@@ -27,7 +33,9 @@ If you'd like to run the unit tests, run
 License
 -------
 
-Copyright 2014 David Jackson
+Copyright 2014-2016 David Jackson
 
-EditSomeXML is licensed under the GPLv3 or later. A copy of the GPLv3 is
-included in the "LICENSE" file.
+This project is licensed under the
+[Mozilla Public License v2](https://www.mozilla.org/en-US/MPL/2.0/). A copy of
+the MPL is included in the LICENSE file. If you are unfamiliar with the MPLv2,
+there is an [FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).

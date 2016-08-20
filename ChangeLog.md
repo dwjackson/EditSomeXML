@@ -27,3 +27,7 @@ All notable chanegs to EditSomeXML will be documented in this file.
 ## 0.2.1 - 2014-11-03
 ### Fixed
 - Importing works again
+
+## 0.5
+### Changed
+- Relicense from the GPLv3 to the Mozilla Public License (MPL) v2
