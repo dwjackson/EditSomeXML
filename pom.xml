@@ -4,6 +4,10 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
+
+<!--
+Copyright (c) 2014-2020 David Jackson
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -17,7 +21,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.13.1</version>
         </dependency>
         <dependency>
 		    <groupId>com.googlecode.json-simple </groupId>
