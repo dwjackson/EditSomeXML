@@ -5,7 +5,7 @@
  */
 
 /*
- * Copyright (C) 2014-2016  David Jackson
+ * Copyright (C) 2014-2020  David Jackson
  */
 
 package editor.menubar;
@@ -33,7 +33,7 @@ public class HelpMenu extends JMenu {
                 sb.append("<div style=\"text-align: center;\">");
                 sb.append("<p>EditSomeXML</p>");
                 sb.append("<p>Copyright David Jackson</p>");
-                sb.append("<p>This program is licensed under the GNU GPLv3</p>");
+                sb.append("<p>This program is licensed under the MPL v2</p>");
                 sb.append("</div>");
                 aboutFrame.add(new JLabel(sb.toString()));
 
